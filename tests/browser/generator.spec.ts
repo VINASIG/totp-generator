@@ -56,6 +56,19 @@ for (const lang of ['vi', 'en'] as const)
       await page.locator('#secret').fill('invalid1');
       await expect(page.locator('#result')).toBeHidden();
       await expect(page.locator('#copy')).toBeDisabled();
+      await page.locator('#clear').scrollIntoViewIfNeeded();
+      const immediateBox = await page.locator('#clear').boundingBox();
+      if (!immediateBox) throw new Error('Clear button has no pointer target');
+      await page.mouse.move(
+        immediateBox.x + immediateBox.width / 2,
+        immediateBox.y + immediateBox.height / 2,
+      );
+      await page.mouse.down();
+      await page.clock.runFor(250);
+      await page.mouse.up();
+      await expect(page.locator('#secret')).toHaveValue('');
+      await expect(page.locator('#secret-error')).toBeHidden();
+      await page.locator('#secret').fill('invalid1');
       await page.clock.runFor(250);
       await page.locator('#secret').press('Enter');
       await expect(page.locator('#secret-error')).toBeVisible();

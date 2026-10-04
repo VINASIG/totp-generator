@@ -72,6 +72,7 @@ function invalidate() {
   blankOutput();
 }
 function showErrors(explicit = false) {
+  if (pointerValidationPending && !explicit) return;
   for (const field of [secret, period, offset]) {
     const message = element(field.id + '-error', HTMLParagraphElement);
     const visible =
