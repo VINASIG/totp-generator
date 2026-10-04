@@ -57,6 +57,22 @@ for (const lang of ['vi', 'en'] as const)
       await expect(page.locator('#result')).toBeHidden();
       await expect(page.locator('#copy')).toBeDisabled();
       await page.clock.runFor(250);
+      await page.locator('#secret').press('Enter');
+      await expect(page.locator('#secret-error')).toBeVisible();
+      await page.locator('#clear').scrollIntoViewIfNeeded();
+      const clearBox = await page.locator('#clear').boundingBox();
+      if (!clearBox) throw new Error('Clear button has no pointer target');
+      await page.mouse.move(
+        clearBox.x + clearBox.width / 2,
+        clearBox.y + clearBox.height / 2,
+      );
+      await page.mouse.down();
+      await page.clock.runFor(50);
+      await page.mouse.up();
+      await expect(page.locator('#secret')).toHaveValue('');
+      await expect(page.locator('#secret-error')).toBeHidden();
+      await page.locator('#secret').fill('invalid1');
+      await page.clock.runFor(250);
       await page.locator('#reveal').click();
       await page.clock.runFor(10);
       await expect(page.locator('#secret-error')).toBeVisible();
@@ -315,4 +331,10 @@ test('script unavailable, keyboard, forced colors and theme controls', async ({
     oldTheme,
   );
   await assertThemeIcon();
+  await page.locator('#secret').fill('invalid1');
+  await page.locator('#secret').press('Enter');
+  await expect(page.locator('#secret-error')).toBeVisible();
+  await page.locator('#clear').focus();
+  await page.keyboard.press('Enter');
+  await expect(page.locator('#secret')).toHaveValue('');
 });

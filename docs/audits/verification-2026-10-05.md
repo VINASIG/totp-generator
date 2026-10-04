@@ -19,7 +19,9 @@ Reviewed on 5 October 2026 using Node 24.21.0, npm 12.2.0 and the production bui
 
 The responsive tests populate an eight-digit result and require a single line. Earlier checks caught wrapping at the desktop breakpoint. The code now scales with its actual result container and passed the same assertions without changing the threshold. Narrow technical details stack labels above values. Additional assertions reject overlapping text and wrapped clock values at 200% text. Theme controls render the appropriate Lucide sun/moon icon rather than a solid square. Automated axe checks cover mobile and desktop in both languages and themes. Keyboard radios, forced colors, reduced motion, failed JavaScript, expiration, delayed signatures, reset, privacy and loaded-page offline operation have browser coverage.
 
-Representative desktop, tablet, mobile and 320 px/200% text screenshots were opened for visual review. The screenshot records remain in ignored output/visual/. Native clipboard permission behavior on every operating system is not established by the synthetic clipboard fixture.
+Representative desktop, tablet, mobile and 320 px/200% text screenshots were opened for visual review. The screenshot records remain in ignored output/visual/. Public HTTPS testing verified a current RFC fixture against an independent HMAC calculation and successful native clipboard status in the Codex browser. This does not establish clipboard permissions on every operating system.
+
+Public pointer testing found that a field's delayed blur validation could move Clear before pointer release, causing the first click to be lost. Clear now keeps the field focused during pointerdown and resets only on the completed click. Browser flow regressions hold the pointer down while advancing time, then require the first release to clear the secret and validation. Keyboard activation retains native click behavior.
 
 ## Performance and limitations
 

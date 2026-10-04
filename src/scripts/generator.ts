@@ -298,9 +298,9 @@ function reset() {
   showErrors();
   announce(c.empty);
 }
-clear.addEventListener('pointerdown', () => {
-  currentError = null;
-  touched.clear();
+clear.addEventListener('pointerdown', (event) => {
+  // Keep field blur from moving the button between pointerdown and pointerup.
+  event.preventDefault();
 });
 clear.addEventListener('click', () => {
   reset();
