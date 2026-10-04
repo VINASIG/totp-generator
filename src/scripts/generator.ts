@@ -40,6 +40,7 @@ let adjustment = 0;
 let renderedCounter: bigint | null = null;
 let generating = false;
 let composing = false;
+let pointerValidationPending = false;
 let timer: ReturnType<typeof setInterval> | undefined;
 let pause: ReturnType<typeof setTimeout> | undefined;
 let label = '';
@@ -262,9 +263,22 @@ for (const field of [secret, period, offset])
     touched.add(field.id);
     // Wait until a pointer action finishes so error reflow cannot swallow Clear.
     setTimeout(() => {
-      showErrors();
+      if (!pointerValidationPending) showErrors();
     }, 0);
   });
+form.addEventListener('pointerdown', (event) => {
+  if (event.button === 0 && event.isPrimary) pointerValidationPending = true;
+});
+function finishPointerValidation() {
+  pointerValidationPending = false;
+  showErrors();
+}
+document.addEventListener('click', finishPointerValidation);
+document.addEventListener('pointercancel', finishPointerValidation);
+document.addEventListener('pointerup', (event) => {
+  if (!(event.target instanceof Node) || !form.contains(event.target))
+    finishPointerValidation();
+});
 form.addEventListener('submit', (event) => {
   event.preventDefault();
   touched.add('secret');
@@ -281,6 +295,7 @@ reveal.addEventListener('click', () => {
   reveal.setAttribute('aria-pressed', String(showing));
 });
 function reset() {
+  pointerValidationPending = false;
   invalidate();
   form.reset();
   secret.value = '';
@@ -298,10 +313,6 @@ function reset() {
   showErrors();
   announce(c.empty);
 }
-clear.addEventListener('pointerdown', (event) => {
-  // Keep field blur from moving the button between pointerdown and pointerup.
-  event.preventDefault();
-});
 clear.addEventListener('click', () => {
   reset();
   secret.focus();

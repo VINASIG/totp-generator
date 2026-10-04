@@ -221,6 +221,26 @@ for (const lang of ['vi', 'en'] as const)
         }
       });
     }
+test('clear by touch after validation', async ({ browser }) => {
+  const context = await browser.newContext({
+    hasTouch: true,
+    viewport: { width: 390, height: 844 },
+  });
+  const page = await context.newPage();
+  try {
+    await page.goto(app.url);
+    await expect(page.locator('#secret')).toBeEnabled();
+    await page.locator('#secret').fill('invalid1');
+    await page.locator('#secret').press('Enter');
+    await expect(page.locator('#secret-error')).toBeVisible();
+    await page.locator('#clear').tap();
+    await expect(page.locator('#secret')).toHaveValue('');
+    await expect(page.locator('#secret-error')).toBeHidden();
+  } finally {
+    await context.close();
+  }
+});
+
 test('clipboard success, failure, expiration and stale async work', async ({
   page,
 }) => {

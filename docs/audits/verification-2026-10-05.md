@@ -11,7 +11,7 @@ Reviewed on 5 October 2026 using Node 24.21.0, npm 12.2.0 and the production bui
 | Pinned standards integrity                   | PASS, all 47 managed files; AGENTS.md 3131 bytes                                                      | output/checks/standards.json           |
 | Source and built license scopes              | PASS                                                                                                  | npm run check:licenses and build       |
 | Unit tests                                   | PASS, 23 tests including all 18 RFC 6238 vectors                                                      | npm test                               |
-| Chromium, Firefox and WebKit                 | PASS, 138 tests across the three engines                                                              | output/playwright/full-report.json     |
+| Chromium, Firefox and WebKit                 | PASS, 141 tests across the three engines                                                              | output/playwright/full-report.json     |
 | Responsive/interface checks                  | PASS, both locales and themes at ten widths, including breakpoint neighbors and 320 px with 200% text | output/responsive/                     |
 | Generated HTML, metadata and security policy | PASS for both pages                                                                                   | output/checks/built.json               |
 | Brand and font byte preservation             | PASS, nine manifest entries and upstream Lucide notice                                                | build checker                          |
@@ -21,7 +21,7 @@ The responsive tests populate an eight-digit result and require a single line. E
 
 Representative desktop, tablet, mobile and 320 px/200% text screenshots were opened for visual review. The screenshot records remain in ignored output/visual/. Public HTTPS testing verified a current RFC fixture against an independent HMAC calculation and successful native clipboard status in the Codex browser. This does not establish clipboard permissions on every operating system.
 
-Public pointer testing found that a field's delayed blur validation could move Clear before pointer release, causing the first click to be lost. Clear now keeps the field focused during pointerdown and resets only on the completed click. Browser flow regressions hold the pointer down while advancing time, then require the first release to clear the secret and validation. Keyboard activation retains native click behavior.
+Public pointer testing found that a field's delayed blur validation could move Clear before pointer release, causing the first click to be lost. Blur validation now defers error layout until a form pointer activation finishes, preserving native focus and click behavior. Browser flow regressions hold the pointer down while advancing time, then require the first release to clear the secret and validation. Dedicated emulated-touch checks and native keyboard activation cover the same action. Physical touch devices remain NOT_RUN.
 
 ## Performance and limitations
 
