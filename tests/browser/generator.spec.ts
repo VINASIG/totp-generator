@@ -17,6 +17,64 @@ test.afterAll(async () => {
   await app.close();
 });
 const secret = 'GEZDGNBVGY3TQOJQGEZDGNBVGY3TQOJQ';
+
+for (const lang of ['vi', 'en'] as const) {
+  test(`secret eye control and URI overrides survive Enter ${lang}`, async ({
+    page,
+  }) => {
+    await page.clock.install({ time: new Date(58000) });
+    await page.clock.pauseAt(new Date(59000));
+    await page.goto(app.url + (lang === 'en' ? 'en/' : ''));
+    const input = page.locator('#secret');
+    const reveal = page.locator('#reveal');
+    await expect(page.locator('.language-switch')).toHaveAccessibleName(
+      lang === 'vi'
+        ? 'EN - Đọc trang này bằng tiếng Anh'
+        : 'VI - Read this page in Vietnamese',
+    );
+    await expect(input).toBeEnabled();
+    await expect(reveal).toHaveAccessibleName(
+      lang === 'vi' ? 'Hiện khóa' : 'Show key',
+    );
+    await expect(reveal.locator('.secret-show')).toBeVisible();
+    await expect(reveal.locator('.secret-hide')).toBeHidden();
+    await input.fill(
+      'otpauth://totp/Example?secret=' + secret + '&digits=8&period=30',
+    );
+    await input.press('Enter');
+    await expect(page.locator('#code')).toHaveText('94287082');
+    await reveal.focus();
+    await reveal.press('Space');
+    await expect(input).toHaveAttribute('type', 'text');
+    await expect(reveal).toHaveAccessibleName(
+      lang === 'vi' ? 'Ẩn khóa' : 'Hide key',
+    );
+    await expect(reveal.locator('.secret-hide')).toBeVisible();
+    await reveal.press('Enter');
+    await expect(input).toHaveAttribute('type', 'password');
+    await expect(reveal.locator('.secret-show')).toBeVisible();
+    await page.locator('#advanced summary').click();
+    await page.locator('#period').fill('60');
+    await page.clock.runFor(250);
+    await page.locator('#offset').fill('5');
+    await page.clock.runFor(250);
+    await page.locator('input[name=digits][value="6"]').check();
+    await page.clock.runFor(250);
+    await page.locator('#period').press('Enter');
+    await expect(page.locator('#period')).toHaveValue('60');
+    await expect(page.locator('#offset')).toHaveValue('5');
+    await expect(page.locator('input[name=digits][value="6"]')).toBeChecked();
+    await expect(page.locator('#code')).toHaveText('287082');
+    await page.locator('#clear').click();
+    await expect(input).toHaveValue('');
+    await expect(input).toHaveAttribute('type', 'password');
+    await expect(reveal).toHaveAttribute('aria-pressed', 'false');
+    await expect(reveal).toHaveAccessibleName(
+      lang === 'vi' ? 'Hiện khóa' : 'Show key',
+    );
+    await expect(reveal.locator('svg')).toHaveCount(2);
+  });
+}
 async function inspect(page: Page) {
   expect(await page.evaluate(inspectInterface)).toEqual([]);
   expect(await page.evaluate(inspectControlSurfaces)).toEqual([]);

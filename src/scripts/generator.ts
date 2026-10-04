@@ -40,6 +40,7 @@ let adjustment = 0;
 let renderedCounter: bigint | null = null;
 let generating = false;
 let composing = false;
+let importUriPending = false;
 let pointerValidationPending = false;
 let timer: ReturnType<typeof setInterval> | undefined;
 let pause: ReturnType<typeof setTimeout> | undefined;
@@ -183,7 +184,8 @@ async function tick() {
   element('account-row', HTMLElement).hidden = !label;
 }
 
-async function update(readUri: boolean) {
+async function update() {
+  if (composing) return;
   invalidate();
   currentError = null;
   showErrors();
@@ -196,13 +198,14 @@ async function update(readUri: boolean) {
     return;
   }
   try {
-    if (readUri && parsed.fromUri) {
+    if (importUriPending && parsed.fromUri) {
       setChoice('algorithm', parsed.options.algorithm);
       setChoice('digits', String(parsed.options.digits));
       period.value = String(parsed.options.period);
       offset.value = '0';
       announce(c.imported);
     }
+    importUriPending = false;
     if (
       !/^\d+$/.test(period.value) ||
       Number(period.value) < 1 ||
@@ -238,13 +241,14 @@ async function update(readUri: boolean) {
 }
 
 function schedule(readUri: boolean) {
+  if (readUri) importUriPending = true;
   invalidate();
   currentError = null;
   showErrors();
   announce(secret.value.trim() ? c.loading : c.empty);
   if (!composing)
     pause = setTimeout(() => {
-      void update(readUri);
+      void update();
     }, 200);
 }
 secret.addEventListener('compositionstart', () => {
@@ -285,23 +289,27 @@ form.addEventListener('submit', (event) => {
   touched.add('secret');
   touched.add('period');
   touched.add('offset');
-  void update(true).then(() => {
+  void update().then(() => {
     showErrors(true);
   });
 });
 reveal.addEventListener('click', () => {
   const showing = secret.type === 'password';
   secret.type = showing ? 'text' : 'password';
-  reveal.textContent = showing ? c.hide : c.show;
+  reveal.setAttribute('aria-label', showing ? c.hide : c.show);
+  reveal.title = showing ? c.hide : c.show;
   reveal.setAttribute('aria-pressed', String(showing));
 });
 function reset() {
   pointerValidationPending = false;
+  importUriPending = false;
+  composing = false;
   invalidate();
   form.reset();
   secret.value = '';
   secret.type = 'password';
-  reveal.textContent = c.show;
+  reveal.setAttribute('aria-label', c.show);
+  reveal.title = c.show;
   reveal.setAttribute('aria-pressed', 'false');
   options = { ...defaults };
   adjustment = 0;
@@ -353,7 +361,7 @@ copyButton.addEventListener('click', () => {
 });
 document.addEventListener('visibilitychange', () => {
   if (document.hidden) invalidate();
-  else void update(false);
+  else void update();
 });
 window.addEventListener('pagehide', reset);
 window.addEventListener('pageshow', (event) => {

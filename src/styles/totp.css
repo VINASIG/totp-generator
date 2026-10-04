@@ -1,3 +1,36 @@
+.secret-control {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 48px;
+  align-items: stretch;
+  gap: var(--space-2);
+}
+
+.secret-control input {
+  min-width: 0;
+}
+
+.secret-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  min-height: 48px;
+  padding: 0;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+.secret-toggle svg {
+  flex-shrink: 0;
+}
+
+.secret-toggle[aria-pressed='false'] .secret-hide,
+.secret-toggle[aria-pressed='true'] .secret-show {
+  display: none;
+}
+
 .input-hint {
   margin-top: 0.5rem;
 }

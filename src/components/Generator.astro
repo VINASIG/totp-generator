@@ -1,5 +1,5 @@
 ---
-import { Copy, Trash } from '@lucide/astro';
+import { Copy, Eye, EyeOff, Trash } from '@lucide/astro';
 import ThemeInit from './ThemeInit.astro';
 import SitePreferences from './SitePreferences.astro';
 import { copy } from '../lib/copy.ts';
@@ -127,30 +127,35 @@ const schema = {
             <form id="totp-form" novalidate autocomplete="off">
               <div class="field">
                 <label for="secret">{c.secret}</label>
-                <input
-                  id="secret"
-                  type="password"
-                  autocomplete="new-password"
-                  spellcheck="false"
-                  maxlength="8192"
-                  required
-                  disabled
-                  aria-describedby="secret-hint secret-error"
-                />
+                <div class="secret-control">
+                  <input
+                    id="secret"
+                    type="password"
+                    autocomplete="new-password"
+                    spellcheck="false"
+                    maxlength="8192"
+                    required
+                    disabled
+                    aria-describedby="secret-hint secret-error"
+                  />
+                  <button
+                    type="button"
+                    class="secret-toggle"
+                    id="reveal"
+                    aria-label={c.show}
+                    title={c.show}
+                    aria-controls="secret"
+                    aria-pressed="false"
+                    disabled
+                  >
+                    <Eye class="secret-show" size={20} aria-hidden="true" />
+                    <EyeOff class="secret-hide" size={20} aria-hidden="true" />
+                  </button>
+                </div>
                 <p class="field-error" id="secret-error" hidden></p>
                 <p class="supporting input-hint" id="secret-hint">
                   {c.secretHint}
                 </p>
-                <button
-                  type="button"
-                  class="clear-button"
-                  id="reveal"
-                  aria-controls="secret"
-                  aria-pressed="false"
-                  disabled
-                >
-                  {c.show}
-                </button>
               </div>
               <details class="advanced" id="advanced">
                 <summary>{c.advanced}</summary>

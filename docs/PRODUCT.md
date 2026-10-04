@@ -8,6 +8,8 @@ Base32 accepts lowercase, spaces, line breaks and hyphen grouping. It validates 
 
 URI edits import algorithm, digit count and period and reset clock adjustment to zero. Subsequent setting edits override imported settings for this session. Raw-key edits keep selected settings. Periods must be integer seconds from 1 to 300, with a default of 30. The clock adjustment ranges from -300 to 300 seconds and defaults to zero. Positive values advance the effective clock. There is no remote time synchronization.
 
+Enter recalculates from the current form without reimporting unchanged URI settings. A new URI edit is imported even when Enter is pressed before the typing delay finishes. The eye button sits beside the secret field, keeps a localized accessible action name and pressed state, and works with keyboard and touch. Clear returns the field to its masked state.
+
 The counter is an unsigned eight-byte big-endian integer. Web Crypto imports a nonextractable HMAC key, then dynamic truncation and decimal padding produce the code. The timer checks absolute wall-clock time every 200 ms. At a time-window change the old code disappears before the new asynchronous calculation. Copy computes a current code again and rejects outdated asynchronous work. When a tab hides, output and imported key references are cleared. Returning recomputes from the form. Leaving, BFCache restoration and reload reset the session.
 
 The browser uses the device's Unix time. A rejected code may mean incorrect settings or a wrong device clock. The verifier decides its acceptance window and must prevent reuse after successful validation. The client cannot establish that a code was used once.
