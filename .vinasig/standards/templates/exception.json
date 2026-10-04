@@ -1,0 +1,10 @@
+{
+  "rule": "WEB-001",
+  "project": "Set consuming project",
+  "owner": null,
+  "reason": "Explain technical or product constraint",
+  "compensatingChecks": [],
+  "reviewDate": null,
+  "approvalEvidence": null,
+  "status": "proposed"
+}

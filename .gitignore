@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.astro/
+output/
+.vinasig/backups/
+.vinasig/locks/
+.env
+.env.*
+!.env.example
+.DS_Store

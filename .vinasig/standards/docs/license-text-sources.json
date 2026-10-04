@@ -1,0 +1,18 @@
+[
+  {
+    "id": "GPL-3.0-or-later",
+    "url": "https://raw.githubusercontent.com/spdx/license-list-data/31ba1a50e5397e00a304dbadc76531740e89ee48/text/GPL-3.0-or-later.txt",
+    "sourceRef": "31ba1a50e5397e00a304dbadc76531740e89ee48",
+    "size": 34674,
+    "sha256": "fb981668c18a279e285fc4d83fba1e836cc84dd4daa73c9697d3cfd2d8aca6e0",
+    "files": ["LICENSE"]
+  },
+  {
+    "id": "CC-BY-SA-4.0",
+    "url": "https://creativecommons.org/licenses/by-sa/4.0/legalcode.txt",
+    "sourceRef": null,
+    "size": 20138,
+    "sha256": "28a9529c7d0bb4dc51f4bf5c116a3d16ef247a052f7591466768ddf563fd1cf5",
+    "files": ["LICENSES/CC-BY-SA-4.0.txt"]
+  }
+]

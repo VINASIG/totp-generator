@@ -1,0 +1,166 @@
+export const copy = {
+  vi: {
+    title: 'Tạo mã xác thực TOTP',
+    description:
+      'Nhập secret key để tạo mã xác thực TOTP trong trình duyệt. Mã tự đổi theo thời gian, hỗ trợ SHA1, SHA256 và SHA512.',
+    lead: 'Nhập khóa. Lấy mã. Đăng nhập.',
+    intro:
+      'Dùng khóa do dịch vụ cung cấp khi bật xác thực hai bước. Mã tự cập nhật theo thời gian.',
+    skip: 'Đến công cụ',
+    brandHome: 'Trang chủ VINASIG',
+    formTitle: 'Khóa xác thực',
+    secret: 'Secret key hoặc liên kết thiết lập',
+    secretHint:
+      'Dán khóa Base32 hoặc liên kết otpauth từ dịch vụ. Có thể giữ khoảng trắng và dấu gạch nối trong khóa.',
+    show: 'Hiện khóa',
+    hide: 'Ẩn khóa',
+    clear: 'Xóa tất cả',
+    advanced: 'Cài đặt nâng cao',
+    advancedHint:
+      'Chỉ đổi khi dịch vụ yêu cầu. Liên kết thiết lập sẽ tự điền các cài đặt này.',
+    algorithm: 'Thuật toán',
+    digits: 'Độ dài mã',
+    six: '6 chữ số',
+    eight: '8 chữ số',
+    period: 'Đổi mã sau số giây',
+    periodHint: 'Thường là 30 giây. Nhập số nguyên từ 1 đến 300.',
+    offset: 'Điều chỉnh giờ theo giây',
+    offsetHint:
+      'Giữ 0 nếu giờ thiết bị đúng. Số dương làm giờ tính mã chạy trước, số âm làm giờ chạy sau. Từ -300 đến 300.',
+    resultTitle: 'Mã xác thực hiện tại',
+    empty: 'Mã sẽ xuất hiện khi bạn nhập khóa hợp lệ.',
+    copy: 'Sao chép mã',
+    copied: 'Đã sao chép mã.',
+    copyFailed: 'Không sao chép được. Hãy chọn mã và sao chép bằng bàn phím.',
+    remaining: 'Đổi mã sau',
+    seconds: 'giây',
+    second: 'giây',
+    ready: 'Mã đang tự cập nhật.',
+    loading: 'Đang tạo mã.',
+    invalid: 'Kiểm tra ô nhập được đánh dấu.',
+    imported: 'Đã đọc cài đặt từ liên kết thiết lập.',
+    account: 'Tài khoản',
+    privacy:
+      'Khóa và mã chỉ nằm trong phiên này. Không gửi lên máy chủ, không lưu sau khi tải lại trang.',
+    technical: 'Thông tin mã',
+    clock: 'Giờ thiết bị',
+    expiry: 'Mã đổi lúc',
+    warning: 'Hãy bật giờ tự động trên thiết bị nếu mã bị từ chối.',
+    faqTitle: 'Cách dùng và lưu ý',
+    faqUse: 'Secret key lấy ở đâu?',
+    faqUseText:
+      'Dịch vụ cung cấp khóa khi bạn bật xác thực hai bước, thường ở mục nhập khóa thủ công cạnh mã QR. Công cụ không tự lấy được khóa từ tài khoản hay tạo khóa thay cho dịch vụ.',
+    faqTime: 'Mã thay đổi như thế nào?',
+    faqTimeText:
+      'Khóa và thời gian hiện tại cùng tạo ra mã. Cùng khóa, cài đặt và khoảng thời gian sẽ cho cùng mã. Thông thường mã đổi sau mỗi 30 giây. Dịch vụ đăng nhập quyết định chấp nhận mã và ngăn dùng lại mã đã xác thực.',
+    faqSafety: 'Cần giữ khóa an toàn như thế nào?',
+    faqSafetyText:
+      'Ai có khóa đều có thể tạo mã đăng nhập. Chỉ nhập khóa trên thiết bị bạn tin cậy. Không chia sẻ khóa, liên kết thiết lập hay ảnh chứa khóa. Tải lại trang sẽ xóa nội dung của phiên. Mã đã sao chép vẫn có thể còn trong clipboard của thiết bị.',
+    faqOffline: 'Có dùng khi mất mạng được không?',
+    faqOfflineText:
+      'Có, sau khi trang tải xong, việc tính mã không cần mạng. Nếu tải lại trang khi đang mất mạng, trang có thể không mở được. Trình duyệt cần hỗ trợ Web Crypto và trang cần dùng HTTPS.',
+    sources: 'Tài liệu chuẩn',
+    source: 'Mã nguồn',
+    licenses: 'Giấy phép',
+    footer: 'Công cụ miễn phí của VINASIG.',
+    noScript: 'Bật JavaScript để tạo mã ngay trên thiết bị.',
+    unavailable:
+      'Trình duyệt chưa hỗ trợ tạo mã an toàn. Hãy dùng trình duyệt mới và mở trang qua HTTPS.',
+    errors: {
+      empty: 'Nhập secret key do dịch vụ cung cấp.',
+      base32:
+        'Khóa Base32 chỉ gồm chữ A đến Z và số 2 đến 7. Kiểm tra cả độ dài và phần cuối của khóa.',
+      length:
+        'Nội dung quá dài. Chỉ nhập khóa hoặc liên kết thiết lập cho một tài khoản.',
+      uri: 'Liên kết thiết lập không hợp lệ. Kiểm tra loại TOTP, khóa và các cài đặt.',
+      hotp: 'Liên kết này dùng HOTP theo bộ đếm. Công cụ này tạo TOTP theo thời gian.',
+      algorithm: 'Chọn SHA1, SHA256 hoặc SHA512.',
+      digits: 'Độ dài mã phải là 6 hoặc 8 chữ số.',
+      period: 'Nhập số nguyên từ 1 đến 300 giây.',
+      offset: 'Nhập số giây từ -300 đến 300.',
+      crypto: 'Trình duyệt cần Web Crypto và HTTPS để tạo mã.',
+    },
+  },
+  en: {
+    title: 'TOTP code generator',
+    description:
+      'Enter a secret key to generate TOTP verification codes in your browser. Codes update automatically with SHA1, SHA256 and SHA512 support.',
+    lead: 'Enter your key. Get your code. Sign in.',
+    intro:
+      'Use the key supplied by your service when enabling two-step verification. Codes update automatically over time.',
+    skip: 'Go to the tool',
+    brandHome: 'VINASIG home',
+    formTitle: 'Authentication key',
+    secret: 'Secret key or setup link',
+    secretHint:
+      'Paste a Base32 key or an otpauth setup link from your service. Spaces and hyphens in a key are accepted.',
+    show: 'Show key',
+    hide: 'Hide key',
+    clear: 'Clear all',
+    advanced: 'Advanced settings',
+    advancedHint:
+      'Change these only when required by your service. A setup link fills them in automatically.',
+    algorithm: 'Algorithm',
+    digits: 'Code length',
+    six: '6 digits',
+    eight: '8 digits',
+    period: 'Seconds between codes',
+    periodHint: 'Usually 30 seconds. Enter a whole number from 1 to 300.',
+    offset: 'Clock adjustment in seconds',
+    offsetHint:
+      'Leave 0 if your device clock is correct. Positive values move the code clock ahead, negative values move it behind. From -300 to 300.',
+    resultTitle: 'Current verification code',
+    empty: 'Your code appears when you enter a valid key.',
+    copy: 'Copy code',
+    copied: 'Code copied.',
+    copyFailed: 'Copy failed. Select the code and copy it with your keyboard.',
+    remaining: 'New code in',
+    seconds: 'seconds',
+    second: 'second',
+    ready: 'Your code updates automatically.',
+    loading: 'Generating your code.',
+    invalid: 'Check the highlighted field.',
+    imported: 'Settings read from the setup link.',
+    account: 'Account',
+    privacy:
+      'Your key and code stay in this session. They are not sent to a server or saved after reloading.',
+    technical: 'Code details',
+    clock: 'Device time',
+    expiry: 'Code changes at',
+    warning: 'Enable automatic time on your device if codes are rejected.',
+    faqTitle: 'How to use this tool',
+    faqUse: 'Where do I get the secret key?',
+    faqUseText:
+      'Your service supplies the key when you enable two-step verification, usually beside its QR code under manual setup. This tool cannot retrieve a key from your account or create a replacement key for the service.',
+    faqTime: 'How do codes change?',
+    faqTimeText:
+      'The key and current time produce a code. The same key, settings and time window produce the same code. Codes usually change every 30 seconds. The sign-in service decides which codes to accept and prevents reuse after successful verification.',
+    faqSafety: 'How should I protect my key?',
+    faqSafetyText:
+      'Anyone with your key can generate sign-in codes. Use a device you trust. Do not share your key, setup link or images containing the key. Reloading clears this session. A copied code may remain in your device clipboard.',
+    faqOffline: 'Can I use this without a network?',
+    faqOfflineText:
+      'Yes. Once the page has loaded, generating codes does not need a network. Reloading while offline may fail to open the page. Your browser must support Web Crypto and the page must use HTTPS.',
+    sources: 'Standards',
+    source: 'Source code',
+    licenses: 'Licenses',
+    footer: 'A free tool from VINASIG.',
+    noScript: 'Enable JavaScript to generate codes on your device.',
+    unavailable:
+      'Your browser cannot generate codes securely. Use a current browser and open this page over HTTPS.',
+    errors: {
+      empty: 'Enter the secret key supplied by your service.',
+      base32:
+        'A Base32 key uses letters A to Z and numbers 2 to 7. Check its length and final characters too.',
+      length:
+        'This input is too long. Enter a key or setup link for one account.',
+      uri: 'This setup link is invalid. Check its TOTP type, key and settings.',
+      hotp: 'This link uses counter-based HOTP. This tool generates time-based TOTP.',
+      algorithm: 'Choose SHA1, SHA256 or SHA512.',
+      digits: 'The code must have 6 or 8 digits.',
+      period: 'Enter a whole number from 1 to 300 seconds.',
+      offset: 'Enter a number of seconds from -300 to 300.',
+      crypto: 'Web Crypto and HTTPS are required to generate codes.',
+    },
+  },
+} as const;

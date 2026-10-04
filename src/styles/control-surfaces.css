@@ -1,0 +1,268 @@
+/* Shared VINASIG control surfaces. Keep native semantics and form behavior. */
+:where(*) {
+  scrollbar-color: var(--color-text-muted) transparent;
+  scrollbar-width: thin;
+}
+
+/* Chromium and WebKit need authored parts to remove platform arrow buttons.
+ * Their non-auto standard scrollbar properties override these parts. */
+@supports selector(::-webkit-scrollbar) {
+  :where(*) {
+    scrollbar-color: auto;
+    scrollbar-width: auto;
+  }
+
+  ::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+  }
+
+  ::-webkit-scrollbar-track,
+  ::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    min-height: 32px;
+    border: 3px solid transparent;
+    border-radius: var(--radius-pill);
+    background-color: var(--color-text-muted);
+    background-clip: padding-box;
+  }
+
+  ::-webkit-scrollbar-button {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+}
+
+:where(summary) {
+  position: relative;
+  display: block;
+  list-style: none;
+  cursor: pointer;
+}
+
+:where(summary)::marker {
+  content: '';
+}
+
+:where(summary)::-webkit-details-marker {
+  display: none;
+}
+
+/* Lucide ChevronRight. Rotate its authored shape when the disclosure opens. */
+:where(summary:not(:has(svg, .ui-icon)))::before {
+  content: '';
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  margin-inline-end: 0.5em;
+  vertical-align: -0.125em;
+  background: currentcolor;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='m9 18 6-6-6-6' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+    center / contain no-repeat;
+}
+
+:where(details[open] > summary:not(:has(svg, .ui-icon)))::before {
+  transform: rotate(90deg);
+}
+
+:where(summary):focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 3px;
+}
+
+:where(input[type='checkbox']:not([role='switch']), input[type='radio']) {
+  appearance: none;
+  display: inline-grid;
+  place-content: center;
+  width: 1.125rem;
+  height: 1.125rem;
+  min-height: 0;
+  flex: none;
+  margin: 0;
+  padding: 0;
+  border: 1.5px solid var(--color-text-muted);
+  border-radius: 4px;
+  background: var(--color-surface);
+  color: var(--color-canvas);
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+:where(input[type='radio']) {
+  border-radius: 50%;
+}
+
+:where(
+  input[type='checkbox']:not([role='switch']),
+  input[type='radio']
+)::before {
+  content: '';
+  display: block;
+  width: 0.75rem;
+  height: 0.75rem;
+  background: var(--color-canvas);
+  opacity: 0;
+}
+
+/* Lucide Check, with the same 24-unit viewBox and two-unit stroke. */
+:where(input[type='checkbox']:not([role='switch']))::before {
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='m20 6-11 11-5-5' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+    center / contain no-repeat;
+}
+
+:where(input[type='radio'])::before {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+}
+
+:where(
+  input[type='checkbox']:not([role='switch']),
+  input[type='radio']
+):checked,
+:where(input[type='checkbox']:not([role='switch'])):indeterminate {
+  border-color: var(--color-focus);
+  background: var(--color-focus);
+}
+
+:where(
+    input[type='checkbox']:not([role='switch']),
+    input[type='radio']
+  ):checked::before,
+:where(input[type='checkbox']:not([role='switch'])):indeterminate::before {
+  opacity: 1;
+}
+
+:where(input[type='checkbox']:not([role='switch'])):indeterminate::before {
+  height: 2px;
+  mask: none;
+}
+
+:where(
+  input[type='checkbox']:not([role='switch']),
+  input[type='radio']
+):focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 3px;
+}
+
+:where(
+  input[type='checkbox']:not([role='switch']),
+  input[type='radio']
+):disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+:where(
+  input[type='checkbox']:not([role='switch']),
+  input[type='radio']
+)[aria-invalid='true'] {
+  border-color: var(--color-error);
+}
+
+:where(progress, meter) {
+  appearance: none;
+  display: block;
+  width: 100%;
+  height: 0.5rem;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: var(--color-surface-muted);
+  color: var(--color-info-accent);
+}
+
+:where(progress)::-webkit-progress-bar,
+:where(meter)::-webkit-meter-bar {
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: var(--color-surface-muted);
+}
+
+:where(progress)::-webkit-progress-value {
+  border-radius: var(--radius-pill);
+  background: var(--color-info-accent);
+}
+
+:where(progress)::-moz-progress-bar {
+  border-radius: var(--radius-pill);
+  background: var(--color-info-accent);
+}
+
+:where(meter)::-webkit-meter-optimum-value {
+  border-radius: var(--radius-pill);
+  background: var(--color-success-accent);
+}
+
+:where(meter)::-moz-meter-bar {
+  border-radius: var(--radius-pill);
+  background: var(--color-success-accent);
+}
+
+:where(input[type='search']) {
+  appearance: none;
+}
+
+:where(input[type='search'])::-webkit-search-cancel-button {
+  appearance: none;
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-inline-start: 0.5rem;
+  background: var(--color-text-muted);
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='m18 6-12 12M6 6l12 12' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E")
+    center / contain no-repeat;
+  cursor: pointer;
+}
+
+:where(input[type='file'])::file-selector-button {
+  margin-inline-end: var(--space-3);
+  padding: 0.625rem 0.75rem;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font: inherit;
+  cursor: pointer;
+}
+
+:where(meter)::-webkit-meter-suboptimum-value {
+  background: var(--color-warning-accent);
+}
+
+:where(meter)::-webkit-meter-even-less-good-value {
+  background: var(--color-error-accent);
+}
+
+@media (forced-colors: active) {
+  /* Masked glyph backgrounds otherwise become Canvas and disappear. Use the
+   * user's system foreground while preserving the disclosure state shape. */
+  :where(summary:not(:has(svg, .ui-icon)))::before {
+    forced-color-adjust: none;
+    background: CanvasText;
+  }
+
+  :where(*) {
+    scrollbar-color: auto;
+    scrollbar-width: auto;
+  }
+
+  :where(
+    input[type='checkbox']:not([role='switch']),
+    input[type='radio'],
+    progress,
+    meter
+  ) {
+    appearance: auto;
+  }
+
+  :where(
+    input[type='checkbox']:not([role='switch']),
+    input[type='radio']
+  )::before {
+    display: none;
+  }
+}

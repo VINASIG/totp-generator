@@ -1,0 +1,22 @@
+---
+name: vinasig-responsive
+description: 'Implement and verify web responsive layout and accessibility with browser evidence. Use for visible UI/layout changes, not non-web tasks.'
+---
+
+Read `.vinasig/standards/policies/web.md` and the consuming profile. Inputs are changed routes, controls, supported browsers and existing server/test commands.
+
+Discover routes/templates and CSS breakpoints. Start/reuse the correct local app and derive its port from logs. Use one available browser driver; Playwright Test keeps reusable regression checks. Do not send destructive or real-data forms.
+
+Measure the five required viewports, 320 px reflow, actual breakpoint neighbors and intermediate widths. Scroll fully. Capture AND open before screenshots, inspect styles/bounds and test applicable open/closed controls, keyboard, errors/loading, long text, enlarged text and themes.
+
+Apply WEB-008 to the full dropdown, calendar, color chooser and slider. A styled closed field with an operating-system popup fails the control requirement. Apply LANG-004 and LANG-005 to initial and dynamic copy in every locale. Run the interface inspector on real states, then inspect the writing and screenshots. Preserve required syntax and user data with narrowly scoped semantic annotations.
+
+Inventory hidden and dynamically revealed controls before coding. Include checkbox/radio/switch, search clear, number stepper, file trigger, disclosure marker, progress/meter and textarea/scrollbar subparts as well as the obvious pickers. Use the reviewed control-surfaces stylesheet and the existing behavioral controls. Open and scroll long dropdowns to the final option, test wheel/touch/keyboard and thumb drag, then verify selection, Escape, reset and disabled/invalid states. `appearance: none` and a styled trigger alone are insufficient. Run `inspectControlSurfaces` with a nonzero consumer control inventory, including initial/script-unavailable and forced-colors behavior. Open the actual screenshots and verify the published interface.
+
+Apply WEB-001 to the header logo. Verify the original asset digest and inspect the actual surface, transparent link/image presentation, matching light/dark export, aspect ratio, accessible name and 44 px target. On VINASIG-owned websites its native link must open `https://vinasig.io.vn/`; source links remain separate. Use `inspectHeaderBrand` alongside the rendered-interface inspector, then open screenshots. The operating-system preference alone does not determine the correct variant. Check the initial HTML, keyboard focus, hover and narrow layouts. Exercise the logo link on mobile and desktop, then verify the deployed site.
+
+Fix the source cause and shared components. Do not clip page overflow, transform-scale the page, hide content, or weaken an assertion. Repeat the same affected matrix after each group of fixes. Add role/name based regression checks using the local web templates where they fit. Run axe plus manual focus, keyboard, contrast/reflow checks. Axe alone is partial coverage.
+
+Measure ordinary dropdown indicators with `inspectControlIndicators` from the local `templates/web/interface.mjs`. WEB-008 requires at least 16 CSS px from the SVG box to the inner trailing border and 12 CSS px from the selected-value box, with declared icon dimensions and no clipping. Use spacing tokens, logical inline-end padding, `data-control-value` and `data-control-indicator` in both initial and enhanced markup. Test disabled/script-unavailable states, long selections and 200% text sizing. Open before/after screenshots at a scale that shows the inset. Compact platform-reference specimens retain their documented metrics.
+
+Output route/viewport/engine/state results, before/after evidence and tests, unrun device/assistive checks and concrete blockers. Chromium emulation never establishes real iPhone/Safari behavior. Review screenshot baselines before approving them.

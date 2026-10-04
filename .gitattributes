@@ -1,0 +1,23 @@
+* text=auto eol=lf
+AGENTS.md -text whitespace=trailing-space,space-before-tab,cr-at-eol
+.vinasig/manifest.json -text
+.agents/** -text
+.vinasig/standards/** -text
+public/brand/** -text
+public/fonts/** -text
+public/fonts/OFL.txt -whitespace
+public/licenses/** -text -whitespace
+
+# Preserve literal standard license text and installed copies.
+LICENSE -text
+LICENSES/** -text
+.vinasig/standards/LICENSE -text
+.vinasig/standards/LICENSES/** -text
+public/licenses/AGPL-3.0-or-later.txt -text
+public/licenses/CC-BY-SA-4.0.txt -text
+
+# Publisher license text may end with a blank line. SHA-256 checks protect it.
+LICENSE whitespace=-blank-at-eof
+LICENSES/CC-BY-SA-4.0.txt whitespace=-blank-at-eof
+.vinasig/standards/LICENSES/CC-BY-SA-4.0.txt whitespace=-blank-at-eof
+public/licenses/CC-BY-SA-4.0.txt whitespace=-blank-at-eof

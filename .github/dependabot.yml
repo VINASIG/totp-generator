@@ -1,0 +1,17 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    # Reviewed 2026-10-03. Revisit when the compiler/checker peers support TS 7.
+    ignore:
+      - dependency-name: typescript
+        versions: ['>=7.0.0 <8.0.0']
+      # Declarations must match the supported Node 24 runtime.
+      - dependency-name: '@types/node'
+        versions: ['>=25.0.0']
+    schedule:
+      interval: weekly
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly

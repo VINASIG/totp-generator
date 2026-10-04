@@ -1,0 +1,16 @@
+{
+  "task": "Name the reviewed change",
+  "revision": null,
+  "environment": {
+    "os": "Record observed OS",
+    "runtime": "Record observed runtime"
+  },
+  "checks": [
+    {
+      "id": "WEB-004",
+      "status": "NOT_RUN",
+      "reason": "No browser measurement executed for this template",
+      "evidence": []
+    }
+  ]
+}

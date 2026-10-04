@@ -1,0 +1,426 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+[hidden] {
+  display: none;
+}
+
+body {
+  margin: 0;
+  background: var(--color-canvas);
+  color: var(--color-text);
+  font-size: var(--font-size-body);
+  line-height: 1.6;
+}
+
+button,
+input {
+  font: inherit;
+  min-width: 0;
+}
+
+a {
+  color: var(--color-info);
+  text-underline-offset: 0.2em;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 4px;
+}
+
+.app-shell {
+  width: min(100%, 72rem);
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.site-header,
+.site-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.site-header a,
+.site-footer a,
+.tool-choice a {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  max-width: 100%;
+  min-height: 44px;
+}
+
+.brand picture,
+.brand img {
+  display: block;
+  width: 132px;
+  max-width: 100%;
+  height: auto;
+}
+
+nav {
+  display: flex;
+  gap: 0.5rem 1.25rem;
+  flex-wrap: wrap;
+}
+
+.site-header nav a {
+  padding: 0.375rem 0;
+}
+
+nav a[aria-current='page'] {
+  color: var(--color-text);
+  text-decoration-thickness: 2px;
+  font-weight: 600;
+}
+
+.intro {
+  margin: 3rem 0 2rem;
+  max-width: 44rem;
+}
+
+h1 {
+  margin: 0 0 0.75rem;
+  font-size: var(--font-size-title);
+  line-height: 1.2;
+  letter-spacing: -0.035em;
+  font-weight: 650;
+  overflow-wrap: anywhere;
+}
+
+h2 {
+  font-size: var(--font-size-heading-small);
+  line-height: 1.4;
+  margin: 0 0 1.5rem;
+  font-weight: 600;
+}
+
+h3 {
+  font-size: var(--font-size-body);
+  line-height: 1.5;
+  margin: 0 0 1rem;
+  font-weight: 600;
+}
+
+.result-section {
+  border-top: 1px solid var(--color-border);
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  overflow-wrap: anywhere;
+}
+
+.workspace-addendum {
+  grid-column: 1 / -1;
+  padding: 2rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.workspace-addendum .result-section {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.tool-choice {
+  margin-top: 2rem;
+  padding: 1.5rem 0;
+  max-width: 58rem;
+}
+
+p {
+  margin: 0 0 1rem;
+}
+
+.intro :where(p:last-child) {
+  color: var(--color-text-muted);
+}
+
+.lead {
+  font-size: var(--font-size-lead);
+  font-weight: 500;
+}
+
+.workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+}
+
+.editor,
+.preview {
+  padding: 2rem;
+  min-width: 0;
+}
+
+.preview {
+  border-left: 1px solid var(--color-border);
+}
+
+.fields {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
+}
+
+.field {
+  min-width: 0;
+}
+
+label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+input {
+  width: 100%;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  color: var(--color-text);
+  padding: 0.75rem;
+  min-height: 48px;
+}
+
+input::placeholder {
+  color: var(--color-text-muted);
+  opacity: 1;
+}
+
+input[aria-invalid='true'] {
+  border-color: var(--color-error);
+}
+
+.supporting {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-small);
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.field-error {
+  color: var(--color-error);
+  font-size: var(--font-size-small);
+  margin: 0.5rem 0 0;
+  overflow-wrap: anywhere;
+}
+
+.form-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+button {
+  min-height: 44px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  padding: 0.625rem 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: default;
+  opacity: 0.5;
+}
+
+.primary {
+  background: var(--color-info-accent);
+  color: #fff;
+}
+
+.quiet {
+  background: transparent;
+  color: var(--color-text-muted);
+}
+
+.clear-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--color-surface);
+  color: var(--color-info);
+  border-color: var(--color-info);
+}
+
+.clear-button svg {
+  flex-shrink: 0;
+}
+
+.privacy {
+  margin-top: 1rem;
+}
+
+.status {
+  min-height: 1.5rem;
+  margin-bottom: 0;
+}
+
+.status[data-state='error'] {
+  color: var(--color-error);
+}
+
+.empty-result {
+  color: var(--color-text-muted);
+  padding: 0.5rem 0;
+}
+
+.empty-result svg {
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.result-scope {
+  margin: 1.5rem 0 0;
+  font-size: var(--font-size-small);
+  color: var(--color-text-muted);
+  overflow-wrap: anywhere;
+}
+
+.notes {
+  margin-top: 2rem;
+}
+
+details {
+  border-top: 1px solid var(--color-border);
+}
+
+.notes details:last-child {
+  border-bottom: 1px solid var(--color-border);
+}
+
+summary {
+  min-height: 44px;
+  padding: 1rem 0;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+details p {
+  color: var(--color-text-muted);
+  overflow-wrap: anywhere;
+  max-width: 58rem;
+}
+
+.ranges {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.25rem;
+  max-width: 36rem;
+}
+
+.ranges li {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.25rem 1rem;
+  flex-wrap: wrap;
+  border-bottom: 1px solid var(--color-border);
+  padding: 0.625rem 0;
+}
+
+.ranges li span {
+  overflow-wrap: anywhere;
+}
+
+.site-footer {
+  margin: 3rem 0 0.5rem;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-small);
+}
+
+.site-footer p {
+  margin: 0;
+}
+
+.skip-link {
+  position: absolute;
+  top: -6rem;
+  left: 1rem;
+  padding: 0.75rem;
+  background: var(--color-surface);
+  z-index: 1;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  button:not(:disabled) {
+    transition:
+      transform 160ms cubic-bezier(0.2, 0.7, 0.2, 1),
+      background-color 160ms ease;
+  }
+
+  button:not(:disabled):hover {
+    transform: translateY(-1px);
+  }
+
+  .primary:not(:disabled):hover {
+    background: var(--color-scout-blue-strong);
+  }
+
+  .quiet:not(:disabled):hover {
+    background: var(--color-surface-hover);
+  }
+}
+
+@media (width <= 760px) {
+  .workspace-addendum {
+    padding: min(2rem, 5vw);
+  }
+
+  .workspace {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .preview {
+    border-left: 0;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .app-shell {
+    padding: min(1.5rem, 4vw);
+  }
+
+  .editor,
+  .preview {
+    padding: min(2rem, 5vw);
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  .intro {
+    margin-top: 2rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  button:not(:disabled) {
+    transition: none;
+  }
+
+  button:not(:disabled):hover {
+    transform: none;
+  }
+}

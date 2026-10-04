@@ -1,0 +1,376 @@
+---
+import { Copy, Trash } from '@lucide/astro';
+import ThemeInit from './ThemeInit.astro';
+import SitePreferences from './SitePreferences.astro';
+import { copy } from '../lib/copy.ts';
+import '../styles/tokens.css';
+import '../styles/app.css';
+import '../styles/control-surfaces.css';
+import '../styles/totp.css';
+interface Props {
+  lang: 'vi' | 'en';
+}
+const { lang } = Astro.props;
+const c = copy[lang];
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+const root = 'https://totp.vinasig.io.vn/';
+const canonical = root + (lang === 'en' ? 'en/' : '');
+const revision = process.env['GITHUB_SHA'];
+const sourceUrl =
+  revision && /^[a-f0-9]{40}$/.test(revision)
+    ? `https://github.com/VINASIG/totp-generator/tree/${revision}`
+    : 'https://github.com/VINASIG/totp-generator';
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: c.title,
+  url: canonical,
+  description: c.description,
+  inLanguage: lang,
+  applicationCategory: 'UtilitiesApplication',
+  operatingSystem: 'Web browser',
+  isAccessibleForFree: true,
+  publisher: {
+    '@type': 'Organization',
+    name: 'VINASIG',
+    url: 'https://vinasig.io.vn/',
+  },
+};
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <ThemeInit />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="referrer" content="no-referrer" />
+    {revision && <meta name="source-revision" content={revision} />}
+    <title>{c.title} | VINASIG</title>
+    <meta name="description" content={c.description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="vi" href={root} />
+    <link rel="alternate" hreflang="en" href={`${root}en/`} />
+    <link rel="alternate" hreflang="x-default" href={root} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={`${c.title} | VINASIG`} />
+    <meta property="og:description" content={c.description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content={lang === 'vi' ? 'vi_VN' : 'en_US'} />
+    <link rel="icon" type="image/svg+xml" href={`${base}brand/mark.svg`} />
+    {[16, 32, 48].map((size) => (
+      <link
+        rel="icon"
+        type="image/png"
+        sizes={`${size}x${size}`}
+        href={`${base}brand/favicon-${size}.png`}
+      />
+    ))}
+    <link
+      rel="preload"
+      href={`${base}fonts/SpaceGrotesk-VariableFont_wght.woff2`}
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="stylesheet" href={`${base}fonts/font.css`} />
+    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+  </head>
+  <body data-language={lang}>
+    <a class="skip-link" href="#generator">
+      {c.skip}
+    </a>
+    <div class="app-shell">
+      <header class="site-header">
+        <a
+          class="brand"
+          href="https://vinasig.io.vn/"
+          aria-label={c.brandHome}
+          data-brand-logo
+        >
+          <picture>
+            <source
+              media="(prefers-color-scheme: dark)"
+              srcset={`${base}brand/reversed.svg`}
+            />
+            <script is:inline>
+              document.currentScript?.previousElementSibling?.setAttribute(
+                'media',
+                document.documentElement.dataset.theme === 'dark'
+                  ? 'all'
+                  : 'not all',
+              );
+            </script>
+            <img
+              src={`${base}brand/primary-color.svg`}
+              width="540"
+              height="140"
+              alt="VINASIG"
+            />
+          </picture>
+        </a>
+        <SitePreferences
+          lang={lang}
+          alternate={lang === 'vi' ? `${base}en/` : base}
+        />
+      </header>
+      <main>
+        <div class="intro">
+          <h1>{c.title}</h1>
+          <p class="lead">{c.lead}</p>
+          <p>{c.intro}</p>
+        </div>
+        <div class="workspace" id="generator">
+          <section class="editor" aria-labelledby="form-heading">
+            <h2 id="form-heading">{c.formTitle}</h2>
+            <form id="totp-form" novalidate autocomplete="off">
+              <div class="field">
+                <label for="secret">{c.secret}</label>
+                <input
+                  id="secret"
+                  type="password"
+                  autocomplete="new-password"
+                  spellcheck="false"
+                  maxlength="8192"
+                  required
+                  disabled
+                  aria-describedby="secret-hint secret-error"
+                />
+                <p class="field-error" id="secret-error" hidden></p>
+                <p class="supporting input-hint" id="secret-hint">
+                  {c.secretHint}
+                </p>
+                <button
+                  type="button"
+                  class="clear-button"
+                  id="reveal"
+                  aria-controls="secret"
+                  aria-pressed="false"
+                  disabled
+                >
+                  {c.show}
+                </button>
+              </div>
+              <details class="advanced" id="advanced">
+                <summary>{c.advanced}</summary>
+                <p class="supporting">{c.advancedHint}</p>
+                <fieldset>
+                  <legend>{c.algorithm}</legend>
+                  <div class="choices">
+                    {['SHA1', 'SHA256', 'SHA512'].map((value) => (
+                      <label class="choice">
+                        <input
+                          type="radio"
+                          name="algorithm"
+                          value={value}
+                          checked={value === 'SHA1'}
+                          disabled
+                        />
+                        <span data-copy-notation="HMAC hash algorithm">
+                          {value}
+                        </span>
+                      </label>
+                    ))}
+                  </div>
+                </fieldset>
+                <fieldset>
+                  <legend>{c.digits}</legend>
+                  <div class="choices">
+                    <label class="choice">
+                      <input
+                        type="radio"
+                        name="digits"
+                        value="6"
+                        checked
+                        disabled
+                      />
+                      <span>{c.six}</span>
+                    </label>
+                    <label class="choice">
+                      <input type="radio" name="digits" value="8" disabled />
+                      <span>{c.eight}</span>
+                    </label>
+                  </div>
+                </fieldset>
+                <div class="fields">
+                  <div class="field">
+                    <label for="period">{c.period}</label>
+                    <input
+                      type="text"
+                      inputmode="numeric"
+                      id="period"
+                      value="30"
+                      maxlength="3"
+                      disabled
+                      aria-describedby="period-error period-hint"
+                    />
+                    <p class="field-error" id="period-error" hidden></p>
+                    <p class="supporting input-hint" id="period-hint">
+                      {c.periodHint}
+                    </p>
+                  </div>
+                  <div class="field">
+                    <label for="offset">{c.offset}</label>
+                    <input
+                      type="text"
+                      inputmode="decimal"
+                      id="offset"
+                      value="0"
+                      maxlength="8"
+                      disabled
+                      aria-describedby="offset-error offset-hint"
+                    />
+                    <p class="field-error" id="offset-error" hidden></p>
+                    <p class="supporting input-hint" id="offset-hint">
+                      {c.offsetHint}
+                    </p>
+                  </div>
+                </div>
+              </details>
+              <button type="submit" hidden disabled>
+                {c.resultTitle}
+              </button>
+              <div class="form-actions">
+                <button type="button" class="clear-button" id="clear" disabled>
+                  <Trash size={18} aria-hidden="true" />
+                  {c.clear}
+                </button>
+              </div>
+              <p class="privacy supporting">{c.privacy}</p>
+              <p class="status supporting" id="status" role="status">
+                {c.noScript}
+              </p>
+            </form>
+          </section>
+          <section class="preview" aria-labelledby="result-heading">
+            <h2 id="result-heading">{c.resultTitle}</h2>
+            <p id="empty" class="supporting">
+              {c.empty}
+            </p>
+            <div id="result" hidden>
+              <output
+                id="code"
+                class="otp-code"
+                aria-label={c.resultTitle}
+                data-user-content
+              ></output>
+              <p class="countdown">
+                <span>{c.remaining}</span> <strong id="remaining"></strong>{' '}
+                <span id="countdown-unit">{c.seconds}</span>
+              </p>
+              <progress
+                id="progress"
+                max="30"
+                value="30"
+                aria-label={c.remaining}
+              ></progress>
+            </div>
+            <div class="form-actions">
+              <button
+                class="primary copy-button"
+                type="button"
+                id="copy"
+                disabled
+              >
+                <Copy size={18} aria-hidden="true" />
+                {c.copy}
+              </button>
+            </div>
+            <p
+              id="copy-status"
+              class="supporting copy-status"
+              role="status"
+            ></p>
+            <p class="supporting">{c.warning}</p>
+            <details class="technical" id="technical" hidden>
+              <summary>{c.technical}</summary>
+              <dl>
+                <div id="account-row" hidden>
+                  <dt>{c.account}</dt>
+                  <dd id="account" data-user-content></dd>
+                </div>
+                <div>
+                  <dt>{c.algorithm}</dt>
+                  <dd>
+                    <span
+                      id="algorithm-value"
+                      data-copy-notation="HMAC algorithm identifier"
+                    ></span>
+                  </dd>
+                </div>
+                <div>
+                  <dt>{c.digits}</dt>
+                  <dd id="digits-value"></dd>
+                </div>
+                <div>
+                  <dt>{c.period}</dt>
+                  <dd id="period-value"></dd>
+                </div>
+                <div>
+                  <dt>{c.clock}</dt>
+                  <dd>
+                    <time
+                      id="clock"
+                      data-copy-notation="Formatted device time"
+                    ></time>
+                  </dd>
+                </div>
+                <div>
+                  <dt>{c.expiry}</dt>
+                  <dd>
+                    <time
+                      id="expiry"
+                      data-copy-notation="Formatted expiry time"
+                    ></time>
+                  </dd>
+                </div>
+              </dl>
+            </details>
+          </section>
+        </div>
+        <section class="notes" aria-labelledby="faq-heading">
+          <h2 id="faq-heading">{c.faqTitle}</h2>
+          {[
+            [c.faqUse, c.faqUseText],
+            [c.faqTime, c.faqTimeText],
+            [c.faqSafety, c.faqSafetyText],
+            [c.faqOffline, c.faqOfflineText],
+          ].map(([title, text]) => (
+            <details>
+              <summary>{title}</summary>
+              <p>{text}</p>
+            </details>
+          ))}
+          <p class="supporting sources">
+            {c.sources}{' '}
+            <a
+              href="https://www.rfc-editor.org/rfc/rfc6238"
+              data-copy-notation="RFC identifier"
+            >
+              RFC 6238
+            </a>{' '}
+            <span aria-hidden="true">-</span>{' '}
+            <a href="https://github.com/google/google-authenticator/wiki/Key-Uri-Format">
+              Key URI Format
+            </a>
+          </p>
+        </section>
+      </main>
+      <footer class="site-footer">
+        <p>{c.footer}</p>
+        <nav
+          aria-label={lang === 'vi' ? 'Thông tin công cụ' : 'About this tool'}
+        >
+          <a href={sourceUrl} data-source-link>
+            {c.source}
+          </a>
+          <a href={`${base}licenses/NOTICE.txt`}>{c.licenses}</a>
+        </nav>
+      </footer>
+    </div>
+    <script>
+      import '../scripts/generator.ts';
+    </script>
+  </body>
+</html>

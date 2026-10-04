@@ -1,0 +1,8 @@
+VINASIG totp-generator
+
+VINASIG-authored application software is licensed under GNU AGPL version 3 or, at your option, any later version. Copyright remains with the respective authors and rights holders. There is no warranty. You may modify and redistribute the software under that license. Read AGPL-3.0-or-later.txt for the full terms.
+
+Corresponding Source, build scripts, the pinned lockfile and install instructions are freely available at https://github.com/VINASIG/totp-generator. The deployment workflow and Git history identify the actual source revision. For a checked-out or downloaded distribution, use the matching revision and retain that record. Fork operators must offer their own modified source when AGPL requires it.
+
+Authored documentation uses CC BY-SA 4.0, included in CC-BY-SA-4.0.txt. Code examples additionally use the software grant. Space Grotesk, Lucide and other third-party components retain the notices supplied alongside them. VINASIG artwork uses BRAND_POLICY.md and is excluded from the open software/documentation grant. User inputs and independent output do not automatically inherit the software license.
+

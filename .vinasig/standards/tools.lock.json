@@ -1,0 +1,414 @@
+{
+  "format": 1,
+  "verifiedOn": "2026-10-03",
+  "runtime": {
+    "selected": "24.21.0",
+    "channel": "Node 24 LTS",
+    "packageManager": "npm@11.19.0"
+  },
+  "packages": [
+    {
+      "package": "typescript",
+      "latestVerified": "7.0.2",
+      "selected": "6.0.3",
+      "verifiedOn": "2026-10-03",
+      "role": "strict compiler",
+      "tier": "default-by-profile",
+      "license": "Apache-2.0",
+      "account": "No account for local package",
+      "data": "Local execution; initial package download contacts registry",
+      "engines": {
+        "node": ">=16.20.0"
+      },
+      "peers": {},
+      "registry": "https://registry.npmjs.org/typescript/latest",
+      "compatibility": "Latest 7.0.2 is outside typescript-eslint <6.1.0 peer range; use 6.0.3 and review migration"
+    },
+    {
+      "package": "eslint",
+      "latestVerified": "10.12.0",
+      "selected": "10.12.0",
+      "verifiedOn": "2026-10-03",
+      "role": "source lint",
+      "tier": "default-by-profile",
+      "license": "MIT",
+      "account": "No account for local package",
+      "data": "Local execution; initial package download contacts registry",
+      "engines": {
+        "node": "^20.19.0 || ^22.13.0 || >=24"
+      },
+      "peers": {
+        "jiti": "*"
+      },
+      "registry": "https://registry.npmjs.org/eslint/latest",
+      "compatibility": "Verify consumer framework/runtime; no implicit installation"
+    },
+    {
+      "package": "@eslint/js",
+      "latestVerified": "10.0.1",
+      "selected": "10.0.1",
+      "verifiedOn": "2026-10-03",
+      "role": "ESLint base rules",
+      "tier": "default-by-profile",
+      "license": "MIT",
+      "account": "No account for local package",
+      "data": "Local execution; initial package download contacts registry",
+      "engines": {
+        "node": "^20.19.0 || ^22.13.0 || >=24"
+      },
+      "peers": {
+        "eslint": "^10.0.0"
+      },
+      "registry": "https://registry.npmjs.org/@eslint/js/latest",
+      "compatibility": "Verify consumer framework/runtime; no implicit installation"
+    },
+    {
+      "package": "typescript-eslint",
+      "latestVerified": "8.71.0",
+      "selected": "8.71.0",
+      "verifiedOn": "2026-10-03",
+      "role": "typed strict lint",
+      "tier": "default-by-profile",
+      "license": "MIT",
+      "account": "No account for local package",
+      "data": "Local execution; initial package download contacts registry",
+      "engines": {
+        "node": "^18.18.0 || ^20.9.0 || >=21.1.0"
+      },
+      "peers": {
+        "eslint": "^8.57.0 || ^9.0.0 || ^10.0.0",
+        "typescript": ">=4.8.4 <6.1.0"
+      },
+      "registry": "https://registry.npmjs.org/typescript-eslint/latest",
+      "compatibility": "Verify consumer framework/runtime; no implicit installation"
+    },
+    {
+      "package": "@types/node",
+      "latestVerified": "26.6.4",
+      "selected": "24.19.1",
+      "verifiedOn": "2026-10-03",
+      "role": "Node runtime types",
+      "tier": "default-by-profile",
+      "license": "MIT",
+      "account": "No account for local package",
+      "data": "Local execution; initial package download contacts registry",
+      "engines": {},
+      "peers": {},
+      "registry": "https://registry.npmjs.org/@types/node/latest",
+      "compatibility": "Matches tested Node major 24; latest major 26 is not selected"
+    },
+    {
+      "package": "prettier",
+      "latestVerified": "3.9.9",
+      "selected": "3.9.9",
+      "verifiedOn": "2026-10-03",
+      "role": "single formatter",
+      "tier": "default-by-profile",
+      "license": "MIT",
+      "account": "No account for local package",
+      "data": "Local execution; initial package download contacts registry",
+      "engines": {
+        "node": ">=14"
+      },
+      "peers": {},
+      "registry": "https://registry.npmjs.org/prettier/latest",
+      "compatibility": "Verify consumer framework/runtime; no implicit installation"
+    },
+    {
+      "package": "stylelint",
+      "latestVerified": "17.16.0",
+      "selected": "17.16.0",
+      "verifiedOn": "2026-10-03",
+      "role": "CSS lint",
+      "tier": "default-by-profile",
+      "license": "MIT",
+      "account": "No account for local package",
+      "data": "Local execution; initial package download contacts registry",
+      "engines": {
+        "node": ">=20.19.0"
+      },
+      "peers": {},
+      "registry": "https://registry.npmjs.org/stylelint/latest",
+      "compatibility": "Verify consumer framework/runtime; no implicit installation"
+    },
+    {
+      "package": "stylelint-config-standard",
+      "latestVerified": "40.0.0",
+      "selected": "40.0.0",
+      "verifiedOn": "2026-10-03",
+      "role": "CSS rules",
+      "tier": "default-by-profile",
+      "license": "MIT",
+      "account": "No account for local package",
+      "data": "Local execution; initial package download contacts registry",
+      "engines": {
+        "node": ">=20.19.0"
+      },
+      "peers": {
+        "stylelint": "^17.0.0"
+      },
+      "registry": "https://registry.npmjs.org/stylelint-config-standard/latest",
+      "compatibility": "Verify consumer framework/runtime; no implicit installation"
+    },
+    {
+      "package": "html-validate",
+      "latestVerified": "11.16.1",
+      "selected": "11.16.1",
+      "verifiedOn": "2026-10-03",
+      "role": "HTML/output validation",
+      "tier": "default-by-profile",
+      "license": "MIT",
+      "account": "No account for local package",
+      "data": "Local execution; initial package download contacts registry",
+      "engines": {
+        "node": "^22.22.0 || >= 24.8.0"
+      },
+      "peers": {
+        "jest": "^29.0.3 || ^30.0.0",
+        "vitest": "^3.2.0 || ^4.0.1 || ^5.0.0",
+        "@jest/globals": "^29.0.3 || ^30.0.0",
+        "jest-snapshot": "^29.0.3 || ^30.0.0",
+        "@vitest/expect": "^3.2.0 || ^4.0.1 || ^5.0.0"
+      },
+      "registry": "https://registry.npmjs.org/html-validate/latest",
+      "compatibility": "Verify consumer framework/runtime; no implicit installation"
+    },
+    {
+      "package": "ajv",
+      "latestVerified": "8.20.0",
+      "selected": "8.20.0",
+      "verifiedOn": "2026-10-03",
+      "role": "JSON Schema validation",
+      "tier": "default-by-profile",
+      "license": "MIT",
+      "account": "No account for local package",
+      "data": "Local execution; initial package download contacts registry",
+      "engines": {},
+      "peers": {},
+      "registry": "https://registry.npmjs.org/ajv/latest",
+      "compatibility": "Verify consumer framework/runtime; no implicit installation"
+    },
+    {
+      "package": "yaml",
+      "latestVerified": "2.9.1",
+      "selected": "2.9.1",
+      "verifiedOn": "2026-10-03",
+      "role": "metadata/config validation",
+      "tier": "default-by-profile",
+      "license": "ISC",
+      "account": "No account for local package",
+      "data": "Local execution; initial package download contacts registry",
+      "engines": {
+        "node": ">= 14.6"
+      },
+      "peers": {},
+      "registry": "https://registry.npmjs.org/yaml/latest",
+      "compatibility": "Verify consumer framework/runtime; no implicit installation"
+    },
+    {
+      "package": "@playwright/test",
+      "latestVerified": "1.63.0",
+      "selected": "1.63.0",
+      "verifiedOn": "2026-10-03",
+      "role": "repeatable browser regression",
+      "tier": "default-by-profile",
+      "license": "Apache-2.0",
+      "account": "No account for local package",
+      "data": "Local execution; initial package download contacts registry",
+      "engines": {
+        "node": ">=20"
+      },
+      "peers": {},
+      "registry": "https://registry.npmjs.org/@playwright/test/latest",
+      "compatibility": "Verify consumer framework/runtime; no implicit installation"
+    },
+    {
+      "package": "@axe-core/playwright",
+      "latestVerified": "4.13.0",
+      "selected": "4.13.0",
+      "verifiedOn": "2026-10-03",
+      "role": "automated accessibility",
+      "tier": "default-by-profile",
+      "license": "MPL-2.0",
+      "account": "No account for local package",
+      "data": "Local execution; initial package download contacts registry",
+      "engines": {},
+      "peers": {
+        "playwright-core": ">= 1.0.0"
+      },
+      "registry": "https://registry.npmjs.org/@axe-core/playwright/latest",
+      "compatibility": "Verify consumer framework/runtime; no implicit installation"
+    },
+    {
+      "package": "lighthouse",
+      "latestVerified": "13.5.0",
+      "selected": "13.5.0",
+      "verifiedOn": "2026-10-03",
+      "role": "repeatable local lab performance/SEO",
+      "tier": "default-by-profile",
+      "license": "Apache-2.0",
+      "account": "No account for local package",
+      "data": "Local execution; initial package download contacts registry",
+      "engines": {
+        "node": ">=22.19"
+      },
+      "peers": {},
+      "registry": "https://registry.npmjs.org/lighthouse/latest",
+      "compatibility": "Verify consumer framework/runtime; no implicit installation"
+    },
+    {
+      "package": "@lhci/cli",
+      "latestVerified": "0.15.1",
+      "selected": "0.15.1",
+      "verifiedOn": "2026-10-03",
+      "role": "optional budget orchestration",
+      "tier": "optional",
+      "license": "Apache-2.0",
+      "account": "No account for local package",
+      "data": "Local execution; initial package download contacts registry",
+      "engines": {},
+      "peers": {},
+      "registry": "https://registry.npmjs.org/@lhci/cli/latest",
+      "compatibility": "Verify consumer framework/runtime; no implicit installation"
+    },
+    {
+      "package": "chrome-devtools-mcp",
+      "latestVerified": "1.10.1",
+      "selected": "1.10.1",
+      "verifiedOn": "2026-10-03",
+      "role": "optional runtime/network/performance diagnosis",
+      "tier": "optional",
+      "license": "Apache-2.0",
+      "account": "No account for local package",
+      "data": "Local browser data; disable default usage stats and CrUX requests; traces stay local unless explicitly shared",
+      "engines": {
+        "node": "^20.19.0 || ^22.12.0 || >=23"
+      },
+      "peers": {
+        "@toon-format/toon": "^4.1.0",
+        "@blackwell-systems/gcf": "^2.2.2"
+      },
+      "registry": "https://registry.npmjs.org/chrome-devtools-mcp/latest",
+      "compatibility": "Verify consumer framework/runtime; no implicit installation"
+    },
+    {
+      "package": "@playwright/mcp",
+      "latestVerified": "0.0.83",
+      "selected": "0.0.83",
+      "verifiedOn": "2026-10-03",
+      "role": "optional browser-agent driver",
+      "tier": "optional",
+      "license": "Apache-2.0",
+      "account": "No account for local package",
+      "data": "Local execution; initial package download contacts registry",
+      "engines": {
+        "node": ">=18"
+      },
+      "peers": {},
+      "registry": "https://registry.npmjs.org/@playwright/mcp/latest",
+      "compatibility": "Verify consumer framework/runtime; no implicit installation"
+    },
+    {
+      "package": "@playwright/cli",
+      "latestVerified": "0.1.22",
+      "selected": "0.1.22",
+      "verifiedOn": "2026-10-03",
+      "role": "optional browser-agent driver",
+      "tier": "optional",
+      "license": "Apache-2.0",
+      "account": "No account for local package",
+      "data": "Local execution; initial package download contacts registry",
+      "engines": {
+        "node": ">=18"
+      },
+      "peers": {},
+      "registry": "https://registry.npmjs.org/@playwright/cli/latest",
+      "compatibility": "Verify consumer framework/runtime; no implicit installation"
+    },
+    {
+      "package": "motion",
+      "latestVerified": "14.0.0",
+      "selected": "14.0.0",
+      "verifiedOn": "2026-10-03",
+      "role": "optional animation runtime",
+      "tier": "optional",
+      "license": "MIT",
+      "account": "No account for local package",
+      "data": "Local execution; initial package download contacts registry",
+      "engines": {},
+      "peers": {
+        "react": "^18.0.0 || ^19.0.0",
+        "react-dom": "^18.0.0 || ^19.0.0"
+      },
+      "registry": "https://registry.npmjs.org/motion/latest",
+      "compatibility": "Official metadata accepts React 18 or 19. This optional reference is not installed or a runtime test; verify consumer framework and current APIs before adoption."
+    },
+    {
+      "package": "motion-ai",
+      "latestVerified": "14.1.0",
+      "selected": "14.1.0",
+      "verifiedOn": "2026-10-03",
+      "role": "optional Motion AI Kit installer",
+      "tier": "optional",
+      "license": "MIT",
+      "account": "Free docs; Motion+ sign-in for premium capabilities",
+      "data": "Hosted Motion documentation queries; inspect premium source/runtime data transfer before use",
+      "engines": {
+        "node": ">=18"
+      },
+      "peers": {},
+      "registry": "https://registry.npmjs.org/motion-ai/latest",
+      "compatibility": "Verify consumer framework/runtime; no implicit installation"
+    },
+    {
+      "package": "agent-browser",
+      "latestVerified": "0.38.2",
+      "selected": "0.38.2",
+      "verifiedOn": "2026-10-03",
+      "role": "alternative browser-agent driver",
+      "tier": "optional",
+      "license": "Apache-2.0",
+      "account": "No account for local package",
+      "data": "Local execution; initial package download contacts registry",
+      "engines": {
+        "node": ">=24.0.0",
+        "pnpm": ">=11.0.0"
+      },
+      "peers": {},
+      "registry": "https://registry.npmjs.org/agent-browser/latest",
+      "compatibility": "Verify consumer framework/runtime; no implicit installation"
+    },
+    {
+      "package": "lucide",
+      "latestVerified": "1.50.0",
+      "selected": "1.50.0",
+      "verifiedOn": "2026-10-03",
+      "role": "interface SVG icons",
+      "tier": "optional",
+      "license": "ISC",
+      "account": "No account for local package",
+      "data": "Local execution; initial package download contacts registry",
+      "engines": {},
+      "peers": {},
+      "registry": "https://registry.npmjs.org/lucide/latest",
+      "compatibility": "Verify consumer framework/runtime; no implicit installation"
+    },
+    {
+      "package": "simple-icons",
+      "latestVerified": "16.33.0",
+      "selected": "16.33.0",
+      "verifiedOn": "2026-10-03",
+      "role": "third-party brand marks",
+      "tier": "optional",
+      "license": "CC0-1.0",
+      "account": "No account for local package",
+      "data": "Local execution; initial package download contacts registry",
+      "engines": {
+        "node": ">=0.12.18"
+      },
+      "peers": {},
+      "registry": "https://registry.npmjs.org/simple-icons/latest",
+      "compatibility": "Verify consumer framework/runtime; no implicit installation"
+    }
+  ]
+}

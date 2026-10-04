@@ -1,0 +1,16 @@
+node_modules
+dist
+.astro
+output
+.agents
+.vinasig
+public/brand
+public/fonts
+AGENTS.md
+package-lock.json
+
+# Standard license texts are verbatim legal documents.
+LICENSE
+LICENSES/
+public/licenses/AGPL-3.0-or-later.txt
+public/licenses/CC-BY-SA-4.0.txt

@@ -1,0 +1,18 @@
+[
+  {
+    "id": "AGPL-3.0-or-later",
+    "url": "https://raw.githubusercontent.com/spdx/license-list-data/31ba1a50e5397e00a304dbadc76531740e89ee48/text/AGPL-3.0-or-later.txt",
+    "sourceRef": "31ba1a50e5397e00a304dbadc76531740e89ee48",
+    "size": 34020,
+    "sha256": "d8a6cc31abc16b6748c7a21f21611f5a1ec33f67d22ca23d7da1c19b95496bee",
+    "files": ["LICENSE", "public/licenses/AGPL-3.0-or-later.txt"]
+  },
+  {
+    "id": "CC-BY-SA-4.0",
+    "url": "https://creativecommons.org/licenses/by-sa/4.0/legalcode.txt",
+    "sourceRef": null,
+    "size": 20138,
+    "sha256": "28a9529c7d0bb4dc51f4bf5c116a3d16ef247a052f7591466768ddf563fd1cf5",
+    "files": ["LICENSES/CC-BY-SA-4.0.txt", "public/licenses/CC-BY-SA-4.0.txt"]
+  }
+]

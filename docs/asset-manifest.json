@@ -1,0 +1,24 @@
+{
+  "format": 1,
+  "designSystemCommit": "7ca081e190a7baa3682edf4d1d12ec6485332349",
+  "brandAssetsCommit": "673d1392d5d78e87323ca91eac480e25b57210a9",
+  "fontContainer": "Full-glyph WOFF2 derived for Unphar; original TTF and OFL preserved",
+  "files": {
+    "public/brand/favicon-16.png": "4f14f69fb21b73653b311adbc1707241c61624171ec6d129fcd283d53c091566",
+    "public/brand/favicon-32.png": "24603abb66b4cd900b997caffb369266cc27495ebe3a3bce7af28181e18a064a",
+    "public/brand/favicon-48.png": "6feec540e3e91f5216feb8766fc851e17e7a41991f4b90fa227d1558189d71f4",
+    "public/brand/mark.svg": "cdb10d7d6da713cec3d1909f25fa70744613a02b7da1a038ae4c8a58b8c62fb8",
+    "public/brand/primary-color.svg": "1a6570886ceb3ce742ebe5afe61eb48798189b15ec4ec72d687dd8c63a32ee59",
+    "public/fonts/OFL.txt": "f2e05925e3d5e73aebbe4148639a899876c12e4708eb453682b278a0a6f2a3b2",
+    "public/fonts/SpaceGrotesk-VariableFont_wght.ttf": "697a7905c71f7c61d071648bc73449541796af865b51c86a672795f3b452b142",
+    "public/fonts/SpaceGrotesk-VariableFont_wght.woff2": "a4268cf625e6b67a77bce46143b61b777cc126383f741bc035f490861428f5f7",
+    "public/brand/reversed.svg": "98ceaaace06835138856d3710b4fed38714528573f78b19e710db796aea53d07"
+  },
+  "headerLogoReview": {
+    "reviewed": "2026-10-04",
+    "repository": "VINASIG/vinasig-brand-assets",
+    "commit": "83ed7515c81c3b2a28888a75c754e44562d5b107",
+    "source": "01_Logos/Horizontal Lockup/Exports/VINASIG Primary Horizontal Lockup - Reversed.svg",
+    "sha256": "98ceaaace06835138856d3710b4fed38714528573f78b19e710db796aea53d07"
+  }
+}

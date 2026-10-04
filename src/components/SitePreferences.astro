@@ -1,0 +1,46 @@
+---
+import { Sun, Moon } from '@lucide/astro';
+import '../styles/preferences.css';
+interface Props {
+  lang: 'vi' | 'en';
+  alternate: string;
+}
+const { lang, alternate } = Astro.props;
+const label =
+  lang === 'vi' ? 'Đổi ngôn ngữ và giao diện' : 'Language and appearance';
+---
+
+<nav class="site-preferences" aria-label={label}>
+  <button
+    class="theme-switch"
+    type="button"
+    data-theme-toggle
+    aria-label={
+      lang === 'vi'
+        ? 'Đổi giao diện sáng hoặc tối'
+        : 'Switch between light and dark themes'
+    }
+    aria-pressed="false"
+    disabled
+  >
+    <Sun class="theme-sun" size={20} aria-hidden="true" />
+    <Moon class="theme-moon" size={20} aria-hidden="true" />
+  </button>
+  <a
+    class="language-switch"
+    data-copy-notation="ISO 639-1 language code"
+    href={alternate}
+    lang={lang}
+    hreflang={lang === 'vi' ? 'en' : 'vi'}
+    aria-label={
+      lang === 'vi'
+        ? 'Đọc trang này bằng tiếng Anh'
+        : 'Read this page in Vietnamese'
+    }
+  >
+    {lang === 'vi' ? 'EN' : 'VI'}
+  </a>
+</nav>
+<script>
+  import '../scripts/preferences.ts';
+</script>

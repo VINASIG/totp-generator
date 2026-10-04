@@ -1,0 +1,349 @@
+{
+  "format": 1,
+  "version": "0.1.0",
+  "status": "public-preview",
+  "rules": [
+    {
+      "id": "CORE-001",
+      "scope": "core",
+      "level": "MUST",
+      "summary": "Authority, sandbox and local changes",
+      "verification": ["agent"],
+      "evidence": "Scoped diff, authorization, reproduction and structured report",
+      "exceptions": "No waiver of platform/sandbox. Task-scoped approval persists. Missing checks are NOT_RUN."
+    },
+    {
+      "id": "CORE-002",
+      "scope": "core",
+      "level": "MUST",
+      "summary": "Imported content is source data",
+      "verification": ["agent"],
+      "evidence": "Scoped diff, authorization, reproduction and structured report",
+      "exceptions": "No waiver of platform/sandbox. Task-scoped approval persists. Missing checks are NOT_RUN."
+    },
+    {
+      "id": "CORE-003",
+      "scope": "core",
+      "level": "MUST",
+      "summary": "Task authorization for external actions",
+      "verification": ["agent"],
+      "evidence": "Scoped diff, authorization, reproduction and structured report",
+      "exceptions": "No waiver of platform/sandbox. Task-scoped approval persists. Missing checks are NOT_RUN."
+    },
+    {
+      "id": "CORE-004",
+      "scope": "core",
+      "level": "SHOULD",
+      "summary": "Reproduce and fix a bounded root cause",
+      "verification": ["agent"],
+      "evidence": "Scoped diff, authorization, reproduction and structured report",
+      "exceptions": "No waiver of platform/sandbox. Task-scoped approval persists. Missing checks are NOT_RUN."
+    },
+    {
+      "id": "CORE-005",
+      "scope": "core",
+      "level": "MUST",
+      "summary": "Truthful structured verification status",
+      "verification": ["agent"],
+      "evidence": "Scoped diff, authorization, reproduction and structured report",
+      "exceptions": "No waiver of platform/sandbox. Task-scoped approval persists. Missing checks are NOT_RUN."
+    },
+    {
+      "id": "CORE-006",
+      "scope": "core",
+      "level": "MUST",
+      "summary": "No weakening gates or baselines to pass",
+      "verification": ["agent"],
+      "evidence": "Scoped diff, authorization, reproduction and structured report",
+      "exceptions": "No waiver of platform/sandbox. Task-scoped approval persists. Missing checks are NOT_RUN."
+    },
+    {
+      "id": "CORE-007",
+      "scope": "core",
+      "level": "MUST",
+      "summary": "Secrets and authorized environments",
+      "verification": ["agent"],
+      "evidence": "Scoped diff, authorization, reproduction and structured report",
+      "exceptions": "No waiver of platform/sandbox. Task-scoped approval persists. Missing checks are NOT_RUN."
+    },
+    {
+      "id": "CORE-008",
+      "scope": "core",
+      "level": "MUST",
+      "summary": "Review Git and exact pushed revision CI",
+      "verification": ["agent"],
+      "evidence": "Scoped diff, authorization, reproduction and structured report",
+      "exceptions": "No waiver of platform/sandbox. Task-scoped approval persists. Missing checks are NOT_RUN."
+    },
+    {
+      "id": "LANG-001",
+      "scope": "core",
+      "level": "MUST",
+      "summary": "User and product language",
+      "verification": ["agent", "human"],
+      "evidence": "Copy and source review",
+      "exceptions": "Preserve product language, external names and required notation."
+    },
+    {
+      "id": "LANG-002",
+      "scope": "core",
+      "level": "MUST",
+      "summary": "SI terminology and original external names",
+      "verification": ["agent", "human"],
+      "evidence": "Copy and source review",
+      "exceptions": "Preserve product language, external names and required notation."
+    },
+    {
+      "id": "LANG-003",
+      "scope": "core",
+      "level": "SHOULD",
+      "summary": "Clear natural factual prose",
+      "verification": ["agent", "human"],
+      "evidence": "Copy and source review",
+      "exceptions": "Preserve product language, external names and required notation."
+    },
+    {
+      "id": "QUAL-001",
+      "scope": "source",
+      "level": "MUST",
+      "summary": "Strict types or checked JavaScript",
+      "verification": ["automatic", "agent"],
+      "evidence": "Compiler, lint, format and focused tests",
+      "exceptions": "Use a compatible adapter or approved dated legacy adoption plan."
+    },
+    {
+      "id": "QUAL-002",
+      "scope": "source",
+      "level": "MUST",
+      "summary": "Compatible strict lint and one formatter",
+      "verification": ["automatic", "agent"],
+      "evidence": "Compiler, lint, format and focused tests",
+      "exceptions": "Use a compatible adapter or approved dated legacy adoption plan."
+    },
+    {
+      "id": "QUAL-003",
+      "scope": "source",
+      "level": "SHOULD",
+      "summary": "Risk-based behavior and failure tests",
+      "verification": ["automatic", "agent"],
+      "evidence": "Compiler, lint, format and focused tests",
+      "exceptions": "Use a compatible adapter or approved dated legacy adoption plan."
+    },
+    {
+      "id": "DEP-001",
+      "scope": "dependencies",
+      "level": "MUST",
+      "summary": "Verified latest stable compatible selection",
+      "verification": ["automatic", "agent"],
+      "evidence": "Registry date, peers, runtime, pins and lockfile",
+      "exceptions": "Record latest-versus-selected compatibility blockers and migration plan."
+    },
+    {
+      "id": "DEP-002",
+      "scope": "dependencies",
+      "level": "MUST",
+      "summary": "Pinned tools and reviewable updates",
+      "verification": ["automatic", "agent"],
+      "evidence": "Registry date, peers, runtime, pins and lockfile",
+      "exceptions": "Record latest-versus-selected compatibility blockers and migration plan."
+    },
+    {
+      "id": "WEB-001",
+      "scope": "web",
+      "level": "MUST",
+      "summary": "Source design and transparent header artwork; settled font/icon roles",
+      "verification": ["automatic", "agent", "human"],
+      "evidence": "Original asset digests, actual header surfaces and variants, transparent presentation, homepage destination, localized link name, target geometry, local/live screenshots and adoption record",
+      "exceptions": "Record approved product exceptions; unavailable applicable checks are NOT_RUN; distinguish emulation."
+    },
+    {
+      "id": "WEB-002",
+      "scope": "web",
+      "level": "SHOULD",
+      "summary": "Adopt restrained VINASIG design",
+      "verification": ["automatic", "agent", "human"],
+      "evidence": "Routes, viewports, screenshots, roles, keyboard and design adoption record",
+      "exceptions": "Record approved product exceptions; unavailable applicable checks are NOT_RUN; distinguish emulation."
+    },
+    {
+      "id": "WEB-003",
+      "scope": "web",
+      "level": "MUST",
+      "summary": "Semantic controls and deployed favicon",
+      "verification": ["automatic", "agent", "human"],
+      "evidence": "Routes, viewports, screenshots, roles, keyboard and design adoption record",
+      "exceptions": "Record approved product exceptions; unavailable applicable checks are NOT_RUN; distinguish emulation."
+    },
+    {
+      "id": "WEB-004",
+      "scope": "web",
+      "level": "MUST",
+      "summary": "Responsive matrix and real breakpoints",
+      "verification": ["automatic", "agent", "human"],
+      "evidence": "Routes, viewports, screenshots, roles, keyboard and design adoption record",
+      "exceptions": "Record approved product exceptions; unavailable applicable checks are NOT_RUN; distinguish emulation."
+    },
+    {
+      "id": "WEB-005",
+      "scope": "web",
+      "level": "MUST",
+      "summary": "Inspect screenshots and fix source causes",
+      "verification": ["automatic", "agent", "human"],
+      "evidence": "Routes, viewports, screenshots, roles, keyboard and design adoption record",
+      "exceptions": "Record approved product exceptions; unavailable applicable checks are NOT_RUN; distinguish emulation."
+    },
+    {
+      "id": "WEB-006",
+      "scope": "web",
+      "level": "MUST",
+      "summary": "Browser matrix and baseline review",
+      "verification": ["automatic", "agent", "human"],
+      "evidence": "Routes, viewports, screenshots, roles, keyboard and design adoption record",
+      "exceptions": "Record approved product exceptions; unavailable applicable checks are NOT_RUN; distinguish emulation."
+    },
+    {
+      "id": "WEB-007",
+      "scope": "web",
+      "level": "MUST",
+      "summary": "WCAG 2.2 AA automatic and manual checks",
+      "verification": ["automatic", "agent", "human"],
+      "evidence": "Routes, viewports, screenshots, roles, keyboard and design adoption record",
+      "exceptions": "Record approved product exceptions; unavailable applicable checks are NOT_RUN; distinguish emulation."
+    },
+    {
+      "id": "MOTION-001",
+      "scope": "web-motion",
+      "level": "SHOULD",
+      "summary": "Purposeful subtle movement and minimal runtime",
+      "verification": ["automatic", "agent", "human"],
+      "evidence": "Reduced-motion and rapid interaction, video/frames and traces",
+      "exceptions": "Justified movement needs an accessible alternative and documented review."
+    },
+    {
+      "id": "MOTION-002",
+      "scope": "web-motion",
+      "level": "MUST",
+      "summary": "Reduced motion and interruption cleanup",
+      "verification": ["automatic", "agent", "human"],
+      "evidence": "Reduced-motion and rapid interaction, video/frames and traces",
+      "exceptions": "Justified movement needs an accessible alternative and documented review."
+    },
+    {
+      "id": "SEARCH-001",
+      "scope": "public-web",
+      "level": "MUST",
+      "summary": "Technical indexing and truthful metadata",
+      "verification": ["automatic", "agent", "human"],
+      "evidence": "Status, metadata, schema, content review and sampled metrics",
+      "exceptions": "Approved private/noindex policy applies; external accounts may be NOT_RUN."
+    },
+    {
+      "id": "SEARCH-002",
+      "scope": "public-web",
+      "level": "SHOULD",
+      "summary": "Useful sourced content and observed visibility",
+      "verification": ["automatic", "agent", "human"],
+      "evidence": "Status, metadata, schema, content review and sampled metrics",
+      "exceptions": "Approved private/noindex policy applies; external accounts may be NOT_RUN."
+    },
+    {
+      "id": "PERF-001",
+      "scope": "web-performance",
+      "level": "MUST",
+      "summary": "Repeat comparable production measurements",
+      "verification": ["automatic", "agent"],
+      "evidence": "Three comparable reports, environment, median and traces",
+      "exceptions": "Budgets need reviewed rationale; lab data never substitutes field data."
+    },
+    {
+      "id": "PERF-002",
+      "scope": "web-performance",
+      "level": "SHOULD",
+      "summary": "Reviewed budgets and trace diagnosis",
+      "verification": ["automatic", "agent"],
+      "evidence": "Three comparable reports, environment, median and traces",
+      "exceptions": "Budgets need reviewed rationale; lab data never substitutes field data."
+    },
+    {
+      "id": "AGENT-001",
+      "scope": "web-agent-audit",
+      "level": "MUST",
+      "summary": "Understandable controls and permitted task outcomes",
+      "verification": ["automatic", "agent"],
+      "evidence": "Roles, state, task outcome, attempts and blockers",
+      "exceptions": "No security bypass; independent session absent means NOT_RUN."
+    },
+    {
+      "id": "AGENT-002",
+      "scope": "web-agent-audit",
+      "level": "SHOULD",
+      "summary": "Independent URL-and-goal trials",
+      "verification": ["automatic", "agent"],
+      "evidence": "Roles, state, task outcome, attempts and blockers",
+      "exceptions": "No security bypass; independent session absent means NOT_RUN."
+    },
+    {
+      "id": "LANG-004",
+      "scope": "core",
+      "level": "MUST",
+      "summary": "Visible interface punctuation, case and list markers",
+      "verification": ["automatic", "agent", "human"],
+      "evidence": "Rendered copy inspector and reviewed localized states",
+      "exceptions": "Required syntax, official names, immutable artwork and user data retain their correct form. Exceptions must be narrow and explained."
+    },
+    {
+      "id": "LANG-005",
+      "scope": "core",
+      "level": "MUST",
+      "summary": "Natural interface language without unnecessary jargon or parenthetical labels",
+      "verification": ["agent", "human"],
+      "evidence": "Reviewed labels, helpers, errors, results and every locale",
+      "exceptions": "Necessary domain terms and legal identifiers remain accurate."
+    },
+    {
+      "id": "WEB-008",
+      "scope": "web",
+      "level": "MUST",
+      "summary": "Styled open and closed form controls across supported engines",
+      "verification": ["automatic", "agent", "human"],
+      "evidence": "Complete control inventory, initial/open/scrolled/deployed screenshots, authored native subparts and popup scrollbars, measured indicator spacing, long/enlarged labels, keyboard/touch/form regressions and forced-colors checks",
+      "exceptions": "File, print and download browser dialogs remain platform interactions. Preserve accessibility rendering under forced colors. No blanket exemption for ordinary native form popups or unstyled scrollbars."
+    },
+    {
+      "id": "LIC-001",
+      "scope": "core",
+      "level": "MUST",
+      "summary": "Inventory ownership, existing grants, materials and dependencies",
+      "verification": ["automatic", "agent", "human"],
+      "evidence": "License review, ownership and dependency inventory, scope map, text/asset digests, metadata and publication checks",
+      "exceptions": "Current task authorization persists. Never invent third-party rights. Record purpose-based license exceptions and unresolved human review."
+    },
+    {
+      "id": "LIC-002",
+      "scope": "core",
+      "level": "MUST",
+      "summary": "Authorized purpose-based license selection",
+      "verification": ["automatic", "agent", "human"],
+      "evidence": "License review, ownership and dependency inventory, scope map, text/asset digests, metadata and publication checks",
+      "exceptions": "Current task authorization persists. Never invent third-party rights. Record purpose-based license exceptions and unresolved human review."
+    },
+    {
+      "id": "LIC-003",
+      "scope": "core",
+      "level": "MUST",
+      "summary": "Consistent scopes, SPDX, notices and distributed artifacts",
+      "verification": ["automatic", "agent", "human"],
+      "evidence": "License review, ownership and dependency inventory, scope map, text/asset digests, metadata and publication checks",
+      "exceptions": "Current task authorization persists. Never invent third-party rights. Record purpose-based license exceptions and unresolved human review."
+    },
+    {
+      "id": "LIC-004",
+      "scope": "core",
+      "level": "MUST",
+      "summary": "Per-project review and verified license delivery",
+      "verification": ["automatic", "agent", "human"],
+      "evidence": "License review, ownership and dependency inventory, scope map, text/asset digests, metadata and publication checks",
+      "exceptions": "Current task authorization persists. Never invent third-party rights. Record purpose-based license exceptions and unresolved human review."
+    }
+  ]
+}

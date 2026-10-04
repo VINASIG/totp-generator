@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$defs": {
+    "textOrNull": { "type": ["string", "null"] },
+    "check": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "status", "detail"],
+      "properties": {
+        "name": { "type": "string" },
+        "status": { "enum": ["PASS", "FAIL", "NOT_RUN"] },
+        "detail": { "type": "string" }
+      }
+    },
+    "diff": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "before", "after"],
+      "properties": {
+        "path": { "type": "string" },
+        "before": { "$ref": "#/$defs/textOrNull" },
+        "after": { "$ref": "#/$defs/textOrNull" }
+      }
+    }
+  },
+  "oneOf": [
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "error"],
+      "properties": {
+        "status": { "const": "FAIL" },
+        "error": { "type": "string" }
+      }
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["command", "checks"],
+      "properties": {
+        "command": { "enum": ["doctor", "check"] },
+        "checks": { "type": "array", "items": { "$ref": "#/$defs/check" } }
+      }
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "command",
+        "dryRun",
+        "changed",
+        "backup",
+        "paths",
+        "diff",
+        "instructionDiff"
+      ],
+      "properties": {
+        "command": {
+          "enum": ["init", "install", "update", "diff", "uninstall", "rollback"]
+        },
+        "dryRun": { "type": "boolean" },
+        "changed": { "type": "boolean" },
+        "backup": { "$ref": "#/$defs/textOrNull" },
+        "paths": { "type": "array", "items": { "type": "string" } },
+        "diff": { "type": "array", "items": { "$ref": "#/$defs/diff" } },
+        "instructionDiff": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["before", "after"],
+          "properties": {
+            "before": { "$ref": "#/$defs/textOrNull" },
+            "after": { "$ref": "#/$defs/textOrNull" }
+          }
+        }
+      }
+    }
+  ]
+}
