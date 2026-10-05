@@ -18,6 +18,12 @@ Read task and relevant local guidance, discover the stack and commands, identify
 - CORE-007 MUST keep credentials, personal data and private captures out of Git and reports. Tests use authorized fixtures/local environments. Production stress tests, active security scans, payments and destructive actions need explicit scope.
 - CORE-008 MUST review the staged diff before an authorized commit, use a concise English imperative subject, preserve shared history, verify pushed HEAD against the remote, and inspect required CI for that exact commit. Report deployment separately. Do not invent successful CI or human validation.
 
+## Public VINASIG project information
+
+- CORE-009 MUST follow the [project publication checklist](../templates/project-publication.md) when creating or publishing a VINASIG-owned project, or changing a listed project's name, canonical destination, public availability, purpose or advertised features. Review and synchronize the relevant project README, repository details, VINASIG website inventory and organization profile within the user's authorized scope. Keep the organization's existing English and Vietnamese profile versions aligned. Existing authorization for those related updates persists. If access or authorization is missing, prepare the exact edit and report that destination as pending.
+
+The public organization profile lives in the public `VINASIG/.github` repository at `profile/README.md`. Its existing Vietnamese counterpart is `profile/README.vi.md`. A personal GitHub profile uses a different repository convention. Do not overwrite the organization's website repository to create its GitHub profile. Publish verified public project facts, preserve brand rights and check actual rendered profile content after pushing. This requirement does not trigger an unrelated dependency upgrade or a rewrite of unchanged descriptions.
+
 ## Exceptions and specialization
 
 License selection, imported material and source/built distribution follow [the licensing policy](licensing.md). LIC-001 through LIC-004 apply across every profile. Current owner authorization for licensing persists, but never supplies a missing third-party right.

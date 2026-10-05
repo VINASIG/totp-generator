@@ -76,6 +76,15 @@
       "exceptions": "No waiver of platform/sandbox. Task-scoped approval persists. Missing checks are NOT_RUN."
     },
     {
+      "id": "CORE-009",
+      "scope": "core",
+      "level": "MUST",
+      "summary": "Synchronize public VINASIG project information",
+      "verification": ["agent"],
+      "evidence": "Affected public README, repository metadata, website inventory, organization profile translations and exact publication evidence",
+      "exceptions": "Applies only to VINASIG-owned public project information. Preserve current authorization and unrelated changes. Prepare exact edits and report inaccessible or unauthorized destinations as pending."
+    },
+    {
       "id": "LANG-001",
       "scope": "core",
       "level": "MUST",
@@ -344,6 +353,15 @@
       "verification": ["automatic", "agent", "human"],
       "evidence": "License review, ownership and dependency inventory, scope map, text/asset digests, metadata and publication checks",
       "exceptions": "Current task authorization persists. Never invent third-party rights. Record purpose-based license exceptions and unresolved human review."
+    },
+    {
+      "id": "WEB-009",
+      "scope": "web",
+      "level": "MUST",
+      "summary": "Shared VINASIG website header and footer for new and existing layouts",
+      "verification": ["automatic", "agent", "human"],
+      "evidence": "Reviewed source revision/digest, every layout route and locale/theme, header/footer screenshots, geometry/link/keyboard/no-JavaScript/enlarged-text regressions and deployed revision",
+      "exceptions": "Product navigation and focused content width remain independent. A shared-chrome exception needs an owner-approved reason and review date."
     }
   ]
 }
