@@ -1,4 +1,6 @@
 ---
+import SiteFooter from './SiteFooter.astro';
+import '../styles/site-chrome.css';
 import { Copy, Eye, EyeOff, Trash } from '@lucide/astro';
 import ThemeInit from './ThemeInit.astro';
 import SitePreferences from './SitePreferences.astro';
@@ -81,8 +83,8 @@ const schema = {
     <a class="skip-link" href="#generator">
       {c.skip}
     </a>
-    <div class="app-shell">
-      <header class="site-header">
+    <div class="app-shell" data-site-shell>
+      <header class="site-header" data-site-header>
         <a
           class="brand"
           href="https://vinasig.io.vn/"
@@ -362,17 +364,12 @@ const schema = {
           </p>
         </section>
       </main>
-      <footer class="site-footer">
-        <p>{c.footer}</p>
-        <nav
-          aria-label={lang === 'vi' ? 'Thông tin công cụ' : 'About this tool'}
-        >
-          <a href={sourceUrl} data-source-link>
-            {c.source}
-          </a>
-          <a href={`${base}licenses/NOTICE.txt`}>{c.licenses}</a>
-        </nav>
-      </footer>
+      <SiteFooter
+        lang={lang}
+        source={sourceUrl}
+        issues="https://github.com/VINASIG/totp-generator/issues"
+        licenses={`${base}licenses/NOTICE.txt`}
+      />
     </div>
     <script>
       import '../scripts/generator.ts';

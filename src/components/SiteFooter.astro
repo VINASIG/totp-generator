@@ -1,0 +1,40 @@
+---
+interface Props {
+  lang: 'vi' | 'en';
+  source: string;
+  issues: string;
+  licenses: string;
+  class?: string;
+}
+const { lang, source, issues, licenses, class: className = '' } = Astro.props;
+const c =
+  lang === 'vi'
+    ? {
+        home: 'Trang chủ VINASIG',
+        nav: 'Thông tin website',
+        source: 'Mã nguồn',
+        issues: 'Báo lỗi',
+        licenses: 'Giấy phép',
+      }
+    : {
+        home: 'VINASIG home',
+        nav: 'Website information',
+        source: 'Source code',
+        issues: 'Report an issue',
+        licenses: 'Licenses',
+      };
+---
+
+<footer class={`site-footer ${className}`} data-site-footer>
+  <a class="footer-home" href="https://vinasig.io.vn/" aria-label={c.home}>
+    VINASIG
+  </a>
+  <nav class="footer-links" aria-label={c.nav}>
+    <a href={source} data-source-link>
+      {c.source}
+    </a>
+    <a href={issues}>{c.issues}</a>
+    <a href={licenses}>{c.licenses}</a>
+    <slot />
+  </nav>
+</footer>

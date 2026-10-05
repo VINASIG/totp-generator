@@ -31,10 +31,11 @@
     "check": "npm run typecheck && npm run lint && npm run lint:css && npm run format:check && npm run check:standards && npm run check:licenses",
     "build": "astro build && node scripts/security.ts && npm run check:built && npm run check:licenses -- --built",
     "test": "node --test tests/*.test.ts",
-    "test:browser": "playwright test",
+    "test:browser": "npm run test:chrome && playwright test",
     "test:responsive": "playwright test --grep responsive",
     "test:performance": "node scripts/performance.ts && node scripts/performance.ts --english",
-    "check:licenses": "node .vinasig/standards/templates/check-licenses.mjs"
+    "check:licenses": "node .vinasig/standards/templates/check-licenses.mjs",
+    "test:chrome": "node tests/site-chrome.ts"
   },
   "dependencies": {
     "@lucide/astro": "1.52.0",

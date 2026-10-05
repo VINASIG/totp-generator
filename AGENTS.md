@@ -2,6 +2,10 @@
 
 Read README.md and docs/PRODUCT.md, docs/RESEARCH.md, docs/BRAND.md and docs/TOOLCHAIN.md. Keep secrets and codes in volatile browser memory only. Generate automatically with revision guards and clear stale codes immediately. Test official RFC 6238 and RFC 4226 vectors. Use reviewed shared UI and both locales/themes. Preserve all sibling repositories. Current user context authorizes this new repository and publication. Write technical documentation in English and respond in Vietnamese.
 
+## Shared header and footer
+
+Read docs/SITE_CHROME.md before header or footer changes. Keep shared chrome consistent and run npm run test:chrome.
+
 <!-- VINASIG STANDARDS BEGIN -->
 ## VINASIG SI agent standards 0.1.0
 
