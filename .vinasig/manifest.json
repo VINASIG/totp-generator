@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "source": {
     "repository": "VINASIG/agent-standards",
-    "ref": "sha256:17de5e89b81eb52abaea8537d7a6b6c6ee9d11ca66624df27342ba4f42b75162",
+    "ref": "sha256:e4531b9a2b2328d75893019424086df97a6eb266c11880a5aa8b2261a0f7dfc1",
     "kind": "local-content-snapshot"
   },
   "files": {
@@ -55,8 +55,8 @@
     ".vinasig/standards/templates/web/domain-discovery.md": "1eb7a1cf2f77a69366dee6f69fc48b5e6696435a43f95bb0d3854cace6fe7f8e",
     ".vinasig/standards/templates/web/interface.mjs": "d4f8491de44a35a43dd13a2159d41572917d5c05fd7507a759ed81f52bd6a0fc",
     ".vinasig/standards/templates/web/responsive.mjs": "2c16dcdc5de65111dbbe917dcf5588e5cc4e9dcb9b433256e14aac007c2655ef",
-    ".vinasig/standards/templates/web/shared-preferences.md": "4f94544c52db8ed7cb0f6759cb6b895478b806898733dc9d34815f716c340cc2",
-    ".vinasig/standards/templates/web/shared-preferences.mjs": "02ecae2b4d673de057602b33d840d209a66a64abd7d21f78c6007fa18cd49874",
+    ".vinasig/standards/templates/web/shared-preferences.md": "c289aefc9c8c1d9dbe25dc68961dcdff9b1bb822a8d4557e5db9f65f77fcbb3f",
+    ".vinasig/standards/templates/web/shared-preferences.mjs": "24e8ffe6b7ecab5cc13492e6f44745e0a798213fd48a1ec299d75e63746ffd96",
     ".vinasig/standards/templates/web/site-chrome.md": "b99f3322febc28be56196f37587a7f69a2ca72fed3a96d5ee75bd5ac32867727",
     ".vinasig/standards/templates/web/site-chrome.mjs": "ad27d6a7db7f23704701690b6ac78f6078247f1e46f49c439c8740e78d7f21da",
     ".vinasig/standards/templates/web/ui-contract.md": "f3e9213b35eda4566a88d5298e908ae08ddb0f0f0383b8be375f597f3d6db1ce",
@@ -64,7 +64,7 @@
     ".vinasig/standards/tools.lock.json": "ed5f942785191c59f833dcd242844b86e7f2ec6c908b146ff0eb01f08b575433"
   },
   "profile": "web-typescript",
-  "bundleSha256": "9bd1eb33da74bb0bb7e943a481b43895ed781cd9b8316e9939e07ba95f1f571b",
+  "bundleSha256": "7927fbaa1c3b9dbd7a2ac3ee611fe8e33476d26c0c9c4f94ef61d1fcb0a2ba0b",
   "agentBlock": "0ef5f41e7716ef96927cbe505c5bcfd1b8a260d6966d2a52952f3618343125bb",
   "agentsCreated": false
 }

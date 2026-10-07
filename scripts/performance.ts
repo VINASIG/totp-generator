@@ -31,9 +31,20 @@ await new Promise<void>((resolve, reject) => {
     else resolve();
   });
 });
+const browserLanguage = profile === 'vi' ? 'vi-VN' : 'en-US';
 const chrome = await chromium.launch({
-  args: [`--remote-debugging-port=${String(port)}`],
+  args: [
+    `--remote-debugging-port=${String(port)}`,
+    `--accept-lang=${browserLanguage}`,
+  ],
 });
+const localeProbe = await chrome.newPage();
+assert.equal(
+  await localeProbe.evaluate(() => navigator.languages[0]),
+  browserLanguage,
+  'The lab browser must use the locale under measurement',
+);
+await localeProbe.close();
 // The pinned Lighthouse trace dependency has an incompatible declaration under
 // exactOptionalPropertyTypes. Validate this external runtime boundary explicitly
 // instead of disabling declaration checking for the project.
@@ -155,7 +166,7 @@ try {
   await writeOutput(
     repositoryRoot,
     `output/lighthouse/${phase}/${profile}/summary.json`,
-    `${JSON.stringify({ status: 'PASS', phase, environment: { browser: chromium.executablePath().split(path.sep).slice(-3).join('/'), node: process.version, cache: 'Lighthouse default cold navigation', network: 'simulated mobile 150 ms / 1.6 Mbps / 4x CPU; desktop 40 ms / 10 Mbps / 1x CPU', viewport: '390x844 and 1440x900', fieldMetrics: 'NOT_RUN' }, metrics, summaries }, null, 2)}\n`,
+    `${JSON.stringify({ status: 'PASS', phase, environment: { browser: chromium.executablePath().split(path.sep).slice(-3).join('/'), node: process.version, browserLanguage, cache: 'Lighthouse default cold navigation', network: 'simulated mobile 150 ms / 1.6 Mbps / 4x CPU; desktop 40 ms / 10 Mbps / 1x CPU', viewport: '390x844 and 1440x900', fieldMetrics: 'NOT_RUN' }, metrics, summaries }, null, 2)}\n`,
   );
   console.log(JSON.stringify(summaries));
 } finally {

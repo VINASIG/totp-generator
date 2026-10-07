@@ -87,7 +87,10 @@ export async function checkSharedPreferences(browser, baseURL) {
       async (route) => {
         const target = new URL(route.request().url());
         const local = new URL(target.pathname + target.search, baseURL);
-        const response = await route.fetch({ url: local.href });
+        const response = await route.fetch({
+          url: local.href,
+          headers: { ...route.request().headers(), host: local.host },
+        });
         assert.equal(
           response.status(),
           200,
@@ -99,6 +102,7 @@ export async function checkSharedPreferences(browser, baseURL) {
   }
   /** @param {import('playwright').Page} page @param {string} theme */
   async function theme(page, theme) {
+    await page.bringToFront();
     await page.waitForFunction(
       (expected) => document.documentElement.dataset.theme === expected,
       theme,
@@ -110,6 +114,7 @@ export async function checkSharedPreferences(browser, baseURL) {
   }
   /** @param {import('playwright').Page} page @param {string} language */
   async function language(page, language) {
+    await page.bringToFront();
     await page.waitForFunction(
       (expected) =>
         document.documentElement.lang === expected &&
@@ -135,6 +140,16 @@ export async function checkSharedPreferences(browser, baseURL) {
     try {
       const first = await context.newPage();
       await first.goto(originA + '/');
+      await first.emulateMedia({
+        colorScheme: /** @type {'light'|'dark'} */ (scheme),
+      });
+      assert.equal(
+        await first.evaluate(
+          () => matchMedia('(prefers-color-scheme: dark)').matches,
+        ),
+        scheme === 'dark',
+        'The native media query must report the configured browser fixture before inspecting the application',
+      );
       await language(first, 'vi');
       assert.equal(new URL(first.url()).pathname, viPath);
       await theme(first, scheme);
