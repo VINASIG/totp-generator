@@ -164,9 +164,9 @@ const schema = {
                 <p class="supporting">{c.advancedHint}</p>
                 <fieldset>
                   <legend>{c.algorithm}</legend>
-                  <div class="choices">
+                  <div class="choices" data-choice-group="algorithm">
                     {['SHA1', 'SHA256', 'SHA512'].map((value) => (
-                      <label class="choice">
+                      <label class="choice" data-choice-card>
                         <input
                           type="radio"
                           name="algorithm"
@@ -183,8 +183,8 @@ const schema = {
                 </fieldset>
                 <fieldset>
                   <legend>{c.digits}</legend>
-                  <div class="choices">
-                    <label class="choice">
+                  <div class="choices" data-choice-group="digits">
+                    <label class="choice" data-choice-card>
                       <input
                         type="radio"
                         name="digits"
@@ -194,7 +194,7 @@ const schema = {
                       />
                       <span>{c.six}</span>
                     </label>
-                    <label class="choice">
+                    <label class="choice" data-choice-card>
                       <input type="radio" name="digits" value="8" disabled />
                       <span>{c.eight}</span>
                     </label>

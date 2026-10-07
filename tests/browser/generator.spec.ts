@@ -9,6 +9,7 @@ import {
   inspectControlSurfaces,
   inspectHeaderBrand,
 } from '../../.vinasig/standards/templates/web/interface.mjs';
+import { inspectUiContract } from '../../.vinasig/standards/templates/web/ui-contract.mjs';
 let app: Awaited<ReturnType<typeof startServer>>;
 test.beforeAll(async () => {
   app = await startServer(path.resolve('dist'));
@@ -79,6 +80,14 @@ async function inspect(page: Page) {
   expect(await page.evaluate(inspectInterface)).toEqual([]);
   expect(await page.evaluate(inspectControlSurfaces)).toEqual([]);
   expect(await page.evaluate(inspectHeaderBrand)).toEqual([]);
+  expect(
+    await page.evaluate(inspectUiContract, {
+      cards: [
+        { selector: '[data-choice-group="algorithm"]', count: 3 },
+        { selector: '[data-choice-group="digits"]', count: 2 },
+      ],
+    }),
+  ).toEqual([]);
   expect(await page.locator('input[type=radio]').count()).toBe(5);
   expect(
     await page.evaluate(
@@ -176,6 +185,11 @@ for (const lang of ['vi', 'en'] as const)
       await page.locator('#technical summary').click();
       await expect(page.locator('#account')).toHaveText('Example:alice');
       await inspect(page);
+      for (const card of await page.locator('.choice:has(input:checked)').all())
+        await expect(card).toHaveCSS(
+          'background-color',
+          theme === 'light' ? 'rgb(234, 240, 246)' : 'rgb(38, 48, 61)',
+        );
       const requests: string[] = [];
       page.on('request', (request) => requests.push(request.url()));
       await page.locator('#secret').fill(secret);
@@ -414,6 +428,13 @@ test('script unavailable, keyboard, forced colors and theme controls', async ({
   await expect(
     page.locator('input[name=algorithm][value=SHA256]'),
   ).toBeChecked();
+  const selectedCard = page.locator(
+    '[data-choice-group="algorithm"] .choice:has(input:checked)',
+  );
+  await expect(selectedCard.locator('input')).toBeFocused();
+  await expect(selectedCard).toHaveCSS('outline-style', 'solid');
+  await expect(selectedCard).toHaveCSS('outline-width', '3px');
+  await expect(selectedCard.locator('input')).toHaveCSS('opacity', '0');
   await page.emulateMedia({ forcedColors: 'none' });
   const oldTheme = await page.locator('html').getAttribute('data-theme');
   await page.locator('[data-theme-toggle]').click();
