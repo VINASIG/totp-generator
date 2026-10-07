@@ -15,6 +15,20 @@ export const copy = {
     show: 'Hiện khóa',
     hide: 'Ẩn khóa',
     clear: 'Xóa tất cả',
+    share: 'Chia sẻ khóa',
+    shareTitle: 'Liên kết tạo mã',
+    shareLink: 'Liên kết chia sẻ',
+    shareWarning:
+      'Ai có liên kết này đều có thể tạo mã xác thực của bạn. Chỉ gửi cho người bạn tin cậy.',
+    shareHint: 'Khi người nhận mở liên kết, mã sẽ tự xuất hiện.',
+    shareCopy: 'Sao chép liên kết',
+    shareCopied: 'Đã sao chép liên kết chứa khóa. Hãy giữ kín liên kết này.',
+    shareCopyFailed:
+      'Không sao chép được. Hãy chọn liên kết và sao chép bằng bàn phím.',
+    shareFailed: 'Không tạo được liên kết. Hãy kiểm tra khóa và cài đặt.',
+    shareImported: 'Đã đọc khóa và cài đặt từ liên kết chia sẻ.',
+    shareInvalid:
+      'Liên kết chia sẻ không hợp lệ hoặc chưa được hỗ trợ. Hãy xin lại liên kết từ người gửi.',
     advanced: 'Cài đặt nâng cao',
     advancedHint:
       'Chỉ đổi khi dịch vụ yêu cầu. Liên kết thiết lập sẽ tự điền các cài đặt này.',
@@ -41,7 +55,7 @@ export const copy = {
     imported: 'Đã đọc cài đặt từ liên kết thiết lập.',
     account: 'Tài khoản',
     privacy:
-      'Khóa và mã chỉ nằm trong phiên này. Không gửi lên máy chủ, không lưu sau khi tải lại trang.',
+      'Khóa và mã không gửi lên máy chủ. Trang không lưu lịch sử. Liên kết chia sẻ chứa khóa, vì vậy hãy giữ kín.',
     technical: 'Thông tin mã',
     clock: 'Giờ thiết bị',
     expiry: 'Mã đổi lúc',
@@ -55,7 +69,10 @@ export const copy = {
       'Khóa và thời gian hiện tại cùng tạo ra mã. Cùng khóa, cài đặt và khoảng thời gian sẽ cho cùng mã. Thông thường mã đổi sau mỗi 30 giây. Dịch vụ đăng nhập quyết định chấp nhận mã và ngăn dùng lại mã đã xác thực.',
     faqSafety: 'Cần giữ khóa an toàn như thế nào?',
     faqSafetyText:
-      'Ai có khóa đều có thể tạo mã đăng nhập. Chỉ nhập khóa trên thiết bị bạn tin cậy. Không chia sẻ khóa, liên kết thiết lập hay ảnh chứa khóa. Tải lại trang sẽ xóa nội dung của phiên. Mã đã sao chép vẫn có thể còn trong clipboard của thiết bị.',
+      'Ai có khóa đều có thể tạo mã đăng nhập. Chỉ nhập khóa trên thiết bị bạn tin cậy. Chỉ chia sẻ với người được phép tạo mã. Tải lại trang sẽ xóa nội dung của phiên. Nội dung đã sao chép có thể còn trong clipboard của thiết bị.',
+    faqShare: 'Liên kết chia sẻ có an toàn không?',
+    faqShareText:
+      'Liên kết chứa khóa xác thực và cài đặt tạo mã. Phần chứa khóa không gửi tới máy chủ khi mở trang và được xóa khỏi thanh địa chỉ sau khi trang đọc xong. Tuy vậy, liên kết có thể còn trong lịch sử trình duyệt, bản đồng bộ, clipboard hoặc tin nhắn. Ai có liên kết đều có thể tạo mã cho đến khi bạn thay khóa tại dịch vụ. Liên kết không tự hết hạn và không dùng một lần. Không gửi nếu bạn không muốn trao quyền này.',
     faqOffline: 'Có dùng khi mất mạng được không?',
     faqOfflineText:
       'Có, sau khi trang tải xong, việc tính mã không cần mạng. Nếu tải lại trang khi đang mất mạng, trang có thể không mở được. Trình duyệt cần hỗ trợ Web Crypto và trang cần dùng HTTPS.',
@@ -97,6 +114,20 @@ export const copy = {
     show: 'Show key',
     hide: 'Hide key',
     clear: 'Clear all',
+    share: 'Share key',
+    shareTitle: 'Code generation link',
+    shareLink: 'Share link',
+    shareWarning:
+      'Anyone with this link can generate your verification codes. Send it only to someone you trust.',
+    shareHint: 'Codes appear automatically when the recipient opens the link.',
+    shareCopy: 'Copy link',
+    shareCopied: 'Link containing your key copied. Keep this link private.',
+    shareCopyFailed:
+      'Copy failed. Select the link and copy it with your keyboard.',
+    shareFailed: 'Could not create a link. Check your key and settings.',
+    shareImported: 'Key and settings read from the share link.',
+    shareInvalid:
+      'This share link is invalid or unsupported. Ask the sender for a new link.',
     advanced: 'Advanced settings',
     advancedHint:
       'Change these only when required by your service. A setup link fills them in automatically.',
@@ -123,7 +154,7 @@ export const copy = {
     imported: 'Settings read from the setup link.',
     account: 'Account',
     privacy:
-      'Your key and code stay in this session. They are not sent to a server or saved after reloading.',
+      'Your key and code are not sent to a server. This page saves no history. Share links contain your key, so keep them private.',
     technical: 'Code details',
     clock: 'Device time',
     expiry: 'Code changes at',
@@ -137,7 +168,10 @@ export const copy = {
       'The key and current time produce a code. The same key, settings and time window produce the same code. Codes usually change every 30 seconds. The sign-in service decides which codes to accept and prevents reuse after successful verification.',
     faqSafety: 'How should I protect my key?',
     faqSafetyText:
-      'Anyone with your key can generate sign-in codes. Use a device you trust. Do not share your key, setup link or images containing the key. Reloading clears this session. A copied code may remain in your device clipboard.',
+      'Anyone with your key can generate sign-in codes. Use a device you trust. Share only with someone allowed to generate your codes. Reloading clears this session. Copied content may remain in your device clipboard.',
+    faqShare: 'Are share links safe?',
+    faqShareText:
+      'A share link contains your authentication key and code settings. The key portion is not sent to the server when the page opens and is removed from the address bar after import. However, the link may remain in browser history, sync, clipboard or messages. Anyone with the link can generate codes until you replace the key at your service. Links do not expire and are not single use. Do not send one unless you want to grant this access.',
     faqOffline: 'Can I use this without a network?',
     faqOfflineText:
       'Yes. Once the page has loaded, generating codes does not need a network. Reloading while offline may fail to open the page. Your browser must support Web Crypto and the page must use HTTPS.',

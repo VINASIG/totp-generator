@@ -52,7 +52,8 @@ for (const lang of ['vi', 'en'] as const) {
     );
     await expect(reveal.locator('.secret-hide')).toBeVisible();
     await reveal.press('Enter');
-    await expect(input).toHaveAttribute('type', 'password');
+    await expect(input).toHaveAttribute('type', 'text');
+    await expect(input).toHaveAttribute('data-masked', 'true');
     await expect(reveal.locator('.secret-show')).toBeVisible();
     await page.locator('#advanced summary').click();
     await page.locator('#period').fill('60');
@@ -68,7 +69,8 @@ for (const lang of ['vi', 'en'] as const) {
     await expect(page.locator('#code')).toHaveText('287082');
     await page.locator('#clear').click();
     await expect(input).toHaveValue('');
-    await expect(input).toHaveAttribute('type', 'password');
+    await expect(input).toHaveAttribute('type', 'text');
+    await expect(input).toHaveAttribute('data-masked', 'true');
     await expect(reveal).toHaveAttribute('aria-pressed', 'false');
     await expect(reveal).toHaveAccessibleName(
       lang === 'vi' ? 'Hiện khóa' : 'Show key',
@@ -162,7 +164,11 @@ for (const lang of ['vi', 'en'] as const)
       await page.locator('#clear').click();
       await expect(page.locator('#secret')).toHaveValue('');
       await expect(page.locator('#secret-error')).toBeHidden();
-      await expect(page.locator('#secret')).toHaveAttribute('type', 'password');
+      await expect(page.locator('#secret')).toHaveAttribute('type', 'text');
+      await expect(page.locator('#secret')).toHaveAttribute(
+        'data-masked',
+        'true',
+      );
       await page
         .locator('#secret')
         .fill(

@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "license": "AGPL-3.0-or-later",
-  "description": "Generate time-based verification codes locally without storing or sending secrets.",
+  "description": "Generate TOTP codes locally. Optional share links carry the key and settings.",
   "repository": {
     "type": "git",
     "url": "https://github.com/VINASIG/totp-generator.git"

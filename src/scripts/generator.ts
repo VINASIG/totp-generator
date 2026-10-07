@@ -9,6 +9,7 @@ import {
   TotpError,
 } from '../lib/totp.ts';
 import type { InputError, Options } from '../lib/totp.ts';
+import { isShareFragment, parseShareFragment, shareUrl } from '../lib/share.ts';
 
 function element<T extends HTMLElement>(id: string, type: new () => T): T {
   const value = document.getElementById(id);
@@ -29,11 +30,18 @@ const copyStatus = element('copy-status', HTMLParagraphElement);
 const copyButton = element('copy', HTMLButtonElement);
 const clear = element('clear', HTMLButtonElement);
 const reveal = element('reveal', HTMLButtonElement);
+const shareButton = element('share', HTMLButtonElement);
+const sharePanel = element('share-panel', HTMLElement);
+const shareLink = element('share-link', HTMLTextAreaElement);
+const shareCopy = element('share-copy', HTMLButtonElement);
+const shareStatus = element('share-status', HTMLParagraphElement);
+const shareImportError = element('share-import-error', HTMLParagraphElement);
 const progress = element('progress', HTMLProgressElement);
 const remaining = element('remaining', HTMLElement);
 const advanced = element('advanced', HTMLDetailsElement);
 const technical = element('technical', HTMLDetailsElement);
 let revision = 0;
+let shareRevision = 0;
 let key: CryptoKey | null = null;
 let options: Options = { ...defaults };
 let adjustment = 0;
@@ -55,6 +63,25 @@ const timeFormat = new Intl.DateTimeFormat(
   { hour: '2-digit', minute: '2-digit', second: '2-digit' },
 );
 
+function clearShare() {
+  shareRevision++;
+  shareLink.value = '';
+  sharePanel.hidden = true;
+  shareButton.disabled = true;
+  shareButton.setAttribute('aria-expanded', 'false');
+  shareCopy.disabled = true;
+  shareStatus.textContent = '';
+}
+
+function setSecretVisibility(showing: boolean) {
+  const cssMask = window.CSS.supports('-webkit-text-security', 'disc');
+  secret.type = showing || cssMask ? 'text' : 'password';
+  secret.dataset['masked'] = String(!showing && cssMask);
+  reveal.setAttribute('aria-label', showing ? c.hide : c.show);
+  reveal.title = showing ? c.hide : c.show;
+  reveal.setAttribute('aria-pressed', String(showing));
+}
+
 function blankOutput() {
   code.value = '';
   result.hidden = true;
@@ -71,6 +98,7 @@ function invalidate() {
   if (timer !== undefined) clearInterval(timer);
   if (pause !== undefined) clearTimeout(pause);
   blankOutput();
+  clearShare();
 }
 function showErrors(explicit = false) {
   if (pointerValidationPending && !explicit) return;
@@ -151,6 +179,7 @@ async function tick() {
       empty.hidden = true;
       technical.hidden = false;
       copyButton.disabled = false;
+      shareButton.disabled = false;
       announce(c.ready);
     } catch (error) {
       if (localRevision === revision) {
@@ -244,6 +273,8 @@ function schedule(readUri: boolean) {
   if (readUri) importUriPending = true;
   invalidate();
   currentError = null;
+  shareImportError.hidden = true;
+  shareImportError.textContent = '';
   showErrors();
   announce(secret.value.trim() ? c.loading : c.empty);
   if (!composing)
@@ -294,11 +325,7 @@ form.addEventListener('submit', (event) => {
   });
 });
 reveal.addEventListener('click', () => {
-  const showing = secret.type === 'password';
-  secret.type = showing ? 'text' : 'password';
-  reveal.setAttribute('aria-label', showing ? c.hide : c.show);
-  reveal.title = showing ? c.hide : c.show;
-  reveal.setAttribute('aria-pressed', String(showing));
+  setSecretVisibility(reveal.getAttribute('aria-pressed') !== 'true');
 });
 function reset() {
   pointerValidationPending = false;
@@ -307,10 +334,7 @@ function reset() {
   invalidate();
   form.reset();
   secret.value = '';
-  secret.type = 'password';
-  reveal.setAttribute('aria-label', c.show);
-  reveal.title = c.show;
-  reveal.setAttribute('aria-pressed', 'false');
+  setSecretVisibility(false);
   options = { ...defaults };
   adjustment = 0;
   label = '';
@@ -319,12 +343,59 @@ function reset() {
   advanced.open = false;
   currentError = null;
   touched.clear();
+  shareImportError.hidden = true;
+  shareImportError.textContent = '';
   showErrors();
   announce(c.empty);
 }
 clear.addEventListener('click', () => {
   reset();
   secret.focus();
+});
+shareButton.addEventListener('click', () => {
+  if (!key || document.hidden) return;
+  if (!sharePanel.hidden) {
+    clearShare();
+    shareButton.disabled = false;
+    return;
+  }
+  let bytes: Uint8Array | undefined;
+  try {
+    bytes = parseSecret(secret.value).bytes;
+    shareLink.value = shareUrl(window.location.href, bytes, options);
+    sharePanel.hidden = false;
+    shareButton.setAttribute('aria-expanded', 'true');
+    shareCopy.disabled = false;
+    shareStatus.textContent = '';
+    shareLink.focus();
+  } catch {
+    clearShare();
+    announce(c.shareFailed, true);
+  } finally {
+    bytes?.fill(0);
+  }
+});
+shareCopy.addEventListener('click', () => {
+  if (!key || document.hidden || sharePanel.hidden || !shareLink.value) return;
+  const localRevision = revision;
+  const localShareRevision = shareRevision;
+  const value = shareLink.value;
+  shareCopy.disabled = true;
+  const current = () =>
+    revision === localRevision &&
+    shareRevision === localShareRevision &&
+    !document.hidden &&
+    !sharePanel.hidden;
+  void (async () => {
+    try {
+      await navigator.clipboard.writeText(value);
+      if (current()) shareStatus.textContent = c.shareCopied;
+    } catch {
+      if (current()) shareStatus.textContent = c.shareCopyFailed;
+    } finally {
+      if (current()) shareCopy.disabled = false;
+    }
+  })();
 });
 copyButton.addEventListener('click', () => {
   const localRevision = revision;
@@ -367,11 +438,65 @@ window.addEventListener('pagehide', reset);
 window.addEventListener('pageshow', (event) => {
   if (event.persisted) reset();
 });
-if (supportsCrypto()) {
-  for (const control of form.querySelectorAll<
-    HTMLInputElement | HTMLButtonElement
-  >('input, button'))
-    control.disabled = false;
-  // Defeat browser form restoration and BFCache carrying a sensitive value.
+function importShare() {
+  if (!isShareFragment(window.location.hash)) return;
+  const fragment = window.location.hash;
   reset();
-} else announce(c.unavailable, true);
+  try {
+    // Keep the credential out of the current address and locale link even on failure.
+    window.history.replaceState(
+      null,
+      '',
+      window.location.pathname + window.location.search,
+    );
+    const languageLink = document.querySelector('.language-switch');
+    if (languageLink instanceof window.HTMLAnchorElement) {
+      const alternate = new URL(languageLink.href);
+      alternate.hash = '';
+      languageLink.href = alternate.href;
+    }
+    if (!supportsCrypto()) {
+      announce(c.unavailable, true);
+      return;
+    }
+    const incoming = parseShareFragment(fragment);
+    secret.value = incoming.secret;
+    setChoice('algorithm', incoming.options.algorithm);
+    setChoice('digits', String(incoming.options.digits));
+    period.value = String(incoming.options.period);
+    offset.value = '0';
+    const calculation = update();
+    const localRevision = revision;
+    void calculation.then(() => {
+      if (key && revision === localRevision && !document.hidden)
+        announce(c.shareImported);
+    });
+  } catch {
+    shareImportError.textContent = c.shareInvalid;
+    shareImportError.hidden = false;
+  }
+}
+
+function initialize() {
+  // Shared locale selection runs first and carries the fragment through its redirect.
+  if (document.documentElement.dataset['preferencesRedirecting'] === 'true')
+    return;
+  if (supportsCrypto()) {
+    for (const control of form.querySelectorAll<
+      HTMLInputElement | HTMLButtonElement
+    >('input, button'))
+      control.disabled = false;
+    reset();
+    importShare();
+    window.addEventListener('hashchange', importShare);
+  } else {
+    announce(c.unavailable, true);
+    importShare();
+  }
+}
+if (
+  document.documentElement.dataset['preferencesReady'] !== 'true' &&
+  document.readyState !== 'complete'
+)
+  document.addEventListener('DOMContentLoaded', initialize, { once: true });
+else initialize();

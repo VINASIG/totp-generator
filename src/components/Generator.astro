@@ -1,7 +1,7 @@
 ---
 import SiteFooter from './SiteFooter.astro';
 import '../styles/site-chrome.css';
-import { Copy, Eye, EyeOff, Trash } from '@lucide/astro';
+import { Copy, Eye, EyeOff, Link, Trash } from '@lucide/astro';
 import ThemeInit from './ThemeInit.astro';
 import SitePreferences from './SitePreferences.astro';
 import { copy } from '../lib/copy.ts';
@@ -127,13 +127,21 @@ const schema = {
           <section class="editor" aria-labelledby="form-heading">
             <h2 id="form-heading">{c.formTitle}</h2>
             <form id="totp-form" novalidate autocomplete="off">
+              <p
+                class="field-error"
+                id="share-import-error"
+                role="alert"
+                hidden
+              ></p>
               <div class="field">
                 <label for="secret">{c.secret}</label>
                 <div class="secret-control">
                   <input
                     id="secret"
-                    type="password"
-                    autocomplete="new-password"
+                    type="text"
+                    data-masked="true"
+                    autocomplete="off"
+                    autocapitalize="off"
                     spellcheck="false"
                     maxlength="8192"
                     required
@@ -239,11 +247,63 @@ const schema = {
                 {c.resultTitle}
               </button>
               <div class="form-actions">
+                <button
+                  type="button"
+                  class="clear-button"
+                  id="share"
+                  aria-controls="share-panel"
+                  aria-expanded="false"
+                  disabled
+                >
+                  <Link size={18} aria-hidden="true" />
+                  {c.share}
+                </button>
                 <button type="button" class="clear-button" id="clear" disabled>
                   <Trash size={18} aria-hidden="true" />
                   {c.clear}
                 </button>
               </div>
+              <section
+                class="share-panel"
+                id="share-panel"
+                aria-labelledby="share-heading"
+                hidden
+              >
+                <h3 id="share-heading">{c.shareTitle}</h3>
+                <p class="share-warning" id="share-warning">
+                  {c.shareWarning}
+                </p>
+                <label for="share-link">{c.shareLink}</label>
+                <textarea
+                  id="share-link"
+                  rows="3"
+                  readonly
+                  autocomplete="off"
+                  autocapitalize="off"
+                  spellcheck="false"
+                  aria-describedby="share-warning share-hint"
+                  data-user-content
+                ></textarea>
+                <p class="supporting input-hint" id="share-hint">
+                  {c.shareHint}
+                </p>
+                <div class="share-actions">
+                  <button
+                    class="primary copy-button"
+                    type="button"
+                    id="share-copy"
+                    disabled
+                  >
+                    <Copy size={18} aria-hidden="true" />
+                    {c.shareCopy}
+                  </button>
+                </div>
+                <p
+                  class="supporting share-status"
+                  id="share-status"
+                  role="status"
+                ></p>
+              </section>
               <p class="privacy supporting">{c.privacy}</p>
               <p class="status supporting" id="status" role="status">
                 {c.noScript}
@@ -342,6 +402,7 @@ const schema = {
             [c.faqUse, c.faqUseText],
             [c.faqTime, c.faqTimeText],
             [c.faqSafety, c.faqSafetyText],
+            [c.faqShare, c.faqShareText],
             [c.faqOffline, c.faqOfflineText],
           ].map(([title, text]) => (
             <details>

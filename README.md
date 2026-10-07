@@ -1,10 +1,12 @@
 # VINASIG TOTP Generator
 
-Generate verification codes from a Base32 secret or an `otpauth://totp/` setup link. The Vietnamese root and English `/en/` share automatic updates, a countdown, explicit copy, masked key entry, inline errors, clear, and light/dark themes. Visit [the tool](https://totp.vinasig.io.vn/).
+Generate verification codes from a Base32 secret, an `otpauth://totp/` setup link or an explicit VINASIG share link. The Vietnamese root and English `/en/` provide automatic updates, a countdown, explicit copy, masked key entry, inline errors, clear, and light/dark themes. Visit [the tool](https://totp.vinasig.io.vn/).
 
 SHA1, SHA256 and SHA512, 6/8 digits, periods of 1-300 seconds and a bounded clock adjustment are supported. Defaults are SHA1, 6 digits and 30 seconds. Use the settings required by your service. HOTP links are rejected.
 
-Secrets, setup links and codes stay in browser memory. They are never put in URLs, submitted, stored or sent to an API. A hash-based Content Security Policy blocks connections and form submissions. All fonts, artwork, scripts and styles are self-hosted. Reloading or leaving the page clears the session. Clipboard content is controlled by the device and is not automatically erased. Once loaded, calculation works without a network. There is no offline cache or service worker.
+Normal key entry and codes stay in browser memory. Share key explicitly creates a credential-bearing URL fragment containing the key and current algorithm, digit count and period. Opening it imports the key and settings, removes the fragment from the current address, and starts calculating codes. A share link grants anyone who obtains it the ability to generate codes until the service replaces the key. It is not encrypted, expiring or single use. Keep it private, including in messages, clipboard and browser history/sync. Read [the sharing design](docs/audits/share-decision-2026-10-07.md).
+
+Secret material is never placed in the HTTP request path/query, submitted or sent to an API by this application. A hash-based Content Security Policy blocks connections and form submissions. All fonts, artwork, scripts and styles are self-hosted. Reloading or leaving the page clears the session. Clipboard content is controlled by the device and is not automatically erased. Once loaded, calculation works without a network. There is no offline cache or service worker. Browser extensions, history/sync and compromised device/page code remain outside this protection.
 
 ## Run locally
 
@@ -29,7 +31,7 @@ npm run test:performance
 
 Unit tests include all 18 RFC 6238 vectors, the RFC 4226 counters, strict decoding, URI errors, clock boundaries and an independent Node HMAC reference. Browser tests exercise Chromium, Firefox and WebKit on the production build. CI runs Ubuntu and Windows and deploys only after verification. Evidence lives in ignored `output/`.
 
-Read [product behavior](docs/PRODUCT.md), [primary-source research](docs/RESEARCH.md), [toolchain selection](docs/TOOLCHAIN.md), [brand provenance](docs/BRAND.md), [privacy and security](docs/SECURITY.md), [verification coverage](tests/README.md) and [the verification record](docs/audits/verification-2026-10-05.md).
+Read [product behavior](docs/PRODUCT.md), [primary-source research](docs/RESEARCH.md), [toolchain selection](docs/TOOLCHAIN.md), [brand provenance](docs/BRAND.md), [privacy and security](docs/SECURITY.md), [verification coverage](tests/README.md), [the original verification record](docs/audits/verification-2026-10-05.md) and [sharing verification](docs/audits/share-verification-2026-10-07.md).
 
 ## License scopes
 
