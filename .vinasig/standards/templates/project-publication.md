@@ -15,6 +15,10 @@ GitHub displays an organization's public README from a public `.github` reposito
 
 ## Publish useful, accurate descriptions
 
+### Set Repo details when creating a repository
+
+For every new VINASIG GitHub repository, configure the About panel during creation rather than waiting for publication. Set a nonempty outcome-based description, a homepage pointing to the verified canonical website or the repository README when no website is live, and a small set of relevant discovery topics. Apply this to private and source-only repositories as well. Preserve the owner-approved visibility. Read the saved description, homepage and topics back with the GitHub API or the actual About panel and record the repository URL and observation. A package.json field alone does not prove that GitHub Repo details were set. If account access or creation authorization is unavailable, prepare the exact fields and report them as pending.
+
 1. Confirm the actual public repository, supported behavior and deployed canonical destination. Distinguish a deployed tool from source-only, preview, private, archived or planned work. Only working public utilities belong in the profile's active tools section. Public standards and assets belong in the shared resources section.
 2. Write the main user outcome in familiar language. Add meaningful constraints when they affect use. Local processing, supported inputs and output formats may matter. Do not advertise two languages, a framework or an internal dependency version as the main product feature. Preserve the established language and official product names.
 3. Update the affected facts in both profile languages and the website inventory. Keep usage and source links distinct. Use current canonical domains and the correct locale route for each tool. Do not assume every website uses the same default locale.
@@ -22,6 +26,8 @@ GitHub displays an organization's public README from a public `.github` reposito
 5. Use the unchanged transparent VINASIG logo variant appropriate to the actual light or dark surface. Keep the original aspect ratio and a homepage link to `https://vinasig.io.vn/`. Record copied asset provenance and preserve separate brand rights. Use the profile's existing light/dark picture pattern. Profile Markdown uses GitHub's typography and does not require a new application framework.
 6. Review the exact diff before an authorized commit. Check relevant destinations, translation agreement and actual rendered organization profile after pushing. Record the remote revision and evidence. A successful source push alone does not establish website deployment or rendered profile behavior.
 7. In the handoff, state which destinations changed, which were reviewed and already accurate, and which remain pending with a specific reason. Keep private contacts, unpublished plans, credentials and local machine paths out of public profile copy.
+
+For a new public website handoff, launch, canonical-host/hosting change or DNS/discovery repair, also apply SEARCH-003 using the project's adopted web profile and its `templates/web/domain-discovery.md`. Include the concrete missing DNS and sitemap submission proposals or report already-correct setup. A core-only source project has no public website setup requirement. DNS account changes and indexing submissions follow existing task authorization; this publication checklist does not itself perform or authorize them.
 
 ## Authority and scoped updates
 

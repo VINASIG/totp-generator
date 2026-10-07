@@ -36,3 +36,5 @@ Read [product behavior](docs/PRODUCT.md), [primary-source research](docs/RESEARC
 Authored software uses **AGPL-3.0-or-later** and authored documentation uses **CC-BY-SA-4.0**. Space Grotesk retains OFL-1.1. VINASIG artwork follows the separate brand policy. Third-party software keeps its original notices. Secret keys and generated codes remain independent user data. See [LICENSES.md](LICENSES.md) and [the decision record](docs/audits/licensing-2026-10-05.md).
 
 The public source link in a GitHub Actions build points to its exact commit. The page includes a source-revision metadata field for deployment verification. A fork must publish its own corresponding modified source and replace excluded identity assets as needed.
+
+System defaults and shared deliberate theme/language choices follow [the ecosystem preference contract](docs/LOCALIZATION.md). Active work is preserved when another tab changes language.

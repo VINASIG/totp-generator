@@ -294,6 +294,7 @@ for (const lang of ['vi', 'en'] as const)
     }
 test('clear by touch after validation', async ({ browser }) => {
   const context = await browser.newContext({
+    locale: 'vi-VN',
     hasTouch: true,
     viewport: { width: 390, height: 844 },
   });
@@ -377,7 +378,10 @@ test('script unavailable, keyboard, forced colors and theme controls', async ({
   browser,
   page,
 }) => {
-  const context = await browser.newContext({ javaScriptEnabled: false });
+  const context = await browser.newContext({
+    locale: 'vi-VN',
+    javaScriptEnabled: false,
+  });
   const initial = await context.newPage();
   await initial.goto(app.url);
   await expect(initial.locator('#secret')).toBeDisabled();

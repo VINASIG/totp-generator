@@ -5,6 +5,8 @@ description: 'Implement and verify web responsive layout and accessibility with 
 
 Read `.vinasig/standards/policies/web.md` and the consuming profile. Inputs are changed routes, controls, supported browsers and existing server/test commands.
 
+Start with WEB-010 and `templates/web/ui-contract.md`. Reproduce each reported state and map it to a regression and retained image. Inventory every mode, invalid field, input boundary, short/long result and timer state. Use inspectUiContract where applicable, including card spacing/semantics, icon alignment, local field errors, inline rows, fitted output, adjacent actions and depleted progress. Test Pause/Resume with the pointer still on the control. Open images of every changed major mode and difficult state. Test counts, saved screenshots and initial-mode checks are not visual approval. Repeat affected live states after deployment.
+
 Discover routes/templates and CSS breakpoints. Start/reuse the correct local app and derive its port from logs. Use one available browser driver; Playwright Test keeps reusable regression checks. Do not send destructive or real-data forms.
 
 Measure the five required viewports, 320 px reflow, actual breakpoint neighbors and intermediate widths. Scroll fully. Capture AND open before screenshots, inspect styles/bounds and test applicable open/closed controls, keyboard, errors/loading, long text, enlarged text and themes.

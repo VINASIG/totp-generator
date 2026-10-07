@@ -1,6 +1,10 @@
 # Start a VINASIG website with shared chrome
 
-Apply WEB-009 before writing a new layout, including a small utility or documentation site.
+Apply WEB-009 before writing a new layout, including a small utility or documentation site. Apply WEB-010 and `ui-contract.md` to the full interface acceptance review.
+
+For appearance and language apply WEB-011 and `shared-preferences.md`. A shared localStorage key cannot synchronize different subdomains. Keep the reviewed preference implementation and actual cross-site tests together with the unchanged header/footer presentation.
+
+The appearance control retains the shared target-state behavior. In light appearance use the reviewed Moon SVG and switch-to-dark name. In dark appearance use the reviewed Sun SVG and switch-to-light name. Do not substitute a combined icon or invert its action. Check persistence, system preference, blocked JavaScript and exact shared CSS/artwork bytes as well as geometry. A similar-looking icon is not the approved source.
 
 1. Read the current project instructions and the reviewed [VINASIG header/footer contract](https://github.com/VINASIG/web-design-system/blob/main/docs/components/site-chrome.md). Review its source revision and the existing websites. Record the adopted revision in the project's source/brand record. The approved chrome does not imply adoption of unrelated draft design guidance.
 2. Reuse `src/styles/site-chrome.css` and the Astro `SiteFooter.astro` source with existing build tools. A non-Astro website uses equivalent semantic HTML with the same CSS. Keep copied source outside installer-owned snapshots and pin its reviewed digest in a regression. A standards import alone does not install a product header or footer.

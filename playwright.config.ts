@@ -23,6 +23,7 @@ export default defineConfig({
     ['json', { outputFile: 'output/playwright/report.json' }],
   ],
   use: {
+    locale: 'vi-VN',
     trace: 'retain-on-failure',
     screenshot: 'only-on-failure',
     acceptDownloads: true,

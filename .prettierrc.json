@@ -1,4 +1,12 @@
 {
   "singleQuote": true,
-  "plugins": ["prettier-plugin-astro"]
+  "plugins": ["prettier-plugin-astro"],
+  "overrides": [
+    {
+      "files": ["src/scripts/shared-preferences.js"],
+      "options": {
+        "singleQuote": false
+      }
+    }
+  ]
 }

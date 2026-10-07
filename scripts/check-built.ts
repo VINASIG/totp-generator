@@ -29,7 +29,7 @@ for (const [route, lang] of [
   );
   assert(html.includes(`<html lang="${lang}">`));
   assert(html.includes(`href="https://totp.vinasig.io.vn/${route}"`));
-  assert.equal((html.match(/hreflang=/g) ?? []).length, 4);
+  assert.equal((html.match(/<(?:link|a)\b[^>]*\bhreflang=/g) ?? []).length, 4);
   assert(
     html.includes('WebApplication') && html.includes('UtilitiesApplication'),
   );

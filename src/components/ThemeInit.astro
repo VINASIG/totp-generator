@@ -1,20 +1,5 @@
 ---
+import preferences from '../scripts/shared-preferences.js?raw';
 ---
 
-<script is:inline>
-  (() => {
-    let saved = null;
-    try {
-      saved = localStorage.getItem('vinasig-theme');
-    } catch {
-      /* Preferences remain optional. */
-    }
-    const theme =
-      saved === 'light' || saved === 'dark'
-        ? saved
-        : matchMedia('(prefers-color-scheme: dark)').matches
-          ? 'dark'
-          : 'light';
-    document.documentElement.dataset.theme = theme;
-  })();
-</script>
+<script is:inline set:html={preferences} />

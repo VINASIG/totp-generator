@@ -1,0 +1,13 @@
+{
+  "format": 1,
+  "sourceRepository": "VINASIG/web-design-system",
+  "sourcePath": "src/scripts/shared-preferences.js",
+  "sourceRef": "sha256:af933a05e658b258e858ab6df46478bcabe5907aaa0d40bb8ae29a20dbddc729",
+  "sha256": "af933a05e658b258e858ab6df46478bcabe5907aaa0d40bb8ae29a20dbddc729",
+  "normalization": "LF line endings; include final newline",
+  "consumerPath": "src/scripts/shared-preferences.js",
+  "softwareLicense": "AGPL-3.0-or-later",
+  "decisionDate": "2026-10-07",
+  "contract": "WEB-011",
+  "documentation": "LOCALIZATION.md"
+}

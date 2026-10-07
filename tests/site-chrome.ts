@@ -99,6 +99,7 @@ try {
     try {
       for (const theme of ['light', 'dark'] as const) {
         const context = await browser.newContext({
+          locale: viFirst ? 'vi-VN' : 'en-US',
           colorScheme: theme,
           reducedMotion: 'reduce',
         });

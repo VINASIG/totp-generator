@@ -81,8 +81,8 @@
       "level": "MUST",
       "summary": "Synchronize public VINASIG project information",
       "verification": ["agent"],
-      "evidence": "Affected public README, repository metadata, website inventory, organization profile translations and exact publication evidence",
-      "exceptions": "Applies only to VINASIG-owned public project information. Preserve current authorization and unrelated changes. Prepare exact edits and report inaccessible or unauthorized destinations as pending."
+      "evidence": "Saved GitHub description, homepage and topics readback for every new repository, affected README, website inventory, organization profile translations and exact publication evidence",
+      "exceptions": "Applies only to VINASIG-owned projects. Repo details apply to private and source-only creation too. Use a README homepage before live deployment. Preserve current authorization and unrelated changes. Prepare exact edits and report inaccessible or unauthorized destinations as pending."
     },
     {
       "id": "LANG-001",
@@ -256,6 +256,15 @@
       "exceptions": "Approved private/noindex policy applies; external accounts may be NOT_RUN."
     },
     {
+      "id": "SEARCH-003",
+      "scope": "public-web",
+      "level": "MUST",
+      "summary": "Complete public website domain and discovery handoff",
+      "verification": ["agent"],
+      "evidence": "Canonical host, hosting configuration, observed DNS/HTTPS/sitemap, concrete missing Cloudflare DNS and Search Console proposals, and distinct submission/fetch/indexing states",
+      "exceptions": "Applies to a new public VINASIG website handoff, launch, host/hosting change or DNS/discovery repair. Non-web/private/noindex work is NOT_APPLICABLE. Unavailable dashboard checks are NOT_RUN. Account writes follow existing task authorization; retain healthy setup on ordinary updates."
+    },
+    {
       "id": "PERF-001",
       "scope": "web-performance",
       "level": "MUST",
@@ -355,6 +364,15 @@
       "exceptions": "Current task authorization persists. Never invent third-party rights. Record purpose-based license exceptions and unresolved human review."
     },
     {
+      "id": "WEB-010",
+      "scope": "web",
+      "level": "MUST",
+      "summary": "Complete interface acceptance across modes, input errors, layout and state transitions",
+      "verification": ["automatic", "agent", "human"],
+      "evidence": "Reported-defect mapping, explicit state/control inventory, structural diagnostics, product behavior regressions, opened before/after images for every changed major mode and difficult state, exact deployed revision and affected live interactions",
+      "exceptions": "Absent categories are NOT_APPLICABLE with a reason. Helpers and test counts do not certify visual review, usability or unavailable device/assistive checks."
+    },
+    {
       "id": "WEB-009",
       "scope": "web",
       "level": "MUST",
@@ -362,6 +380,15 @@
       "verification": ["automatic", "agent", "human"],
       "evidence": "Reviewed source revision/digest, every layout route and locale/theme, header/footer screenshots, geometry/link/keyboard/no-JavaScript/enlarged-text regressions and deployed revision",
       "exceptions": "Product navigation and focused content width remain independent. A shared-chrome exception needs an owner-approved reason and review date."
+    },
+    {
+      "id": "WEB-011",
+      "scope": "web",
+      "level": "MUST",
+      "summary": "System defaults and synchronized VINASIG theme and language preferences",
+      "verification": ["automatic", "agent", "human"],
+      "evidence": "Reviewed canonical runtime digest, real HTTPS subdomain interoperability, system/manual/blocked preferences, existing-data preservation, locale discovery and deployed receipts",
+      "exceptions": "Global sharing applies only within the same browser profile on HTTPS vinasig.io.vn. Denied cookies, local hosts and offline files use local or volatile fallback. Active tabs defer language navigation until explicit navigation or reload."
     }
   ]
 }

@@ -1,6 +1,6 @@
 # Privacy and security boundaries
 
-Secrets never enter request URLs, forms, analytics, logs or persistent storage. Only the optional appearance preference uses `vinasig-theme`. Tests use public RFC and synthetic secrets. Rendering uses textContent/value, so imported labels cannot become markup. No remote provisioning URI or image is followed.
+Secrets never enter request URLs, forms, analytics, logs or persistent storage. Only finite theme/language preferences use shared Secure cookies or local fallback under WEB-011. Tests use public RFC and synthetic secrets. Rendering uses textContent/value, so imported labels cannot become markup. No remote provisioning URI or image is followed.
 
 The production build installs CSP using exact inline-script hashes. Connections and form submissions are disallowed. Scripts, styles, fonts and ordinary images are self-hosted. Controlled data SVG masks in the shared control stylesheet are permitted by img-src. A no-referrer meta field suppresses referrers on navigation. There are no external runtime packages beyond the bundled Astro bootstrap and interface code. HMAC uses Web Crypto.
 
