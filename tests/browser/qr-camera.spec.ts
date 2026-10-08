@@ -34,7 +34,10 @@ async function cameraFixture(
       let stops = 0;
       let ended = false;
       let now = 0;
-      Object.defineProperty(performance, 'now', { value: () => now });
+      Object.defineProperty(performance, 'now', {
+        configurable: true,
+        value: () => now,
+      });
       document.addEventListener('camera-fixture-timeout', () => {
         now = 121000;
       });
@@ -78,12 +81,13 @@ async function cameraFixture(
           );
       };
       Object.defineProperties(HTMLVideoElement.prototype, {
-        readyState: { get: () => 2 },
-        videoWidth: { get: () => 480 },
-        videoHeight: { get: () => 480 },
+        readyState: { configurable: true, get: () => 2 },
+        videoWidth: { configurable: true, get: () => 480 },
+        videoHeight: { configurable: true, get: () => 480 },
       });
       let attached: unknown = null;
       Object.defineProperty(HTMLVideoElement.prototype, 'srcObject', {
+        configurable: true,
         get: () => attached,
         set: (value: unknown) => {
           attached = value;
@@ -113,6 +117,7 @@ async function cameraFixture(
           configurable: true,
         });
       Object.defineProperty(navigator.mediaDevices, 'getUserMedia', {
+        configurable: true,
         value: async (constraints: MediaStreamConstraints) => {
           calls++;
           ended = false;
@@ -133,12 +138,19 @@ async function cameraFixture(
           return stream;
         },
       });
+      Object.defineProperty(window, '__cameraFixtureMode', {
+        configurable: true,
+        value: mode,
+      });
     },
     { bytes: [...png], mode },
   );
 }
 async function start(page: Page, lang = 'vi') {
   await page.goto(app.url + (lang === 'en' ? 'en/' : ''));
+  expect(
+    await page.evaluate(() => Object.hasOwn(window, '__cameraFixtureMode')),
+  ).toBe(true);
   await page.locator('#qr-import summary').click();
   await expect(page.locator('html')).not.toHaveAttribute('data-camera-calls');
   await page.locator('#qr-camera').click();
