@@ -1,5 +1,13 @@
 VINASIG totp-generator
 
+Bundled QR reader: zxing-wasm 3.1.5, MIT, Copyright (c) 2023 Ze-Zheng Wu.
+ZXing-C++ is Apache-2.0, copyright its respective contributors. Matching source: https://github.com/zxing-cpp/zxing-cpp/tree/2ecec3f5be0ee803f6e14a5a2c7028c0cfe525b4
+Reader WASM SHA-256: aecc1876de036c62c8419f67a5e1a16b1698a325bcd190aa84810d516e263931
+Full upstream texts are retained in zxing-wasm.txt and zxing-cpp.txt.
+Reader source, dependencies and build: https://github.com/Sec-ant/zxing-wasm/tree/v3.1.5
+QR image bounds and raster workflow are adapted from VINASIG/qr-scanner under its AGPL-3.0-or-later grant, with TOTP payload validation in this tool.
+qrcode and pngjs are development-only fixture tools and are not shipped in the application.
+
 VINASIG-authored application software is licensed under GNU AGPL version 3 or, at your option, any later version. Copyright remains with the respective authors and rights holders. There is no warranty. You may modify and redistribute the software under that license. Read AGPL-3.0-or-later.txt for the full terms.
 
 Corresponding Source, build scripts, the pinned lockfile and install instructions are freely available at https://github.com/VINASIG/totp-generator. The deployment workflow and Git history identify the actual source revision. For a checked-out or downloaded distribution, use the matching revision and retain that record. Fork operators must offer their own modified source when AGPL requires it.

@@ -41,6 +41,8 @@ New contributions should use the relevant license scope above unless a different
 
 ## Decision record
 
+QR import adds a self-hosted zxing-wasm 3.1.5 reader under MIT and its matching ZXing-C++ source 2ecec3f5be0ee803f6e14a5a2c7028c0cfe525b4 under Apache-2.0. Their original texts and attribution are preserved in public/licenses/zxing-wasm.txt, zxing-cpp.txt and NOTICE.txt, with build checks. These permissive upstream grants remain intact alongside the existing AGPL application. No application relicensing is performed. The QR raster/bounds workflow adapts compatible VINASIG/qr-scanner code reviewed at 02b02a93f3527a0ce442f3b15b2d0d69fc3547bd under its AGPL-3.0-or-later grant. qrcode/pngjs generate synthetic test fixtures only. See the dated QR review for source, dependency and distribution evidence. Independent legal review is NOT_RUN.
+
 The TOTP generator is browser-delivered application software. AGPL fits the implementation, with CC BY-SA for authored documentation. Secret keys and verification codes remain independent user data.
 
 See [the dated review](docs/audits/licensing-2026-10-05.md) for inspected ownership/dependencies, changes and any remaining human review. Earlier publication audits describe their historical state and are not the current license grant.

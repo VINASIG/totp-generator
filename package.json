@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "license": "AGPL-3.0-or-later",
-  "description": "Generate TOTP codes locally. Optional share links carry the key and settings.",
+  "description": "Generate TOTP codes locally from keys, setup URLs, QR images or a camera. Optional share links carry the key and settings.",
   "repository": {
     "type": "git",
     "url": "https://github.com/VINASIG/totp-generator.git"
@@ -29,7 +29,7 @@
     "check:standards": "node scripts/check-standards.ts",
     "check:built": "node scripts/check-built.ts",
     "check": "npm run typecheck && npm run lint && npm run lint:css && npm run format:check && npm run check:standards && npm run check:licenses",
-    "build": "astro build && node scripts/security.ts && npm run check:built && npm run check:licenses -- --built",
+    "build": "astro build && node scripts/qr-assets.ts && node scripts/security.ts && npm run check:built && npm run check:licenses -- --built",
     "test": "node --test tests/*.test.ts",
     "test:browser": "npm run test:chrome && playwright test",
     "test:responsive": "playwright test --grep responsive",
@@ -39,7 +39,8 @@
   },
   "dependencies": {
     "@lucide/astro": "1.52.0",
-    "astro": "7.3.5"
+    "astro": "7.3.5",
+    "zxing-wasm": "3.1.5"
   },
   "devDependencies": {
     "@astrojs/check": "0.9.10",
@@ -47,12 +48,16 @@
     "@eslint/js": "10.0.1",
     "@playwright/test": "1.63.0",
     "@types/node": "24.19.1",
+    "@types/pngjs": "6.0.5",
+    "@types/qrcode": "1.5.6",
     "eslint": "10.12.0",
     "eslint-plugin-astro": "3.2.1",
     "html-validate": "11.16.2",
     "lighthouse": "13.5.0",
+    "pngjs": "7.0.0",
     "prettier": "3.9.9",
     "prettier-plugin-astro": "1.1.0",
+    "qrcode": "1.5.4",
     "stylelint": "17.16.0",
     "stylelint-config-standard": "40.0.0",
     "typescript": "6.0.3",

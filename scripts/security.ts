@@ -12,7 +12,7 @@ for (const file of ['dist/index.html', 'dist/en/index.html']) {
         .digest('base64') +
       "'",
   );
-  const policy = `default-src 'self'; script-src 'self' ${hashes.join(' ')}; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'none'; form-action 'none'; base-uri 'none'; object-src 'none'`;
+  const policy = `default-src 'self'; script-src 'self' 'wasm-unsafe-eval' ${hashes.join(' ')}; worker-src blob:; frame-src 'none'; style-src 'self'; img-src 'self' data: blob:; media-src blob:; font-src 'self'; connect-src 'self'; form-action 'none'; base-uri 'none'; object-src 'none'`;
   html = html.replace(
     '<meta charset="utf-8">',
     `<meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="${policy}">`,

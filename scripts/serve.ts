@@ -16,6 +16,7 @@ const types: Record<string, string> = {
   '.ico': 'image/x-icon',
   '.ttf': 'font/ttf',
   '.woff2': 'font/woff2',
+  '.wasm': 'application/wasm',
 };
 
 export async function startServer(root = path.resolve('dist'), port = 0) {

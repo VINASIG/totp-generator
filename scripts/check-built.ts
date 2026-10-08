@@ -1,7 +1,8 @@
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
-import { readFile } from 'node:fs/promises';
+import { readFile, readdir } from 'node:fs/promises';
 import { FileSystemConfigLoader, HtmlValidate } from 'html-validate';
+import { ZXING_WASM_SHA256 } from 'zxing-wasm/reader';
 import {
   digest,
   parseJson,
@@ -34,7 +35,10 @@ for (const [route, lang] of [
     html.includes('WebApplication') && html.includes('UtilitiesApplication'),
   );
   assert(
-    html.includes("connect-src 'none'") && html.includes("form-action 'none'"),
+    html.includes("connect-src 'self'") &&
+      html.includes('worker-src blob:') &&
+      html.includes("frame-src 'none'") &&
+      html.includes("form-action 'none'"),
   );
   assert(!html.includes('name="secret"'));
   assert(html.includes('data-source-link'));
@@ -57,6 +61,17 @@ for (const [route, lang] of [
 const manifest = record(
   parseJson(await readLocal(repositoryRoot, 'docs/asset-manifest.json')),
 );
+const decoder = record(parseJson(await readFile('dist/decoder-info.json')));
+const wasmAssets = (await readdir('dist/_astro')).filter((file) =>
+  file.endsWith('.wasm'),
+);
+assert.equal(wasmAssets.length, 1);
+const wasmFile = wasmAssets[0];
+assert(wasmFile);
+const wasm = await readFile('dist/_astro/' + wasmFile);
+assert.equal(digest(wasm), ZXING_WASM_SHA256);
+assert.equal(digest(wasm), text(decoder['wasmSha256']));
+assert.equal(wasm.byteLength, decoder['bytes']);
 const assets = Object.entries(record(manifest['files']));
 assert.equal(assets.length, 9);
 for (const [file, expected] of assets) {
@@ -78,7 +93,7 @@ await writeOutput(
     status: 'PASS',
     routes: 2,
     preservedAssets: assets.length,
-    csp: 'hash-based scripts; no connections or form submissions',
+    csp: 'hash-based scripts; same-origin assets; no external connections or frames; no form submissions',
   }),
 );
 console.log('Bilingual HTML, metadata, CSP and preserved assets passed.');

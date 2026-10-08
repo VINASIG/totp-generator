@@ -1,7 +1,17 @@
 ---
 import SiteFooter from './SiteFooter.astro';
 import '../styles/site-chrome.css';
-import { Copy, Eye, EyeOff, Link, Trash } from '@lucide/astro';
+import {
+  Copy,
+  Eye,
+  EyeOff,
+  Link,
+  Trash,
+  ImageUp,
+  ScanQrCode,
+  Camera,
+  X,
+} from '@lucide/astro';
 import ThemeInit from './ThemeInit.astro';
 import SitePreferences from './SitePreferences.astro';
 import { copy } from '../lib/copy.ts';
@@ -167,6 +177,112 @@ const schema = {
                   {c.secretHint}
                 </p>
               </div>
+              <details class="qr-import" id="qr-import" aria-busy="false">
+                <summary>{c.qr.title}</summary>
+                <p class="supporting">{c.qr.hint}</p>
+                <input
+                  id="qr-file"
+                  type="file"
+                  accept="image/png,image/jpeg,image/webp,image/gif"
+                  aria-label={c.qr.file}
+                  disabled
+                  hidden
+                />
+                <div class="qr-dropzone" id="qr-dropzone">
+                  <ScanQrCode size={32} aria-hidden="true" />
+                  <label for="qr-paste">{c.qr.paste}</label>
+                  <textarea
+                    id="qr-paste"
+                    rows="2"
+                    data-masked="true"
+                    autocomplete="off"
+                    autocapitalize="off"
+                    spellcheck="false"
+                    maxlength="8192"
+                    placeholder={c.qr.pastePlaceholder}
+                    aria-describedby="qr-paste-error qr-paste-hint"
+                    disabled
+                  ></textarea>
+                </div>
+                <p
+                  class="field-error"
+                  id="qr-paste-error"
+                  role="alert"
+                  hidden
+                ></p>
+                <p class="supporting input-hint" id="qr-paste-hint">
+                  {c.qr.pasteHint}
+                </p>
+                <div class="qr-actions">
+                  <button
+                    type="button"
+                    class="clear-button"
+                    id="qr-upload"
+                    aria-describedby="qr-file-error qr-file-hint"
+                    disabled
+                  >
+                    <ImageUp size={20} aria-hidden="true" />
+                    {c.qr.file}
+                  </button>
+                  <button
+                    type="button"
+                    class="clear-button"
+                    id="qr-camera"
+                    aria-describedby="qr-camera-error qr-camera-hint"
+                    aria-controls="qr-camera-panel"
+                    aria-expanded="false"
+                    disabled
+                  >
+                    <Camera size={20} aria-hidden="true" />
+                    {c.qr.camera}
+                  </button>
+                </div>
+                <p
+                  class="field-error"
+                  id="qr-file-error"
+                  role="alert"
+                  hidden
+                ></p>
+                <p
+                  class="field-error"
+                  id="qr-camera-error"
+                  role="alert"
+                  hidden
+                ></p>
+                <p class="supporting input-hint" id="qr-file-hint">
+                  {c.qr.fileHint}
+                </p>
+                <p class="supporting input-hint" id="qr-camera-hint">
+                  {c.qr.cameraHint}
+                </p>
+                <div class="qr-feedback">
+                  <p id="qr-status" class="supporting" role="status"></p>
+                  <button
+                    type="button"
+                    class="clear-button"
+                    id="qr-cancel"
+                    hidden
+                  >
+                    <X size={20} aria-hidden="true" />
+                    <span id="qr-cancel-label">{c.qr.cancel}</span>
+                  </button>
+                </div>
+                <div
+                  class="qr-camera-panel"
+                  id="qr-camera-panel"
+                  role="group"
+                  aria-label={c.qr.cameraPreview}
+                  hidden
+                >
+                  <video
+                    id="qr-video"
+                    muted
+                    playsinline
+                    aria-hidden="true"
+                  ></video>
+                  <p class="supporting">{c.qr.cameraAim}</p>
+                </div>
+              </details>
               <details class="advanced" id="advanced">
                 <summary>{c.advanced}</summary>
                 <p class="supporting">{c.advancedHint}</p>

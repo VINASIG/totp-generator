@@ -10,6 +10,7 @@ import {
 } from '../lib/totp.ts';
 import type { InputError, Options } from '../lib/totp.ts';
 import { isShareFragment, parseShareFragment, shareUrl } from '../lib/share.ts';
+import { installQrControls } from './qr-controls.ts';
 
 function element<T extends HTMLElement>(id: string, type: new () => T): T {
   const value = document.getElementById(id);
@@ -270,6 +271,7 @@ async function update() {
 }
 
 function schedule(readUri: boolean) {
+  qr.cancel();
   if (readUri) importUriPending = true;
   invalidate();
   currentError = null;
@@ -283,6 +285,7 @@ function schedule(readUri: boolean) {
     }, 200);
 }
 secret.addEventListener('compositionstart', () => {
+  qr.cancel();
   composing = true;
   invalidate();
 });
@@ -291,7 +294,10 @@ secret.addEventListener('compositionend', () => {
   schedule(true);
 });
 form.addEventListener('input', (event) => {
-  if (event.target instanceof HTMLInputElement)
+  if (
+    event.target instanceof HTMLInputElement &&
+    !event.target.id.startsWith('qr-')
+  )
     schedule(event.target === secret);
 });
 for (const field of [secret, period, offset])
@@ -317,6 +323,7 @@ document.addEventListener('pointerup', (event) => {
 });
 form.addEventListener('submit', (event) => {
   event.preventDefault();
+  qr.cancel();
   touched.add('secret');
   touched.add('period');
   touched.add('offset');
@@ -328,6 +335,7 @@ reveal.addEventListener('click', () => {
   setSecretVisibility(reveal.getAttribute('aria-pressed') !== 'true');
 });
 function reset() {
+  qr.reset();
   pointerValidationPending = false;
   importUriPending = false;
   composing = false;
@@ -431,8 +439,10 @@ copyButton.addEventListener('click', () => {
   })();
 });
 document.addEventListener('visibilitychange', () => {
-  if (document.hidden) invalidate();
-  else void update();
+  if (document.hidden) {
+    qr.cancel();
+    invalidate();
+  } else void update();
 });
 window.addEventListener('pagehide', reset);
 window.addEventListener('pageshow', (event) => {
@@ -477,14 +487,29 @@ function importShare() {
   }
 }
 
+const qr = installQrControls({
+  start: invalidate,
+  apply: async (uri) => {
+    secret.value = uri;
+    setSecretVisibility(false);
+    importUriPending = true;
+    currentError = null;
+    touched.clear();
+    shareImportError.hidden = true;
+    shareImportError.textContent = '';
+    await update();
+  },
+  restore: update,
+});
+
 function initialize() {
   // Shared locale selection runs first and carries the fragment through its redirect.
   if (document.documentElement.dataset['preferencesRedirecting'] === 'true')
     return;
   if (supportsCrypto()) {
     for (const control of form.querySelectorAll<
-      HTMLInputElement | HTMLButtonElement
-    >('input, button'))
+      HTMLInputElement | HTMLButtonElement | HTMLTextAreaElement
+    >('input, button, textarea'))
       control.disabled = false;
     reset();
     importShare();

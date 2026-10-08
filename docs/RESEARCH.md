@@ -1,5 +1,7 @@
 # Primary-source research
 
+QR image import was researched on 8 October 2026. The [QR decision and verification record](audits/qr-import-2026-10-08.md) compares native-only detection and a self-hosted common decoder. Enrollment QR images encode the Key URI provisioning format. A setup URL pasted into the main input follows the same strict TOTP parser. Format interoperability remains bounded to validated single-account TOTP setup URIs.
+
 Reviewed on 5 October 2026.
 
 - [RFC 6238](https://www.rfc-editor.org/rfc/rfc6238), sections 4-6 and Appendix B, defines the time counter, shared step, SHA1/SHA256/SHA512 HMAC alternatives, 30-second default and the interoperability vectors. The counter must support time beyond 2038. A validator owns acceptance and prevention of reuse.
