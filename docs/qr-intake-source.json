@@ -1,0 +1,8 @@
+{
+  "designSource": "https://github.com/VINASIG/web-design-system",
+  "designSourceCommit": "06accd3c0831e9064812ea4b742ff40c6907cd18",
+  "files": {
+    "src/components/QrImageIntake.astro": "1729f5cc3947f1bbc9df2931b77431cdf576eb495ef95ff9f80ac8d2f8a5f72d",
+    "src/styles/qr-image-intake.css": "b98a99fba112e351df426d64fd461bd5feed251bece87574585a3495091b60f3"
+  }
+}

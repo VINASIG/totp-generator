@@ -18,18 +18,19 @@ export const copy = {
     qr: {
       title: 'Nhập từ mã QR',
       hint: 'Dán hoặc chọn ảnh QR thiết lập TOTP. Bạn cũng có thể dùng máy ảnh để quét mã trên một màn hình khác.',
-      file: 'Chọn ảnh QR',
+      file: 'Chọn ảnh',
+      pasteButton: 'Dán ảnh',
       fileHint:
         'Ảnh được đọc trên thiết bị, không tải lên máy chủ. Hỗ trợ PNG, JPEG, WebP và GIF, tối đa 20 MB.',
       paste: 'Dán hoặc thả ảnh QR vào đây',
       pastePlaceholder: 'Dán ảnh QR',
       pasteHint:
-        'Chọn ô này rồi nhấn Ctrl+V, hoặc dùng Dán trên bàn phím điện thoại. Nhận ảnh QR hoặc URL otpauth://totp/. Nếu bàn phím không dán được ảnh, hãy dùng Chọn ảnh QR.',
+        'Chọn ô này rồi nhấn Ctrl+V, hoặc dùng Dán trên bàn phím điện thoại. Nhận ảnh QR hoặc URL otpauth://totp/. Nếu nút Dán ảnh hoặc bàn phím không dán được ảnh, hãy dùng Chọn ảnh.',
       scanning: 'Đang đọc mã QR trên thiết bị.',
       imported: 'Đã đọc khóa và cài đặt từ mã QR.',
       cancel: 'Hủy đọc ảnh',
       cancelled: 'Đã hủy đọc ảnh.',
-      camera: 'Quét bằng máy ảnh',
+      camera: 'Quét bằng camera',
       cameraHint:
         'Máy ảnh chỉ bật khi bạn cho phép. Hình ảnh được đọc trên thiết bị, không ghi lại hay gửi lên máy chủ.',
       cameraRequest: 'Hãy cho phép dùng máy ảnh trong trình duyệt.',
@@ -171,13 +172,14 @@ export const copy = {
     qr: {
       title: 'Import from a QR code',
       hint: 'Paste or choose a TOTP setup QR image. You can also scan a code on another screen with your camera.',
-      file: 'Choose QR image',
+      file: 'Choose image',
+      pasteButton: 'Paste image',
       fileHint:
         'Images are read on your device and are not uploaded. Supports PNG, JPEG, WebP and GIF up to 20 MB.',
       paste: 'Paste or drop a QR image here',
       pastePlaceholder: 'Paste a QR image',
       pasteHint:
-        'Select this field and press Ctrl+V, or use Paste on your phone keyboard. Accepts QR images or otpauth://totp/ URLs. If your keyboard cannot paste images, use Choose QR image.',
+        'Select this field and press Ctrl+V, or use Paste on your phone keyboard. Accepts QR images or otpauth://totp/ URLs. If the Paste image button or your keyboard cannot paste images, choose an image.',
       scanning: 'Reading the QR code on your device.',
       imported: 'Key and settings read from the QR code.',
       cancel: 'Cancel image import',

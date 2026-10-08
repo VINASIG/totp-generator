@@ -1,0 +1,92 @@
+---
+import { ScanQrCode, ImageUp, ClipboardPaste, Camera } from "@lucide/astro";
+import "../styles/qr-image-intake.css";
+
+interface Props {
+  id: string;
+  pasteId: string;
+  fileId: string;
+  chooseId: string;
+  pasteButtonId: string;
+  cameraId: string;
+  cameraControlsId: string;
+  cameraDescribedBy: string;
+  title: string;
+  placeholder: string;
+  chooseLabel: string;
+  pasteLabel: string;
+  cameraLabel: string;
+  helpId: string;
+  help: string;
+  describedBy: string;
+  accept: string;
+  disabled?: boolean;
+  masked?: boolean;
+}
+const { disabled = true, masked = false, ...p } = Astro.props;
+---
+
+<div id={p.id} class="qr-image-intake" data-qr-intake>
+  <ScanQrCode class="qr-image-intake-icon" size={32} aria-hidden="true" />
+  <label class="qr-image-intake-title" for={p.pasteId}>
+    {p.title}
+  </label>
+  <textarea
+    id={p.pasteId}
+    class="qr-image-intake-paste"
+    data-qr-paste
+    data-masked={String(masked)}
+    rows="2"
+    autocomplete="off"
+    autocapitalize="off"
+    spellcheck="false"
+    maxlength="8192"
+    placeholder={p.placeholder}
+    aria-describedby={p.describedBy}
+    disabled={disabled}
+  ></textarea>
+  <div class="qr-image-intake-actions">
+    <button
+      type="button"
+      id={p.chooseId}
+      class="qr-image-intake-choose"
+      disabled={disabled}
+      aria-describedby={p.describedBy}
+    >
+      <ImageUp size={20} aria-hidden="true" />
+      <span>{p.chooseLabel}</span>
+    </button>
+    <button
+      type="button"
+      id={p.pasteButtonId}
+      disabled={disabled}
+      aria-describedby={p.describedBy}
+    >
+      <ClipboardPaste size={20} aria-hidden="true" />
+      <span>{p.pasteLabel}</span>
+    </button>
+    <button
+      type="button"
+      id={p.cameraId}
+      disabled={disabled}
+      aria-describedby={p.cameraDescribedBy}
+      aria-controls={p.cameraControlsId}
+      aria-expanded="false"
+    >
+      <Camera size={20} aria-hidden="true" />
+      <span>{p.cameraLabel}</span>
+    </button>
+  </div>
+  <input
+    id={p.fileId}
+    type="file"
+    accept={p.accept}
+    aria-label={p.chooseLabel}
+    aria-describedby={p.describedBy}
+    disabled={disabled}
+    hidden
+  />
+  <p id={p.helpId} class="qr-image-intake-help">
+    {p.help}
+  </p>
+</div>

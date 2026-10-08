@@ -1,0 +1,168 @@
+.qr-image-intake {
+  container-type: inline-size;
+  display: grid;
+  justify-items: center;
+  gap: 1rem;
+  min-width: 0;
+  padding: clamp(12px, 3vw, 24px);
+  border: 2px dashed var(--color-info-border);
+  border-radius: var(--radius-md);
+  background: var(--color-info-background);
+  color: var(--color-text);
+  text-align: center;
+}
+
+.qr-image-intake:focus-within,
+.qr-image-intake[data-drag="true"],
+.qr-image-intake[data-dragging="true"] {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 3px;
+}
+
+.qr-image-intake > .qr-image-intake-icon {
+  width: 2rem;
+  height: 2rem;
+  color: var(--color-info);
+}
+
+.qr-image-intake > .qr-image-intake-title {
+  margin: 0;
+  font-weight: 600;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.qr-image-intake > .qr-image-intake-paste {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  min-height: calc(3em + 18px);
+  margin: 0;
+  padding: 8px;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font: inherit;
+  line-height: 1.5;
+  text-align: center;
+  resize: none;
+}
+
+.qr-image-intake-paste[data-masked="true"] {
+  -webkit-text-security: disc;
+}
+
+.qr-image-intake > .qr-image-intake-paste::placeholder {
+  color: var(--color-text-muted);
+  opacity: 1;
+  -webkit-text-security: none;
+}
+
+.qr-image-intake-actions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+  width: 100%;
+  min-width: 0;
+}
+
+.qr-image-intake-actions > button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-width: 0;
+  min-height: 48px;
+  margin: 0;
+  padding: 12px;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font: inherit;
+  font-weight: 600;
+  line-height: 1.4;
+  text-align: center;
+  cursor: pointer;
+}
+
+.qr-image-intake-actions > button svg {
+  flex: none;
+  width: 20px;
+  height: 20px;
+}
+
+.qr-image-intake-actions > button span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.qr-image-intake-actions > button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.qr-image-intake-actions > .qr-image-intake-choose {
+  border-color: var(--color-scout-blue);
+  background: var(--color-scout-blue);
+  color: var(--color-white);
+}
+
+.qr-image-intake-actions > button:hover:not(:disabled) {
+  background: var(--color-surface-hover);
+}
+
+.qr-image-intake-actions > .qr-image-intake-choose:hover:not(:disabled) {
+  background: var(--color-scout-blue-strong);
+}
+
+.qr-image-intake :is(button, textarea):focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 3px;
+}
+
+.qr-image-intake > .qr-image-intake-help {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-small);
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+@container (max-width: 30rem) {
+  .qr-image-intake-actions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .qr-image-intake-actions > button:last-child {
+    grid-column: 1 / -1;
+  }
+}
+
+@container (max-width: 20rem) {
+  .qr-image-intake-actions {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (forced-colors: active) {
+  .qr-image-intake,
+  .qr-image-intake > .qr-image-intake-paste,
+  .qr-image-intake-actions > button,
+  .qr-image-intake > .qr-image-intake-icon,
+  .qr-image-intake > .qr-image-intake-help {
+    background: Canvas;
+    color: CanvasText;
+    border-color: CanvasText;
+  }
+
+  .qr-image-intake > .qr-image-intake-paste::placeholder {
+    color: CanvasText;
+  }
+
+  .qr-image-intake:focus-within,
+  .qr-image-intake :is(button, textarea):focus-visible {
+    outline-color: CanvasText;
+  }
+}

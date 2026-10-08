@@ -1,17 +1,8 @@
 ---
+import QrImageIntake from './QrImageIntake.astro';
 import SiteFooter from './SiteFooter.astro';
 import '../styles/site-chrome.css';
-import {
-  Copy,
-  Eye,
-  EyeOff,
-  Link,
-  Trash,
-  ImageUp,
-  ScanQrCode,
-  Camera,
-  X,
-} from '@lucide/astro';
+import { Copy, Eye, EyeOff, Link, Trash, X } from '@lucide/astro';
 import ThemeInit from './ThemeInit.astro';
 import SitePreferences from './SitePreferences.astro';
 import { copy } from '../lib/copy.ts';
@@ -181,30 +172,26 @@ const schema = {
               <details class="qr-import" id="qr-import" aria-busy="false">
                 <summary>{c.qr.title}</summary>
                 <p class="supporting">{c.qr.hint}</p>
-                <input
-                  id="qr-file"
-                  type="file"
+                <QrImageIntake
+                  id="qr-dropzone"
+                  pasteId="qr-paste"
+                  fileId="qr-file"
+                  chooseId="qr-upload"
+                  pasteButtonId="qr-paste-button"
+                  cameraId="qr-camera"
+                  cameraControlsId="qr-camera-panel"
+                  cameraDescribedBy="qr-camera-hint qr-camera-error"
+                  title={c.qr.paste}
+                  placeholder={c.qr.pastePlaceholder}
+                  chooseLabel={c.qr.file}
+                  pasteLabel={c.qr.pasteButton}
+                  cameraLabel={c.qr.camera}
+                  helpId="qr-file-hint"
+                  help={c.qr.fileHint}
+                  describedBy="qr-paste-error qr-file-error qr-file-hint qr-paste-hint"
                   accept="image/png,image/jpeg,image/webp,image/gif"
-                  aria-label={c.qr.file}
-                  disabled
-                  hidden
+                  masked
                 />
-                <div class="qr-dropzone" id="qr-dropzone">
-                  <ScanQrCode size={32} aria-hidden="true" />
-                  <label for="qr-paste">{c.qr.paste}</label>
-                  <textarea
-                    id="qr-paste"
-                    rows="2"
-                    data-masked="true"
-                    autocomplete="off"
-                    autocapitalize="off"
-                    spellcheck="false"
-                    maxlength="8192"
-                    placeholder={c.qr.pastePlaceholder}
-                    aria-describedby="qr-paste-error qr-paste-hint"
-                    disabled
-                  ></textarea>
-                </div>
                 <p
                   class="field-error"
                   id="qr-paste-error"
@@ -214,30 +201,6 @@ const schema = {
                 <p class="supporting input-hint" id="qr-paste-hint">
                   {c.qr.pasteHint}
                 </p>
-                <div class="qr-actions">
-                  <button
-                    type="button"
-                    class="clear-button"
-                    id="qr-upload"
-                    aria-describedby="qr-file-error qr-file-hint"
-                    disabled
-                  >
-                    <ImageUp size={20} aria-hidden="true" />
-                    {c.qr.file}
-                  </button>
-                  <button
-                    type="button"
-                    class="clear-button"
-                    id="qr-camera"
-                    aria-describedby="qr-camera-error qr-camera-hint"
-                    aria-controls="qr-camera-panel"
-                    aria-expanded="false"
-                    disabled
-                  >
-                    <Camera size={20} aria-hidden="true" />
-                    {c.qr.camera}
-                  </button>
-                </div>
                 <p
                   class="field-error"
                   id="qr-file-error"
@@ -250,9 +213,6 @@ const schema = {
                   role="alert"
                   hidden
                 ></p>
-                <p class="supporting input-hint" id="qr-file-hint">
-                  {c.qr.fileHint}
-                </p>
                 <p class="supporting input-hint" id="qr-camera-hint">
                   {c.qr.cameraHint}
                 </p>

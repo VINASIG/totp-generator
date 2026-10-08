@@ -17,6 +17,7 @@ export function installQrControls(hooks: Hooks) {
   const file = element('qr-file', HTMLInputElement);
   const upload = element('qr-upload', HTMLButtonElement);
   const paste = element('qr-paste', HTMLTextAreaElement);
+  const pasteButton = element('qr-paste-button', HTMLButtonElement);
   const dropzone = element('qr-dropzone', HTMLDivElement);
   const camera = element('qr-camera', HTMLButtonElement);
   const cameraPanel = element('qr-camera-panel', HTMLDivElement);
@@ -135,10 +136,45 @@ export function installQrControls(hooks: Hooks) {
   upload.addEventListener('click', () => {
     file.click();
   });
+  pasteButton.addEventListener('click', () => {
+    const wasBusy = Boolean(active);
+    cancel();
+    if (wasBusy) void hooks.restore();
+    const id = revision;
+    const current = () => revision === id && !document.hidden;
+    void (async () => {
+      try {
+        const items = await navigator.clipboard.read();
+        if (!current()) return;
+        const images = items.flatMap((item) => {
+          const type = item.types.find((value) => value.startsWith('image/'));
+          return type ? [{ item, type }] : [];
+        });
+        if (images.length !== 1)
+          throw new QrError(
+            images.length > 1 ? 'pasteMultiple' : 'pasteUnavailable',
+          );
+        const image = images[0];
+        if (!image) throw new QrError('pasteUnavailable');
+        const blob = await image.item.getType(image.type);
+        if (!current()) return;
+        await run(blob, 'paste');
+      } catch (error) {
+        if (!current()) return;
+        pasteError.textContent =
+          c.errors[error instanceof QrError ? error.code : 'pasteUnavailable'];
+        pasteError.hidden = false;
+        paste.setAttribute('aria-invalid', 'true');
+        paste.focus();
+      }
+    })();
+  });
   camera.addEventListener('click', () => {
     void run(null, 'camera');
   });
-  dropzone.addEventListener('click', () => {
+  dropzone.addEventListener('click', (event) => {
+    if (event.target instanceof Element && event.target.closest('button'))
+      return;
     paste.focus();
   });
   file.addEventListener('change', () => {

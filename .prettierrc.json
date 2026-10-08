@@ -13,6 +13,15 @@
       "options": {
         "singleQuote": false
       }
+    },
+    {
+      "files": [
+        "src/components/QrImageIntake.astro",
+        "src/styles/qr-image-intake.css"
+      ],
+      "options": {
+        "singleQuote": false
+      }
     }
   ]
 }

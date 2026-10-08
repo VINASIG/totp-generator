@@ -6,6 +6,8 @@ Read README.md and docs/PRODUCT.md, docs/RESEARCH.md, docs/BRAND.md and docs/TOO
 
 Read docs/SITE_CHROME.md before header or footer changes. Keep shared chrome consistent and run npm run test:chrome.
 
+For QR image intake changes, read [the shared intake contract](docs/QR_INTAKE.md). Reuse the pinned component and stylesheet from web-design-system. Verify both actual consumers and acquisition failures before publication.
+
 <!-- VINASIG STANDARDS BEGIN -->
 ## VINASIG SI agent standards 0.1.0
 
