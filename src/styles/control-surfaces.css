@@ -173,7 +173,7 @@
   border: 0;
   border-radius: var(--radius-pill);
   background: var(--color-surface-muted);
-  color: var(--color-info-accent);
+  color: var(--color-indicator);
 }
 
 :where(progress)::-webkit-progress-bar,
@@ -183,24 +183,29 @@
   background: var(--color-surface-muted);
 }
 
+:where(progress),
+:where(progress)::-webkit-progress-bar {
+  background: var(--color-border-strong);
+}
+
 :where(progress)::-webkit-progress-value {
   border-radius: var(--radius-pill);
-  background: var(--color-info-accent);
+  background: var(--color-indicator);
 }
 
 :where(progress)::-moz-progress-bar {
   border-radius: var(--radius-pill);
-  background: var(--color-info-accent);
+  background: var(--color-indicator);
 }
 
 :where(meter)::-webkit-meter-optimum-value {
   border-radius: var(--radius-pill);
-  background: var(--color-success-accent);
+  background: var(--color-success);
 }
 
 :where(meter)::-moz-meter-bar {
   border-radius: var(--radius-pill);
-  background: var(--color-success-accent);
+  background: var(--color-success);
 }
 
 :where(input[type='search']) {
@@ -230,11 +235,11 @@
 }
 
 :where(meter)::-webkit-meter-suboptimum-value {
-  background: var(--color-warning-accent);
+  background: var(--color-warning);
 }
 
 :where(meter)::-webkit-meter-even-less-good-value {
-  background: var(--color-error-accent);
+  background: var(--color-error);
 }
 
 @media (forced-colors: active) {
