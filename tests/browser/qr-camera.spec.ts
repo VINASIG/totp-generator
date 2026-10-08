@@ -111,12 +111,8 @@ async function cameraFixture(
         getTracks: { value: () => [track] },
         getVideoTracks: { value: () => [track] },
       });
-      if (typeof Reflect.get(navigator, 'mediaDevices') !== 'object')
-        Object.defineProperty(navigator, 'mediaDevices', {
-          value: {},
-          configurable: true,
-        });
-      Object.defineProperty(navigator.mediaDevices, 'getUserMedia', {
+      const media = {};
+      Object.defineProperty(media, 'getUserMedia', {
         configurable: true,
         value: async (constraints: MediaStreamConstraints) => {
           calls++;
@@ -138,9 +134,18 @@ async function cameraFixture(
           return stream;
         },
       });
+      Object.defineProperty(navigator, 'mediaDevices', {
+        configurable: true,
+        value: media,
+      });
       Object.defineProperty(window, '__cameraFixtureMode', {
         configurable: true,
         value: mode,
+      });
+      const acquire: unknown = Reflect.get(media, 'getUserMedia');
+      Object.defineProperty(window, '__cameraFixtureAcquire', {
+        configurable: true,
+        value: acquire,
       });
     },
     { bytes: [...png], mode },
@@ -149,11 +154,19 @@ async function cameraFixture(
 async function start(page: Page, lang = 'vi') {
   await page.goto(app.url + (lang === 'en' ? 'en/' : ''));
   expect(
-    await page.evaluate(() => Object.hasOwn(window, '__cameraFixtureMode')),
+    await page.evaluate(() => {
+      const acquire: unknown = Reflect.get(window, '__cameraFixtureAcquire');
+      return (
+        Object.hasOwn(window, '__cameraFixtureMode') &&
+        Object.hasOwn(navigator, 'mediaDevices') &&
+        navigator.mediaDevices.getUserMedia === acquire
+      );
+    }),
   ).toBe(true);
   await page.locator('#qr-import summary').click();
   await expect(page.locator('html')).not.toHaveAttribute('data-camera-calls');
   await page.locator('#qr-camera').click();
+  await expect(page.locator('html')).toHaveAttribute('data-camera-calls', '1');
 }
 async function stopped(page: Page) {
   await expect
