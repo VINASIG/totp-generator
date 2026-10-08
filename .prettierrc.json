@@ -7,6 +7,12 @@
       "options": {
         "singleQuote": false
       }
+    },
+    {
+      "files": ["src/styles/destructive-actions.css"],
+      "options": {
+        "singleQuote": false
+      }
     }
   ]
 }

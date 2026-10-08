@@ -9,6 +9,8 @@ Start with WEB-010 and `templates/web/ui-contract.md`. Reproduce each reported s
 
 Discover routes/templates and CSS breakpoints. Start/reuse the correct local app and derive its port from logs. Use one available browser driver; Playwright Test keeps reusable regression checks. Do not send destructive or real-data forms.
 
+Under WEB-010, classify each action by effect. Mark actual deletion, session/input clearing and unsaved-edit discarding with data-destructive-action and use the reviewed semantic red. Keep a declared nonzero inventory and run inspectDestructiveActions on enabled synthetic-input, hover, active, keyboard-focus and opened states in both themes/locales. Check disabled and forced-colors behavior, actual discard outcomes and stale-result cleanup. A blue destructive fixture must fail. Preserve clear verbs/icons. Ordinary search/filter/date clearing, cancellation and generating a separate processed copy do not become destructive merely because their labels say clear or remove.
+
 Measure the five required viewports, 320 px reflow, actual breakpoint neighbors and intermediate widths. Scroll fully. Capture AND open before screenshots, inspect styles/bounds and test applicable open/closed controls, keyboard, errors/loading, long text, enlarged text and themes.
 
 Apply WEB-008 to the full dropdown, calendar, color chooser and slider. A styled closed field with an operating-system popup fails the control requirement. Apply LANG-004 and LANG-005 to initial and dynamic copy in every locale. Run the interface inspector on real states, then inspect the writing and screenshots. Preserve required syntax and user data with narrowly scoped semantic annotations.

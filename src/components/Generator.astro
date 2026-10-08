@@ -19,6 +19,7 @@ import '../styles/tokens.css';
 import '../styles/app.css';
 import '../styles/control-surfaces.css';
 import '../styles/totp.css';
+import '../styles/destructive-actions.css';
 interface Props {
   lang: 'vi' | 'en';
 }
@@ -374,7 +375,13 @@ const schema = {
                   <Link size={18} aria-hidden="true" />
                   {c.share}
                 </button>
-                <button type="button" class="clear-button" id="clear" disabled>
+                <button
+                  type="button"
+                  class="clear-button"
+                  id="clear"
+                  disabled
+                  data-destructive-action
+                >
                   <Trash size={18} aria-hidden="true" />
                   {c.clear}
                 </button>

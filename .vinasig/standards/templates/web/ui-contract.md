@@ -28,6 +28,12 @@ For each reported defect, write a failing regression or record measurable before
 | Success text is ambiguous                                   | Use natural localized text that states the completed action. Review messages in their actual location. Avoid unexplained advice, jargon, implementation badges and unverified assurances.                                                                                                                              |
 | Header/footer diverge from other VINASIG websites           | Apply WEB-009, including exact icon artwork, target-state theme behavior, ordering, logo variants, source revision and native links. Review the full top and bottom, not only the workspace.                                                                                                                           |
 
+## Action meaning and color
+
+Under WEB-010, inventory data deletion, session/input clearing, unsaved-edit discarding and destructive resets. Apply the reviewed semantic red using `data-destructive-action` and the pinned design-system stylesheet. Do not style all `clear-button` controls red, since that class may also be used for uploads, sharing or paging. Record ordinary search/date/filter clearing, cancellation and copy-producing tools separately by actual effect.
+
+Run `inspectDestructiveActions` from `destructive-actions.mjs` with explicit selector/count entries on real enabled, hover, active, keyboard-focused and opened states in both themes and every locale. Test disabled controls, system forced colors, actual clear/discard behavior and stale-result protection. Require text 4.5:1 and meaningful icon/border/focus contrast 3:1 without rounding thresholds. Preserve a specific accessible verb and existing icon. The helper does not infer the product's consequences, grant permission or replace visual review. Retain a blue-action negative fixture so an accidental return to the default style fails CI.
+
 ## Verify and deliver
 
 Run the existing interface, control and chrome helpers with explicit nonzero inventories. Where applicable, use inspectUiContract from ui-contract.mjs for declared card groups, icon rows, field errors, adjacent output actions, aligned rows and progress surfaces. Assert that the declared elements exist. Its diagnostics contain selectors and geometry, never secret text. It checks structural invariants, not meaning, subjective balance, contrast compliance or behavioral correctness. Add product-specific tests for these remaining outcomes.

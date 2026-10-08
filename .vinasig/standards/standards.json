@@ -367,7 +367,7 @@
       "id": "WEB-010",
       "scope": "web",
       "level": "MUST",
-      "summary": "Complete interface acceptance across modes, input errors, layout and state transitions",
+      "summary": "Complete interface acceptance across modes, input errors, action semantics, layout and state transitions",
       "verification": ["automatic", "agent", "human"],
       "evidence": "Reported-defect mapping, explicit state/control inventory, structural diagnostics, product behavior regressions, opened before/after images for every changed major mode and difficult state, exact deployed revision and affected live interactions",
       "exceptions": "Absent categories are NOT_APPLICABLE with a reason. Helpers and test counts do not certify visual review, usability or unavailable device/assistive checks."

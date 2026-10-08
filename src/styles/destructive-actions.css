@@ -1,0 +1,79 @@
+[data-destructive-action] {
+  color: var(--color-error);
+  background: var(--color-surface);
+  border: 1px solid var(--color-error);
+}
+
+[data-destructive-action]:focus-visible {
+  outline: 3px solid var(--color-error);
+  outline-offset: 3px;
+}
+
+[data-destructive-action]:disabled,
+[data-destructive-action][aria-disabled="true"] {
+  color: var(--color-error);
+  background: var(--color-surface);
+  border-color: var(--color-error);
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+[data-destructive-action] svg {
+  color: inherit;
+}
+
+[data-destructive-action]:not(:disabled, [aria-disabled="true"]):hover,
+[data-destructive-action]:not(:disabled, [aria-disabled="true"]):active {
+  color: var(--color-error);
+  background: var(--color-error-background);
+  border-color: var(--color-error);
+}
+
+[data-destructive-action="filled"] {
+  color: var(--color-white);
+  background: var(--color-error-accent);
+  border-color: var(--color-error);
+}
+
+[data-destructive-action="filled"]:disabled,
+[data-destructive-action="filled"][aria-disabled="true"] {
+  color: var(--color-white);
+  background: var(--color-error-accent);
+  border-color: var(--color-error);
+}
+
+[data-destructive-action="filled"]:not(:disabled, [aria-disabled="true"]):hover,
+[data-destructive-action="filled"]:not(
+    :disabled,
+    [aria-disabled="true"]
+  ):active {
+  color: var(--color-white);
+  background: var(--color-auditor-red-strong);
+  border-color: var(--color-error);
+}
+
+@media (forced-colors: active) {
+  [data-destructive-action] {
+    color: CanvasText;
+    background: Canvas;
+    border-color: CanvasText;
+  }
+
+  [data-destructive-action]:focus-visible {
+    outline-color: CanvasText;
+  }
+
+  [data-destructive-action]:disabled,
+  [data-destructive-action][aria-disabled="true"] {
+    color: GrayText;
+    border-color: GrayText;
+    opacity: 1;
+  }
+
+  [data-destructive-action]:not(:disabled, [aria-disabled="true"]):hover,
+  [data-destructive-action]:not(:disabled, [aria-disabled="true"]):active {
+    color: Canvas;
+    background: CanvasText;
+    border-color: CanvasText;
+  }
+}

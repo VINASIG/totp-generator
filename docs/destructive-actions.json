@@ -1,0 +1,18 @@
+{
+  "format": 1,
+  "designRepository": "VINASIG/web-design-system",
+  "designSourceCommit": "4ebf0ab8ec3791a79844edaa544040278f898dfd",
+  "cssPath": "src/styles/destructive-actions.css",
+  "cssSha256": "f874f2f32f17dd95ae6bd85d3c1696911dfc24f1605c6aa7e27aa6a0ada79788",
+  "standardsRepository": "VINASIG/agent-standards",
+  "standardsSourceCommit": "567d839f6fdb983582e1f0ed4c33678799cc6fe8",
+  "rule": "WEB-010",
+  "actions": [
+    {
+      "selector": "#clear",
+      "count": 1,
+      "effect": "Discard current inputs and outputs"
+    }
+  ],
+  "browserRegression": "tests/browser/destructive.spec.ts"
+}
