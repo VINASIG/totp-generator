@@ -97,11 +97,18 @@ for (const locale of ['vi', 'en']) {
           await page.mouse.move(0, 0);
           await page.mouse.up();
           await button.focus();
-          await page.keyboard.press('Shift+Tab');
+          await expect(button).toBeFocused();
           await page.keyboard.press('Tab');
-          expect(
-            await button.evaluate((node) => node.matches(':focus-visible')),
-          ).toBe(true);
+          await page.keyboard.press('Shift+Tab');
+          await expect
+            .poll(() =>
+              button.evaluate(
+                (node) =>
+                  node === document.activeElement &&
+                  node.matches(':focus-visible'),
+              ),
+            )
+            .toBe(true);
           await expect(button).toBeFocused();
           await inspect(page);
         }
@@ -125,12 +132,19 @@ for (const locale of ['vi', 'en']) {
           await page.mouse.move(0, 0);
           await page.mouse.up();
           await button.focus();
-          await page.keyboard.press('Shift+Tab');
-          await page.keyboard.press('Tab');
           await expect(button).toBeFocused();
-          expect(
-            await button.evaluate((node) => node.matches(':focus-visible')),
-          ).toBe(true);
+          await page.keyboard.press('Tab');
+          await page.keyboard.press('Shift+Tab');
+          await expect(button).toBeFocused();
+          await expect
+            .poll(() =>
+              button.evaluate(
+                (node) =>
+                  node === document.activeElement &&
+                  node.matches(':focus-visible'),
+              ),
+            )
+            .toBe(true);
           await inspect(page);
         }
         await page.emulateMedia({ forcedColors: 'none' });
