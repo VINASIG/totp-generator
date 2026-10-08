@@ -1,8 +1,8 @@
 {
   "designSource": "https://github.com/VINASIG/web-design-system",
-  "designSourceCommit": "06accd3c0831e9064812ea4b742ff40c6907cd18",
+  "designSourceCommit": "523b278a81019ea086550855bc2b78301b7310c4",
   "files": {
-    "src/components/QrImageIntake.astro": "1729f5cc3947f1bbc9df2931b77431cdf576eb495ef95ff9f80ac8d2f8a5f72d",
-    "src/styles/qr-image-intake.css": "b98a99fba112e351df426d64fd461bd5feed251bece87574585a3495091b60f3"
+    "src/components/QrImageIntake.astro": "4d31da0e5366492a0cad07f3085b97a5906753e99fde72c1125328b18f3fe8f4",
+    "src/styles/qr-image-intake.css": "9e0571b48ca816119c9fd567522958474463803c66a46a4ebbc80c52dde9c135"
   }
 }

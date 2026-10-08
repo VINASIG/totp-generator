@@ -17,23 +17,23 @@ export const copy = {
     clear: 'Xóa tất cả',
     qr: {
       title: 'Nhập từ mã QR',
-      hint: 'Dán hoặc chọn ảnh QR thiết lập TOTP. Bạn cũng có thể dùng máy ảnh để quét mã trên một màn hình khác.',
+      helpTitle: 'Cách nhập ảnh QR',
       file: 'Chọn ảnh',
       pasteButton: 'Dán ảnh',
       fileHint:
-        'Ảnh được đọc trên thiết bị, không tải lên máy chủ. Hỗ trợ PNG, JPEG, WebP và GIF, tối đa 20 MB.',
-      paste: 'Dán hoặc thả ảnh QR vào đây',
-      pastePlaceholder: 'Dán ảnh QR',
+        'Hỗ trợ ảnh QR thiết lập TOTP dạng PNG, JPEG, WebP và GIF, tối đa 20 MB.',
+      paste: 'Dán hoặc kéo thả ảnh QR',
+      pastePlaceholder: 'Ctrl + V hoặc Dán',
       pasteHint:
-        'Chọn ô này rồi nhấn Ctrl+V, hoặc dùng Dán trên bàn phím điện thoại. Nhận ảnh QR hoặc URL otpauth://totp/. Nếu nút Dán ảnh hoặc bàn phím không dán được ảnh, hãy dùng Chọn ảnh.',
+        'Chọn vùng dán rồi nhấn Ctrl+V hoặc Cmd+V. Trên điện thoại, dùng Dán trên bàn phím. Nhận ảnh QR hoặc URL otpauth://totp/. Nếu nút Dán ảnh hoặc bàn phím không dán được ảnh, hãy dùng Chọn ảnh.',
       scanning: 'Đang đọc mã QR trên thiết bị.',
       imported: 'Đã đọc khóa và cài đặt từ mã QR.',
       cancel: 'Hủy đọc ảnh',
       cancelled: 'Đã hủy đọc ảnh.',
-      camera: 'Quét bằng camera',
-      cameraHint:
-        'Máy ảnh chỉ bật khi bạn cho phép. Hình ảnh được đọc trên thiết bị, không ghi lại hay gửi lên máy chủ.',
-      cameraRequest: 'Hãy cho phép dùng máy ảnh trong trình duyệt.',
+      camera: 'Camera',
+      switchCamera: 'Đổi camera',
+      cancelCamera: 'Hủy',
+      cameraRequest: 'Đang chờ quyền dùng camera.',
       cameraScanning: 'Đang quét. Đưa một mã QR thiết lập TOTP vào khung hình.',
       cameraPreview: 'Khung máy ảnh quét QR',
       cameraAim:
@@ -55,18 +55,18 @@ export const copy = {
         payload:
           'Không nhận được cấu hình TOTP hợp lệ. Chưa hỗ trợ HOTP, liên kết đăng nhập hoặc QR xuất nhiều tài khoản.',
         pasteUnavailable:
-          'Không nhận được ảnh QR hoặc URL thiết lập TOTP. Hãy sao chép lại hoặc dùng Chọn ảnh QR.',
+          'Không nhận được ảnh QR hoặc URL thiết lập TOTP. Hãy sao chép lại hoặc dùng Chọn ảnh.',
         pasteMultiple: 'Hãy dán một ảnh QR mỗi lần.',
         cameraUnsupported:
-          'Trình duyệt chưa hỗ trợ máy ảnh hoặc trang không được mở qua HTTPS. Hãy dùng Chọn ảnh QR.',
+          'Trình duyệt chưa hỗ trợ máy ảnh hoặc trang không được mở qua HTTPS. Hãy dùng Chọn ảnh.',
         cameraDenied:
-          'Chưa được phép dùng máy ảnh. Cho phép máy ảnh trong cài đặt trình duyệt hoặc dùng Chọn ảnh QR.',
-        cameraMissing: 'Không tìm thấy máy ảnh. Hãy dùng Chọn ảnh QR.',
+          'Chưa được phép dùng máy ảnh. Cho phép máy ảnh trong cài đặt trình duyệt hoặc dùng Chọn ảnh.',
+        cameraMissing: 'Không tìm thấy máy ảnh. Hãy dùng Chọn ảnh.',
         cameraBusy:
           'Không mở được máy ảnh. Đóng ứng dụng đang dùng máy ảnh rồi thử lại, hoặc chọn ảnh QR.',
         cameraStopped: 'Máy ảnh đã bị ngắt. Hãy bật lại hoặc chọn ảnh QR.',
         cameraTimeout:
-          'Đã tắt máy ảnh sau 2 phút. Bấm Quét bằng máy ảnh để thử lại hoặc chọn ảnh QR rõ hơn.',
+          'Đã tắt máy ảnh sau 2 phút. Bấm Camera để thử lại hoặc chọn ảnh QR rõ hơn.',
         timeout: 'Đọc ảnh quá lâu. Hãy chọn ảnh nhỏ và rõ hơn rồi thử lại.',
       },
     },
@@ -171,23 +171,23 @@ export const copy = {
     clear: 'Clear all',
     qr: {
       title: 'Import from a QR code',
-      hint: 'Paste or choose a TOTP setup QR image. You can also scan a code on another screen with your camera.',
+      helpTitle: 'How to import a QR image',
       file: 'Choose image',
       pasteButton: 'Paste image',
       fileHint:
-        'Images are read on your device and are not uploaded. Supports PNG, JPEG, WebP and GIF up to 20 MB.',
-      paste: 'Paste or drop a QR image here',
-      pastePlaceholder: 'Paste a QR image',
+        'Supports TOTP setup QR images in PNG, JPEG, WebP and GIF up to 20 MB.',
+      paste: 'Paste or drop a QR image',
+      pastePlaceholder: 'Ctrl + V or Paste',
       pasteHint:
-        'Select this field and press Ctrl+V, or use Paste on your phone keyboard. Accepts QR images or otpauth://totp/ URLs. If the Paste image button or your keyboard cannot paste images, choose an image.',
+        'Select the paste area and press Ctrl+V or Cmd+V. On a phone, use Paste on your keyboard. Accepts QR images or otpauth://totp/ URLs. If the Paste image button or your keyboard cannot paste images, choose an image.',
       scanning: 'Reading the QR code on your device.',
       imported: 'Key and settings read from the QR code.',
       cancel: 'Cancel image import',
       cancelled: 'Image import cancelled.',
-      camera: 'Scan with camera',
-      cameraHint:
-        'The camera starts only with your permission. Frames are read on your device, without recording or upload.',
-      cameraRequest: 'Allow camera access in your browser.',
+      camera: 'Camera',
+      switchCamera: 'Switch camera',
+      cancelCamera: 'Cancel',
+      cameraRequest: 'Waiting for camera access.',
       cameraScanning: 'Scanning. Point the camera at one TOTP setup QR code.',
       cameraPreview: 'QR scanner camera preview',
       cameraAim:
@@ -210,13 +210,13 @@ export const copy = {
         payload:
           'No valid TOTP setup found. HOTP, sign-in links and multi-account export QR codes are unsupported.',
         pasteUnavailable:
-          'No QR image or TOTP setup URL received. Copy it again or use Choose QR image.',
+          'No QR image or TOTP setup URL received. Copy it again or use Choose image.',
         pasteMultiple: 'Paste one QR image at a time.',
         cameraUnsupported:
-          'Camera access is unavailable in this browser or without HTTPS. Use Choose QR image.',
+          'Camera access is unavailable in this browser or without HTTPS. Use Choose image.',
         cameraDenied:
-          'Camera permission was not granted. Allow it in browser settings or use Choose QR image.',
-        cameraMissing: 'No camera found. Use Choose QR image.',
+          'Camera permission was not granted. Allow it in browser settings or use Choose image.',
+        cameraMissing: 'No camera found. Use Choose image.',
         cameraBusy:
           'Could not open the camera. Close other camera apps and retry, or choose a QR image.',
         cameraStopped:

@@ -2,7 +2,7 @@
 import QrImageIntake from './QrImageIntake.astro';
 import SiteFooter from './SiteFooter.astro';
 import '../styles/site-chrome.css';
-import { Copy, Eye, EyeOff, Link, Trash, X } from '@lucide/astro';
+import { Copy, Eye, EyeOff, Link, SwitchCamera, Trash, X } from '@lucide/astro';
 import ThemeInit from './ThemeInit.astro';
 import SitePreferences from './SitePreferences.astro';
 import { copy } from '../lib/copy.ts';
@@ -171,7 +171,6 @@ const schema = {
               </div>
               <details class="qr-import" id="qr-import" aria-busy="false">
                 <summary>{c.qr.title}</summary>
-                <p class="supporting">{c.qr.hint}</p>
                 <QrImageIntake
                   id="qr-dropzone"
                   pasteId="qr-paste"
@@ -180,15 +179,13 @@ const schema = {
                   pasteButtonId="qr-paste-button"
                   cameraId="qr-camera"
                   cameraControlsId="qr-camera-panel"
-                  cameraDescribedBy="qr-camera-hint qr-camera-error"
+                  cameraDescribedBy="qr-camera-error"
                   title={c.qr.paste}
                   placeholder={c.qr.pastePlaceholder}
                   chooseLabel={c.qr.file}
                   pasteLabel={c.qr.pasteButton}
                   cameraLabel={c.qr.camera}
-                  helpId="qr-file-hint"
-                  help={c.qr.fileHint}
-                  describedBy="qr-paste-error qr-file-error qr-file-hint qr-paste-hint"
+                  describedBy="qr-paste-error qr-file-error"
                   accept="image/png,image/jpeg,image/webp,image/gif"
                   masked
                 />
@@ -198,9 +195,6 @@ const schema = {
                   role="alert"
                   hidden
                 ></p>
-                <p class="supporting input-hint" id="qr-paste-hint">
-                  {c.qr.pasteHint}
-                </p>
                 <p
                   class="field-error"
                   id="qr-file-error"
@@ -213,21 +207,6 @@ const schema = {
                   role="alert"
                   hidden
                 ></p>
-                <p class="supporting input-hint" id="qr-camera-hint">
-                  {c.qr.cameraHint}
-                </p>
-                <div class="qr-feedback">
-                  <p id="qr-status" class="supporting" role="status"></p>
-                  <button
-                    type="button"
-                    class="clear-button"
-                    id="qr-cancel"
-                    hidden
-                  >
-                    <X size={20} aria-hidden="true" />
-                    <span id="qr-cancel-label">{c.qr.cancel}</span>
-                  </button>
-                </div>
                 <div
                   class="qr-camera-panel"
                   id="qr-camera-panel"
@@ -240,8 +219,29 @@ const schema = {
                     muted
                     playsinline
                     aria-hidden="true"
+                    hidden
                   ></video>
-                  <p class="supporting">{c.qr.cameraAim}</p>
+                </div>
+                <div class="qr-feedback">
+                  <p id="qr-status" class="supporting" role="status"></p>
+                  <button
+                    type="button"
+                    class="clear-button"
+                    id="qr-switch-camera"
+                    hidden
+                  >
+                    <SwitchCamera size={20} aria-hidden="true" />
+                    <span>{c.qr.switchCamera}</span>
+                  </button>
+                  <button
+                    type="button"
+                    class="clear-button"
+                    id="qr-cancel"
+                    hidden
+                  >
+                    <X size={20} aria-hidden="true" />
+                    <span id="qr-cancel-label">{c.qr.cancel}</span>
+                  </button>
                 </div>
               </details>
               <details class="advanced" id="advanced">
@@ -481,6 +481,12 @@ const schema = {
         </div>
         <section class="notes" aria-labelledby="faq-heading">
           <h2 id="faq-heading">{c.faqTitle}</h2>
+          <details>
+            <summary>{c.qr.helpTitle}</summary>
+            <p>{c.qr.fileHint}</p>
+            <p>{c.qr.pasteHint}</p>
+            <p>{c.qr.cameraAim}</p>
+          </details>
           {[
             [c.faqUse, c.faqUseText],
             [c.faqTime, c.faqTimeText],

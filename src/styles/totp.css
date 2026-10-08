@@ -104,12 +104,24 @@
   object-fit: contain;
 }
 
+.qr-camera-panel {
+  margin-top: 1rem;
+}
+
 .qr-feedback {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   gap: 0.75rem;
-  padding-bottom: 0.75rem;
+  margin-top: 0.75rem;
+}
+
+.qr-feedback:has(p:empty):not(:has(button:not([hidden]))) {
+  display: none;
+}
+
+.qr-feedback > button {
+  min-height: 48px;
 }
 
 .qr-feedback p {

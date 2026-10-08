@@ -19,7 +19,8 @@ function delay(signal: AbortSignal) {
 export async function scanCamera(
   video: HTMLVideoElement,
   signal: AbortSignal,
-  ready: () => void,
+  ready: (devices: string[], selected: string) => void,
+  deviceId?: string,
 ): Promise<string> {
   const media: unknown = Reflect.get(navigator, 'mediaDevices');
   if (
@@ -30,6 +31,7 @@ export async function scanCamera(
   )
     throw new QrError('cameraUnsupported');
   const cancelled = () => signal.aborted;
+  const backgrounded = () => document.hidden;
   let stream: MediaStream | undefined;
   let reader: ReturnType<typeof createQrPixelReader> | undefined;
   let deadline: ReturnType<typeof setTimeout> | undefined;
@@ -40,8 +42,10 @@ export async function scanCamera(
     stream?.getTracks().forEach((track) => {
       track.stop();
     });
-    video.pause();
-    video.srcObject = null;
+    if (stream && video.srcObject === stream) {
+      video.pause();
+      video.srcObject = null;
+    }
     canvas.width = 0;
     canvas.height = 0;
     reader?.close(expired ? new QrError('cameraTimeout') : undefined);
@@ -52,7 +56,9 @@ export async function scanCamera(
       stream = await navigator.mediaDevices.getUserMedia({
         audio: false,
         video: {
-          facingMode: { ideal: 'environment' },
+          ...(deviceId
+            ? { deviceId: { exact: deviceId } }
+            : { facingMode: { ideal: 'environment' } }),
           width: { ideal: 1280 },
           height: { ideal: 720 },
           frameRate: { ideal: 15, max: 30 },
@@ -68,7 +74,7 @@ export async function scanCamera(
             : 'cameraBusy',
       );
     }
-    if (cancelled() || document.hidden)
+    if (cancelled() || backgrounded())
       throw new globalThis.DOMException('Cancelled', 'AbortError');
     deadline = setTimeout(() => {
       expired = true;
@@ -79,7 +85,24 @@ export async function scanCamera(
     if (cancelled())
       throw new globalThis.DOMException('Cancelled', 'AbortError');
     reader = createQrPixelReader(signal);
-    ready();
+    let devices: string[] = [];
+    try {
+      const mediaDevices: Partial<MediaDevices> = navigator.mediaDevices;
+      const available = await mediaDevices.enumerateDevices?.();
+      devices = [
+        ...new Set(
+          (available ?? [])
+            .filter((device) => device.kind === 'videoinput' && device.deviceId)
+            .map((device) => device.deviceId),
+        ),
+      ];
+    } catch {
+      // Camera switching is optional when device enumeration is unavailable.
+    }
+    if (cancelled() || backgrounded())
+      throw new globalThis.DOMException('Cancelled', 'AbortError');
+    if (isExpired()) throw new QrError('cameraTimeout');
+    ready(devices, stream.getVideoTracks()[0]?.getSettings().deviceId ?? '');
     const started = performance.now();
     while (!cancelled()) {
       if (isExpired() || performance.now() - started > 120_000)

@@ -20,6 +20,7 @@ export function installQrControls(hooks: Hooks) {
   const pasteButton = element('qr-paste-button', HTMLButtonElement);
   const dropzone = element('qr-dropzone', HTMLDivElement);
   const camera = element('qr-camera', HTMLButtonElement);
+  const switchCamera = element('qr-switch-camera', HTMLButtonElement);
   const cameraPanel = element('qr-camera-panel', HTMLDivElement);
   const video = element('qr-video', HTMLVideoElement);
   const cameraError = element('qr-camera-error', HTMLParagraphElement);
@@ -32,6 +33,8 @@ export function installQrControls(hooks: Hooks) {
   let active: AbortController | undefined;
   let pause: ReturnType<typeof setTimeout> | undefined;
   let composing = false;
+  let cameraDevices: string[] = [];
+  let cameraDevice = '';
   function errors() {
     fileError.textContent = '';
     fileError.hidden = true;
@@ -48,6 +51,10 @@ export function installQrControls(hooks: Hooks) {
     active?.abort();
     active = undefined;
     cameraPanel.hidden = true;
+    video.hidden = true;
+    switchCamera.hidden = true;
+    cameraDevices = [];
+    cameraDevice = '';
     camera.setAttribute('aria-expanded', 'false');
     if (pause !== undefined) clearTimeout(pause);
     pause = undefined;
@@ -61,6 +68,7 @@ export function installQrControls(hooks: Hooks) {
   async function run(
     source: Blob | string | null,
     origin: 'file' | 'paste' | 'camera' = 'file',
+    deviceId?: string,
   ) {
     cancel();
     const id = revision;
@@ -70,7 +78,7 @@ export function installQrControls(hooks: Hooks) {
     panel.open = true;
     panel.setAttribute('aria-busy', 'true');
     stop.hidden = false;
-    stopLabel.textContent = origin === 'camera' ? c.stopCamera : c.cancel;
+    stopLabel.textContent = origin === 'camera' ? c.cancelCamera : c.cancel;
     status.textContent = origin === 'camera' ? c.cameraRequest : c.scanning;
     const current = () =>
       revision === id && !controller.signal.aborted && !document.hidden;
@@ -81,9 +89,20 @@ export function installQrControls(hooks: Hooks) {
         camera.setAttribute('aria-expanded', 'true');
         const scanner = await import('./qr-camera.ts');
         if (!current()) return;
-        uri = await scanner.scanCamera(video, controller.signal, () => {
-          if (current()) status.textContent = c.cameraScanning;
-        });
+        uri = await scanner.scanCamera(
+          video,
+          controller.signal,
+          (devices, selected) => {
+            if (!current()) return;
+            cameraDevices = devices;
+            cameraDevice = selected;
+            video.hidden = false;
+            switchCamera.hidden = devices.length < 2;
+            stopLabel.textContent = c.stopCamera;
+            status.textContent = c.cameraScanning;
+          },
+          deviceId,
+        );
       } else if (typeof source === 'string') {
         if (!source.trim()) throw new QrError('pasteUnavailable');
         uri = provisioningQr([source.trim()]);
@@ -129,6 +148,10 @@ export function installQrControls(hooks: Hooks) {
         stop.hidden = true;
         file.value = '';
         cameraPanel.hidden = true;
+        video.hidden = true;
+        switchCamera.hidden = true;
+        cameraDevices = [];
+        cameraDevice = '';
         camera.setAttribute('aria-expanded', 'false');
       }
     }
@@ -171,6 +194,13 @@ export function installQrControls(hooks: Hooks) {
   });
   camera.addEventListener('click', () => {
     void run(null, 'camera');
+  });
+  switchCamera.addEventListener('click', () => {
+    const next =
+      cameraDevices[
+        (cameraDevices.indexOf(cameraDevice) + 1) % cameraDevices.length
+      ];
+    if (next) void run(null, 'camera', next);
   });
   dropzone.addEventListener('click', (event) => {
     if (event.target instanceof Element && event.target.closest('button'))

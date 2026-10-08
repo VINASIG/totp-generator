@@ -98,6 +98,7 @@ async function cameraFixture(
       };
       const stream = {};
       const track = {
+        getSettings: () => ({ deviceId: 'fixture-camera' }),
         get readyState() {
           return ended ? 'ended' : 'live';
         },
@@ -357,7 +358,7 @@ test('QR paste area is styled for image intake and accepts a dropped image', asy
   );
   expect(
     await page
-      .locator('#qr-dropzone')
+      .locator('#qr-dropzone .qr-image-intake-target')
       .evaluate((node) => getComputedStyle(node).borderStyle),
   ).toBe('dashed');
   const image = await QRCode.toBuffer(uri, { width: 480 });
